@@ -19,7 +19,7 @@
         postcode,
         town,
         country,
-        status as referrer_status
+        individual.status as referrer_status
         from
         individual
         inner join external_practitioner on individual.individual_id=external_practitioner.individual_id
