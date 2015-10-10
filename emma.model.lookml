@@ -5,6 +5,7 @@
 
 
 - explore: treatment_cycle_referral
+  label: Referrals
   joins:
     - join: payor
       type: inner
