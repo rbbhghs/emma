@@ -4,8 +4,15 @@
 - include: "*.dashboard.lookml"  # include all the dashboards
 
 
-
-- explore: patient
+- explore: treatment_cycle_referral
   joins:
-  - join: individual
-    foreign_key: individual_id
+    - join: payor
+      type: inner
+      relationship: many_to_one
+      sql_on: ${treatment_cycle_referral.payor} = ${payor.individual_id}
+      
+    - join: patient
+      type: inner
+      relationship: many_to_one
+      sql_on: ${treatment_cycle_referral.patient_id} = ${patient.individual_id}
+      
