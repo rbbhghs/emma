@@ -24,7 +24,8 @@
         individual
         inner join external_practitioner on individual.individual_id=external_practitioner.individual_id
         left join address on address.individual_id=individual.individual_id and address_type_id='1'
-    #persist_for: 24 hours    
+    sql_trigger_value: SELECT CURDATE()
+    indexes: [individual_id]   
 
   fields:
   
