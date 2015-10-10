@@ -40,10 +40,6 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.created_date
 
-  - dimension: emr2_encounter_id
-    type: int
-    # hidden: true
-    sql: ${TABLE}.emr2_encounter_id
 
   - dimension: escalated
     type: yesno

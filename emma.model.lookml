@@ -35,6 +35,6 @@
     - join: referrer
       type: left_outer
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.from_id} = ${referrer.individual_id}      
+      sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}      
             
             
