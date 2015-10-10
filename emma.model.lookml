@@ -9,7 +9,7 @@
     - join: payor
       type: inner
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.payor} = ${payor.individual_id}
+      sql_on: ${treatment_cycle_referral.charge_to_id} = ${payor.individual_id}
       
     - join: patient
       type: inner
