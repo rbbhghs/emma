@@ -16,7 +16,8 @@
         insurance_company ON individual.individual_id = insurance_company.individual_id
         left join
         company ON individual.individual_id = company.individual_id
-    #persist_for: 24 hours    
+    sql_trigger_value: SELECT CURDATE()
+    indexes: [individual_id]  
 
   fields:
 
