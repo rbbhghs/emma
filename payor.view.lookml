@@ -17,7 +17,6 @@
         left join
         company ON individual.individual_id = company.individual_id
     #persist_for: 24 hours    
-    indexes: [individual_id]
 
   fields:
 
