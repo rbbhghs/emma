@@ -73,6 +73,6 @@
      - dimension: town
        sql: ${TABLE}.country 
        
-     - dimension: town
-       sql: ${TABLE}.country    
+     - dimension: status
+       sql: ${TABLE}.status    
       
