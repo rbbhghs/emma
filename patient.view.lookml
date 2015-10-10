@@ -23,7 +23,8 @@
         individual
         inner join patient on individual.individual_id=patient.individual_id
         left join address on address.individual_id=individual.individual_id and address_type_id='1'
-    persist_for: 6 hours    
+    #persist_for: 24 hours    
+    indexes: [individual_id]
 
   fields:
 

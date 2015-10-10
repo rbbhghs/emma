@@ -16,7 +16,7 @@
         insurance_company ON individual.individual_id = insurance_company.individual_id
         left join
         company ON individual.individual_id = company.individual_id
-    persistence: 6 hours
+    #persist_for: 24 hours    
     indexes: [individual_id]
 
   fields:
