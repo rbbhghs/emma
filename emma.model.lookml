@@ -5,4 +5,7 @@
 
 
 
-- explore: individual
+- explore: patient
+  joins:
+  - join: individual
+    foreign_key: individual_id
