@@ -8,7 +8,7 @@
         title,
         forename,
         surname,
-        concat(title, ' ' ,forename, ' ',surname) as patient_full_name,
+        concat(title, ' ' ,forename, ' ',surname) as referrer_full_name,
         dob,
         sex,
         email,
@@ -44,8 +44,8 @@
      - dimension: surname
        sql: ${TABLE}.surname
        
-     - dimension: patient_full_name
-       sql: ${TABLE}.patient_full_name
+     - dimension: referrer_full_name
+       sql: ${TABLE}.referrer_full_name
        
      - dimension: sex
        sql: ${TABLE}.sex 
