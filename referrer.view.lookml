@@ -3,7 +3,6 @@
   derived_table:
     sql: 
       select 
-        select 
         individual.individual_id,
         title,
         forename,
