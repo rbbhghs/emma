@@ -16,3 +16,24 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.patient_id} = ${patient.individual_id}
       
+    - join: location
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${treatment_cycle_referral.to_location_id} = ${location.location_id}
+
+    - join: appointment
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
+      
+    - join: appointment_type
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+      
+    - join: referrer
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${treatment_cycle_referral.from_id} = ${referrer.individual_id}      
+            
+            
