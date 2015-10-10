@@ -18,7 +18,7 @@
         postcode,
         town,
         country,
-        status as patient_status
+        individual.status as patient_status
         from
         individual
         inner join patient on individual.individual_id=patient.individual_id
