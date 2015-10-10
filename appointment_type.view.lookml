@@ -156,7 +156,7 @@
     type: int
     sql: ${TABLE}.section_count
 
-  - dimension: status
+  - dimension: appointment_type_status
     sql: ${TABLE}.status
 
   - dimension: superseded_by_id

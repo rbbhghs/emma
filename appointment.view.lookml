@@ -274,7 +274,7 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
-  - dimension: status
+  - dimension: appointment_status
     sql: ${TABLE}.status
 
   - dimension: text_notes
