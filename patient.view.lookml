@@ -18,12 +18,12 @@
         postcode,
         town,
         country,
-        status
+        status as patient_status
         from
         individual
         inner join patient on individual.individual_id=patient.individual_id
         left join address on address.individual_id=individual.individual_id and address_type_id='1'
-        
+    persist_for: 6 hours    
 
   fields:
 
@@ -73,6 +73,6 @@
      - dimension: town
        sql: ${TABLE}.country 
        
-     - dimension: status
-       sql: ${TABLE}.status    
+     - dimension: patient_status
+       sql: ${TABLE}.patient_status    
       
