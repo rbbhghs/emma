@@ -68,6 +68,7 @@
        sql: ${TABLE}.address_4 
        
      - dimension: postcode
+       type: zipcode
        sql: ${TABLE}.postcode 
        
      - dimension: town
