@@ -22,15 +22,10 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.to_location_id} = ${location.location_id}
 
-    - join: appointment
+    - join: appointments
       type: left_outer
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
-      
-    - join: appointment_type
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointments.treatment_cycle_referral_id}
       
     - join: referrer
       type: left_outer
