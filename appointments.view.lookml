@@ -46,17 +46,17 @@
                     concat(`b`.`forename`, ' ', `b`.`surname`) AS `Booked by`
                 from
                     `appointment_section` `asec`
-                    join `appointment` ON `asec`.`appointment_id` = `appointment`.`appointment_id`
-                    join `location` `loc` ON `appointment`.`location_id` = `loc`.`location_id`
-                    join `individual` `doc` ON `asec`.`doctor_id` = `doc`.`individual_id`
+                    left join `appointment` ON `asec`.`appointment_id` = `appointment`.`appointment_id`
+                    left join `location` `loc` ON `appointment`.`location_id` = `loc`.`location_id`
+                    left join `individual` `doc` ON `asec`.`doctor_id` = `doc`.`individual_id`
                     left join `cab_cancellation_reason` `cax` ON `appointment`.`cab_cancellation_reason_code` = `cax`.`cab_cancellation_reason_code`
                     left join `cab_dna_reason` `cad` ON `appointment`.`cab_dna_reason_code` = `cad`.`cab_dna_reason_code`
-                    join `individual` `pat` ON `appointment`.`patient_id` = `pat`.`individual_id`
-                    join `appointment_type` `at` ON `appointment`.`appointment_type_id` = `at`.`appointment_type_id`
+                    left join `individual` `pat` ON `appointment`.`patient_id` = `pat`.`individual_id`
+                    left join `appointment_type` `at` ON `appointment`.`appointment_type_id` = `at`.`appointment_type_id`
                     left join `event` `e` ON `appointment`.`appointment_id` = `e`.`entity_id`
                         and (`e`.`event_type_id` = '7')
                     left join `individual` `b` ON (`e`.`user_id` = `b`.`individual_id`)
-                    limit 10
+                    
 
   fields:
   - measure: count
