@@ -46,6 +46,6 @@
     - join: Charges
       type: left_outer
       relationship: one_to_many
-      sql_on: ${appointment.appointment_id} = ${Charges.appointment_id}  
+      sql_on: ${appointments.appointment_id} = ${Charges.appointment_id}  
              
             
