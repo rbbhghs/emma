@@ -4,6 +4,7 @@
       select 
               date_format(`charge`.`effective`, '%d/%m/%Y') AS `Charge Date`,
               date_format(`appointment`.`start`, '%d/%m/%Y') AS `Appt Date`,
+              appointment.appointment_id,
               `location`.`location_name` AS `Clinic`,
               ifnull((select 
                               `company`.`company_name`
@@ -100,6 +101,10 @@
   - measure: count
     type: count
     drill_fields: detail*
+    
+  - dimension: appointment_id
+    type: int
+    sql: ${TABLE}.`appointment_id`
 
   - dimension: charge_date
     sql: ${TABLE}.`Charge Date`
