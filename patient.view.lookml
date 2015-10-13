@@ -69,7 +69,18 @@
        
      - dimension: postcode
        type: zipcode
-       sql: ${TABLE}.postcode 
+       sql: ${TABLE}.postcode
+
+
+     - dimension: uk_post_area
+      
+       label: 'UK Post Area'
+       type: zipcode
+       sql: |
+              IF((left(${postcode},2) REGEXP '[0-9]') = 0, left(${postcode},2), left(${postcode},1))
+      
+         
+       
        
      - dimension: town
        sql: ${TABLE}.country 

@@ -65,6 +65,7 @@
     drill_fields: detail*
 
   - dimension: appointment_id
+    primary_key: true
     type: number
     sql: ${TABLE}.appointment_id
 
