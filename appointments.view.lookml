@@ -1,4 +1,4 @@
-- view: add_name
+- view: appointments
   derived_table:
     sql: |
       select 
