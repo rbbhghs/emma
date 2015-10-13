@@ -32,7 +32,7 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
       
-- explore: Charges
+- explore: charges
   label: Charges
   
 - explore: appointments
@@ -43,9 +43,9 @@
       relationship: many_to_one
       sql_on: ${appointment.patient_id} = ${patient.individual_id}
       
-    - join: Charges
+    - join: charges
       type: left_outer
       relationship: one_to_many
-      sql_on: ${appointments.appointment_id} = ${Charges.appointment_id}  
+      sql_on: ${appointments.appointment_id} = ${charges.appointment_id}  
              
             
