@@ -4,7 +4,7 @@
       select 
                     `appointment`.`appointment_id` AS `appointment_id`,
                     `appointment`.`treatment_cycle_referral_id` AS `treatment_cycle_referral_id`,
-                    `at`.`appointment_type_name` AS `Appointment type`,
+                    coalesce(`at`.`appointment_type_name`, bt.busy_type_name) AS `Appointment type`,
                     concat_ws(_latin1' ',
                             `doc`.`title`,
                             `doc`.`forename`,
@@ -48,6 +48,7 @@
                     `appointment_section` `asec`
                     left join `appointment` ON `asec`.`appointment_id` = `appointment`.`appointment_id`
                     left join `location` `loc` ON `appointment`.`location_id` = `loc`.`location_id`
+                    left join busy_type bt on asec.busy_type_id
                     left join `individual` `doc` ON `asec`.`doctor_id` = `doc`.`individual_id`
                     left join `cab_cancellation_reason` `cax` ON `appointment`.`cab_cancellation_reason_code` = `cax`.`cab_cancellation_reason_code`
                     left join `cab_dna_reason` `cad` ON `appointment`.`cab_dna_reason_code` = `cad`.`cab_dna_reason_code`
