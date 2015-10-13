@@ -30,6 +30,22 @@
     - join: referrer
       type: left_outer
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}      
-            
+      sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
+      
+- explore: Charges
+  label: Charges
+  
+- explore: appointments
+  label: Appointments
+  joins:
+    - join: patient
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.patient_id} = ${patient.individual_id}
+      
+    - join: Charges
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${appointment.appointment_id} = ${Charges.appointment_id}  
+             
             
