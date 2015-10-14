@@ -34,7 +34,7 @@
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
       
 - explore: charge
-  label: Charges
+  label: Charge
   -joins:
     - join: payor
       type: inner
