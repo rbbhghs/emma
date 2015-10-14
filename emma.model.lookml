@@ -32,8 +32,37 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
       
-- explore: charges
+- explore: charge
   label: Charges
+  -joins:
+    - join: payor
+      type: inner
+      relationship: many_to_one
+      sql_on: ${charge.charge_to_id} = ${payor.individual_id}
+      
+    - join: patient
+      type: inner
+      relationship: many_to_one
+      sql_on: ${charge.patient_id} = ${patient.individual_id}
+      
+    - join: location
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${charge.location_id} = ${location.location_id}
+      fields: [location_name, status]
+      
+    - join: address
+      type: inner
+      relationship: one_to_one
+      sql_on: location.address_id=address.address_id
+      required_joins: [location]
+      fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
+
+    - join: appointment
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${charge.appointment_id}
+      fields: [appointment_type_name, status, start, end, arrive, leave, view, dna, late_cancellation]
   
 - explore: appointments
   label: Appointments
