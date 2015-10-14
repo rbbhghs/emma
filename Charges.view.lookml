@@ -98,13 +98,18 @@
           
 
   fields:
-  - measure: count
+  - measure: number_of_charges
     type: count
     drill_fields: detail*
+    
     
   - dimension: appointment_id
     type: int
     sql: ${TABLE}.`appointment_id`
+    
+  - measure: number_of_appointments
+    type: count_distinct
+    sql: ${appointment_id}
 
   - dimension: charge_date
     sql: ${TABLE}.`Charge Date`
@@ -147,13 +152,23 @@
   - dimension: charge_total
     type: number
     sql: ${TABLE}.`Charge Total`
+    
+  - measure: average_charge_value
+    type: average
+    sql: ${charge_total}
+    
 
   - dimension: practitioner
     sql: ${TABLE}.Practitioner
 
   - dimension: invoice_total
+#     hidden: true
     type: number
     sql: ${TABLE}.`Invoice Total`
+
+  - measure: total_invoice_total
+    type: sum
+    sql: ${invoice_total}
 
   - dimension: invoice_no
     sql: ${TABLE}.`Invoice No`
@@ -179,25 +194,25 @@
   sets:
     detail:
       - charge_date
-      - appt_date
-      - clinic
-      - patient_employer
-      - charged_to
-      - contract
-      - patient
-      - charge_name
-      - booklet_type
-      - booklet_created_date
-      - quantity
-      - unit_cost
-      - charge_total
-      - practitioner
-      - invoice_total
-      - invoice_no
-      - description
-      - invoice_type
-      - invoiced_to
-      - payment_amount
-      - received_date
-      - payment_method
+      - number_of_appointments
+#       - clinic
+#       - patient_employer
+#       - charged_to
+#       - contract
+#       - patient
+#       - charge_name
+#       - booklet_type
+#       - booklet_created_date
+#       - quantity
+#       - unit_cost
+#       - charge_total
+#       - practitioner
+#       - invoice_total
+#       - invoice_no
+#       - description
+#       - invoice_type
+#       - invoiced_to
+#       - payment_amount
+#       - received_date
+#       - payment_method
 

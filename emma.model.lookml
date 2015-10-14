@@ -26,6 +26,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointments.treatment_cycle_referral_id}
+#       fields: [detail*]
       
     - join: referrer
       type: left_outer
