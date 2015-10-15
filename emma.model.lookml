@@ -68,14 +68,14 @@
     - join: appointment
       type: left_outer
       relationship: many_to_one
-      sql_on: ${appointment.appointment_id} = ${charge.appointment_id}
-      fields: [appointment_id, 'status', start, end, arrive, leave, view, dna, late_cancellation]
+      sql_on: appointment.appointment_id = charge.appointment_id
+      fields: [appointment_id, status, start_date, start_time , end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation]
   
     - join: appointment_type
       type: left_outer
       relationship: many_to_one
       sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
-      fields: [appointment_type_name, sage_code] 
+      fields: [appointment_type_name] 
       required_joins: [appointment]
   
   
