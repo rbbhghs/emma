@@ -69,7 +69,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}
-      fields: [appointment_id, status, start, end, arrive, leave, view, dna, late_cancellation]
+      fields: [appointment_id, 'status', start, end, arrive, leave, view, dna, late_cancellation]
   
     - join: appointment_type
       type: left_outer
