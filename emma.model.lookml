@@ -43,11 +43,14 @@
       sql_on: ${charge.charge_to_id} = ${payor.individual_id}
       
     - join: patient
+      view_label: 'Patient'
       type: inner
       relationship: many_to_one
       sql_on: ${charge.patient_id} = ${patient.individual_id}
       
+      
     - join: location
+      view_label: 'Location'
       type: left_outer
       relationship: many_to_one
       sql_on: ${charge.location_id} = ${location.location_id}
@@ -55,24 +58,29 @@
       
     - join: product
       type: left_outer
+      view_label: 'Appointment'
       relationship: one_to_one
       sql_on: ${charge.product_id} = ${product.product_id}
       fields: [product_name, sage_reference]  
       
-    - join: address
-      type: inner
+    - join: location_address
+      from: address
+      view_label: 'Location'
+      type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=address.address_id
+      sql_on: location.address_id=${address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
     - join: appointment
+      view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
       sql_on: appointment.appointment_id = charge.appointment_id
       fields: [appointment_id, status, start_date, start_time , end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation]
   
     - join: appointment_type
+      view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
       sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
