@@ -56,7 +56,7 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${charge.product_id} = ${product.product_id}
-      fields: [product_name, sage_code]  
+      fields: [product_name, sage_reference]  
       
     - join: address
       type: inner
