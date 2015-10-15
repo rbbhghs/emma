@@ -35,7 +35,7 @@
       
 - explore: charge
   label: Charge
-  -joins:
+  joins:
     - join: payor
       type: inner
       relationship: many_to_one
