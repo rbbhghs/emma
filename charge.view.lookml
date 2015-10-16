@@ -4,6 +4,7 @@
   - dimension: cloned_from_charge_id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.cloned_from_charge_id
 
   - dimension: amount
@@ -12,12 +13,12 @@
 
   - dimension: appointment_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_id
 
   - dimension: available_product_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.available_product_id
 
   - dimension: batch
@@ -25,11 +26,12 @@
 
   - dimension: charge_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.charge_id
 
   - dimension: charge_to_id
     type: int
+    hidden: true
     sql: ${TABLE}.charge_to_id
 
   - dimension: comments
@@ -37,7 +39,7 @@
 
   - dimension: contract_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.contract_id
 
   - dimension: credit
@@ -54,7 +56,7 @@
 
   - dimension: invoice_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.invoice_id
 
   - dimension_group: invoiced
@@ -64,6 +66,7 @@
 
   - dimension_group: last_modified
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified
 
@@ -72,15 +75,16 @@
 
   - dimension: location_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.location_id
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: patient_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.patient_id
 
   - dimension: price
@@ -89,7 +93,7 @@
 
   - dimension: product_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.product_id
 
   - dimension: purchase_order_no
