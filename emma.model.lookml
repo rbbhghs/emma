@@ -35,7 +35,7 @@
       
 - explore: charge
   label: Charge
-  #fields: [amount, quantity, effective_time, effective_date, effective_week, price, status]
+  fields: [amount, quantity, effective_time, effective_date, effective_week, price, status]
   joins:
     - join: payor
       type: inner
