@@ -4,6 +4,7 @@
   - dimension: treatment_cycle_referral_id
     primary_key: true
     type: int
+    #hidden: true
     sql: ${TABLE}.treatment_cycle_referral_id
 
   - dimension_group: appointment
@@ -14,25 +15,27 @@
 
   - dimension: appointment_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_type_id
 
   - dimension: assigned_to_id
     type: int
+    hidden: true
     sql: ${TABLE}.assigned_to_id
 
   - dimension: charge_to_id
     type: int
+    hidden: true
     sql: ${TABLE}.charge_to_id
 
   - dimension: company_contact_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.company_contact_id
 
   - dimension: contact_method_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.contact_method_id
 
   - dimension_group: created
@@ -47,14 +50,17 @@
 
   - dimension: from_company_id
     type: int
+    hidden: true
     sql: ${TABLE}.from_company_id
 
   - dimension: from_practitioner_id
     type: int
+    hidden: true
     sql: ${TABLE}.from_practitioner_id
 
   - dimension: from_treatment_cycle_id
     type: int
+    hidden: true
     sql: ${TABLE}.from_treatment_cycle_id
 
   - dimension: gp_code
@@ -77,9 +83,11 @@
 
   - dimension: marketing_source_id
     type: int
+    hidden: true
     sql: ${TABLE}.marketing_source_id
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: nhs_no
@@ -90,7 +98,7 @@
 
   - dimension: patient_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.patient_id
 
   - dimension_group: pre_rejected
@@ -100,11 +108,12 @@
 
   - dimension: priority_code_id
     type: int
+    hidden: true
     sql: ${TABLE}.priority_code_id
 
   - dimension: product_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.product_id
 
   - dimension: purchase_order_no
@@ -117,12 +126,12 @@
 
   - dimension: referral_method_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.referral_method_id
 
   - dimension: referral_rejection_reason_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.referral_rejection_reason_id
 
   - dimension_group: referred
@@ -147,28 +156,32 @@
 
   - dimension: to_location_id
     type: int
+    hidden: true
     sql: ${TABLE}.to_location_id
 
   - dimension: to_practitioner_id
     type: int
+    hidden: true
     sql: ${TABLE}.to_practitioner_id
 
   - dimension: to_speciality_id
     type: int
+    hidden: true
     sql: ${TABLE}.to_speciality_id
 
   - dimension: to_treatment_cycle_id
     type: int
+    hidden: true
     sql: ${TABLE}.to_treatment_cycle_id
 
   - dimension: treatment_cycle_referral_source_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.treatment_cycle_referral_source_id
 
   - dimension: treatment_cycle_referral_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.treatment_cycle_referral_type_id
 
   - dimension: ubrn
@@ -176,6 +189,7 @@
 
   - dimension: user_id
     type: int
+    hidden: true
     sql: ${TABLE}.user_id
 
   - measure: count

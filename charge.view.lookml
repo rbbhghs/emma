@@ -106,9 +106,27 @@
   - dimension: status
     sql: ${TABLE}.status
 
-  - measure: count
-    type: count
-    drill_fields: detail*
+  - measure: number_of_charges
+    label: '# of Charges'
+    type: count_distinct
+    sql: ${charge_id}
+    
+  - measure: number_of_appts
+    label: '# of Appts'
+    type: count_distinct
+    sql: ${appointment_id}
+    
+  - measure: number_of_invoices
+    label: '# of Invoices'
+    type: count_distinct
+    sql: ${invoice_id}    
+    
+  - measure: sum_charged
+    label: 'Sum of Charges'
+    type: sum
+    sql: ${amount} 
+    value_format: '£0.00'
+    
 
 
   # ----- Sets of fields for drilling ------

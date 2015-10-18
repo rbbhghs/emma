@@ -308,6 +308,17 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.view
 
+
+  - measure: number_of_appts
+    label: '# of Appts'
+    type: count_distinct
+    sql: ${appointment_id}
+    
+  - measure: number_of_locations
+    label: '# of Locations'
+    type: count_distinct
+    sql: ${location_id}
+    
   - measure: count
     type: count
     drill_fields: detail*
