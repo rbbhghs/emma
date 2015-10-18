@@ -188,7 +188,7 @@
 
     - join: individual
       type: left_outer
-      label: 'Activity'
+      label: 'Patient'
       relationship: many_to_one
       sql_on: ${patient_id} = ${individual.individual_id}
       fields: [full_name, dob_date]   
