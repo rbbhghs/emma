@@ -10,14 +10,16 @@
     sql: ${TABLE}.account_number
 
   - dimension: alternate_destination
+    hidden: true
     sql: ${TABLE}.alternate_destination
 
   - dimension: alternate_pickup_location
+    hidden: true
     sql: ${TABLE}.alternate_pickup_location
 
   - dimension: appointment_booklet_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_booklet_id
 
   - dimension: appointment_price
@@ -30,12 +32,12 @@
 
   - dimension: appointment_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_type_id
 
   - dimension: appointment_type_problem_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_type_problem_id
 
   - dimension_group: arrive
@@ -59,14 +61,17 @@
     sql: ${TABLE}.cab_cancellation_reason_code
 
   - dimension: cab_cancellation_reason_text
+    hidden: true
     sql: ${TABLE}.cab_cancellation_reason_text
 
   - dimension: cab_dna_reason_code
     type: int
+    hidden: true
     sql: ${TABLE}.cab_dna_reason_code
 
   - dimension: cab_priority_type_code
     type: int
+    hidden: true
     sql: ${TABLE}.cab_priority_type_code
 
   - dimension: cab_ubrn
@@ -78,26 +83,32 @@
 
   - dimension: cancellation_late_hours
     type: int
+    hidden: true
     sql: ${TABLE}.cancellation_late_hours
 
   - dimension: cancellation_late_hours_tier3
     type: int
+    hidden: true
     sql: ${TABLE}.cancellation_late_hours_tier3
 
   - dimension: cancellation_late_price
     type: number
+    hidden: true
     sql: ${TABLE}.cancellation_late_price
 
   - dimension: cancellation_late_price_tier3
     type: number
+    hidden: true
     sql: ${TABLE}.cancellation_late_price_tier3
 
   - dimension: cancellation_price
     type: number
+    hidden: true
     sql: ${TABLE}.cancellation_price
 
   - dimension: cc_waive_individual
     type: int
+    hidden: true
     sql: ${TABLE}.cc_waive_individual
 
   - dimension: cc_waive_reason
@@ -106,11 +117,12 @@
 
   - dimension: charge_to_id
     type: int
+    hidden: true
     sql: ${TABLE}.charge_to_id
 
   - dimension: class_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.class_id
 
   - dimension: comments
@@ -118,7 +130,7 @@
 
   - dimension: contract_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.contract_id
 
   - dimension_group: discharge
@@ -153,9 +165,11 @@
 
   - dimension: ignore_diary_limits_authorised_by
     type: int
+    hidden: true
     sql: ${TABLE}.ignore_diary_limits_authorised_by
 
   - dimension: ignore_diary_limits_reason
+    hidden: true
     sql: ${TABLE}.ignore_diary_limits_reason
 
   - dimension: insurance_authorisation_code
@@ -174,10 +188,12 @@
 
   - dimension_group: last_modified
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: late_cancellation
@@ -191,10 +207,11 @@
 
   - dimension: location_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.location_id
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension_group: notes_pulled
@@ -212,6 +229,7 @@
 
   - dimension: original_appointment_type_id
     type: int
+    hidden: true
     sql: ${TABLE}.original_appointment_type_id
 
   - dimension: patient_comments
@@ -219,23 +237,27 @@
 
   - dimension: patient_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.patient_id
 
   - dimension: primary_diary_id
     type: int
+    hidden: true
     sql: ${TABLE}.primary_diary_id
 
   - dimension: primary_doctor_id
     type: int
+    hidden: true
     sql: ${TABLE}.primary_doctor_id
 
   - dimension: referring_practitioner_id
     type: int
+    hidden: true
     sql: ${TABLE}.referring_practitioner_id
 
   - dimension: repeat_days
     type: int
+    hidden: true
     sql: ${TABLE}.repeat_days
 
   - dimension_group: requested
@@ -257,12 +279,12 @@
 
   - dimension: simple_diagnosis_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.simple_diagnosis_type_id
 
   - dimension: simple_referral_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.simple_referral_type_id
 
   - dimension: sms_reminder_hours
@@ -282,7 +304,7 @@
 
   - dimension: transport_provider_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.transport_provider_id
 
   - dimension: transport_provider_processed
@@ -296,7 +318,7 @@
 
   - dimension: treatment_cycle_referral_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.treatment_cycle_referral_id
 
   - dimension: upgrade_cancellation_price

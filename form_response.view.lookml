@@ -87,9 +87,25 @@
 
   - dimension: response
     sql: ${TABLE}.response
+    
+  - measure: response_measure
+    type: string
+    sql: ${TABLE}.response  
 
   - dimension: response_long
     sql: ${TABLE}.response_long
+    
+  - dimension: best_response
+    type: string
+    sql: COALESCE(${TABLE}.response,${TABLE}.response_long)  
+    
+  - measure: response_long_measure
+    type: string
+    sql: ${TABLE}.response_long
+    
+  - measure: best_response_measure
+    type: string
+    sql: COALESCE(${TABLE}.response,${TABLE}.response_long)   
 
   - dimension_group: valid_until
     type: time

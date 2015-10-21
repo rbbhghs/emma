@@ -6,7 +6,7 @@
     drill_fields: detail*
     
   - measure: datetime
-    type: date
+    type: time
     sql: ${TABLE}.created
     
   - measure: date

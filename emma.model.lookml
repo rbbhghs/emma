@@ -21,7 +21,7 @@
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointments.treatment_cycle_referral_id}
+      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
       fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
   
     - join: location
@@ -175,7 +175,7 @@
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_id = form_response.appointment_id
+      sql_on: ${appointment_id} = ${appointment.appointment_id}
       fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
   
     - join: appointment_type
@@ -199,18 +199,27 @@
       relationship: one_to_many
       sql_on: ${form_question_version_id}=${form_question_version.form_question_version_id}
       fields: [question_name]
+      
   
-- explore: appointments
+- explore: appointment
   label: Appointments
   joins:
-    - join: patient
+    - join: individual
+      view_label: 'Patient'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.patient_id} = ${patient.individual_id}
       
-    - join: charges
+    - join: charge
       type: left_outer
       relationship: one_to_many
-      sql_on: ${appointments.appointment_id} = ${charges.appointment_id}  
+      sql_on: ${appointment.appointment_id} = ${charges.appointment_id}  
+    
+    - join: patient
+      view_label: 'Patient'
+      type: left_outer
+      required_joins: [individual]
+      relationship: one_to_one
+      sql_on: ${patient_id} = ${individual.individual_id}  
              
             

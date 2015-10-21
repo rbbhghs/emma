@@ -4,11 +4,12 @@
   - dimension: appointment_type_id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.appointment_type_id
 
   - dimension: appointment_type_category_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_type_category_id
 
   - dimension: appointment_type_name
@@ -30,6 +31,7 @@
 
   - dimension: combine_emr_tabs
     type: yesno
+    hidden: true
     sql: ${TABLE}.combine_emr_tabs
 
   - dimension: come_early_for_preparations
@@ -54,19 +56,22 @@
 
   - dimension: contract_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.contract_id
 
   - dimension: copy_of_id
     type: int
+    hidden: true
     sql: ${TABLE}.copy_of_id
 
   - dimension: default_review_speciality_id
     type: int
+    hidden: true
     sql: ${TABLE}.default_review_speciality_id
 
   - dimension: default_reviewer_id
     type: int
+    hidden: true
     sql: ${TABLE}.default_reviewer_id
 
   - dimension: email_comments
@@ -74,6 +79,7 @@
 
   - dimension: encounter_type_id
     type: int
+    hidden: true
     sql: ${TABLE}.encounter_type_id
 
   - dimension: family_notes
@@ -84,29 +90,36 @@
     sql: ${TABLE}.fast
 
   - dimension: fast_comment
+    hidden: true
     sql: ${TABLE}.fast_comment
 
   - dimension: feedback_form_type_id
     type: int
+    hidden: true
     sql: ${TABLE}.feedback_form_type_id
 
   - dimension: fit_first_id
     type: int
+    hidden: true
     sql: ${TABLE}.fit_first_id
 
   - dimension: hide_name_on_insurance_invoice
     type: yesno
+    hidden: true
     sql: ${TABLE}.hide_name_on_insurance_invoice
 
   - dimension_group: last_modified
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: participant_count
@@ -115,15 +128,17 @@
 
   - dimension: primary_participant_id
     type: int
+    hidden: true
     sql: ${TABLE}.primary_participant_id
 
   - dimension: primary_participant_index
     type: int
+    hidden: true
     sql: ${TABLE}.primary_participant_index
 
   - dimension: product_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.product_id
 
   - dimension: recallable
@@ -132,9 +147,11 @@
 
   - dimension: requires_injection
     type: yesno
+    hidden: true
     sql: ${TABLE}.requires_injection
 
   - dimension: requires_injection_comment
+    hidden: true
     sql: ${TABLE}.requires_injection_comment
 
   - dimension: requires_review
@@ -161,6 +178,7 @@
 
   - dimension: superseded_by_id
     type: int
+    hidden: true
     sql: ${TABLE}.superseded_by_id
 
   - dimension: type_comments

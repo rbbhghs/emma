@@ -11,22 +11,25 @@
 
   - dimension: address_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.address_id
 
   - dimension: assistant
     type: int
+    hidden: true
     sql: ${TABLE}.assistant
 
   - dimension: business_school_depot
+    hidden: true
     sql: ${TABLE}.business_school_depot
 
   - dimension: colour
+    hidden: true
     sql: ${TABLE}.colour
 
   - dimension: company_office_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.company_office_id
 
   - dimension_group: created
@@ -68,12 +71,12 @@
 
   - dimension: id_domain_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.id_domain_id
 
   - dimension: individual_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.individual_type_id
 
   - dimension: job_title
@@ -85,22 +88,24 @@
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: location_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.location_id
 
   - dimension: middlename
     sql: ${TABLE}.middlename
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: nationality_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.nationality_id
 
   - dimension: no_email
@@ -144,6 +149,7 @@
 
   - dimension: user_permission_id
     type: yesno
+    hidden: true
     sql: ${TABLE}.user_permission_id
 
   - measure: count

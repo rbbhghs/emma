@@ -4,6 +4,7 @@
   - dimension: raised_by_invoice_id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.raised_by_invoice_id
 
   - dimension: collect_by_direct_debit
@@ -15,7 +16,7 @@
 
   - dimension: company_contact_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.company_contact_id
 
   - dimension_group: created
@@ -38,6 +39,7 @@
 
   - dimension: external_invoice_id
     type: int
+    hidden: true
     sql: ${TABLE}.external_invoice_id
 
   - dimension: external_invoice_number
@@ -56,12 +58,12 @@
 
   - dimension: invoice_reissue_reason_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.invoice_reissue_reason_id
 
   - dimension: invoice_status_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.invoice_status_id
 
   - dimension: invoice_text
@@ -80,15 +82,17 @@
 
   - dimension_group: last_modified
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: location_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.location_id
 
   - dimension: modified_by_function
@@ -103,7 +107,7 @@
 
   - dimension: patient_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.patient_id
 
   - dimension: payment_method_detail
@@ -111,7 +115,7 @@
 
   - dimension: payment_method_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.payment_method_id
 
   - dimension: purchase_order_no
@@ -119,10 +123,12 @@
 
   - dimension: reissue_of_id
     type: int
+    hidden: true
     sql: ${TABLE}.reissue_of_id
 
   - dimension: removal_invoice
     type: yesno
+    hidden: true
     sql: ${TABLE}.removal_invoice
 
   - dimension: show_patient_details
