@@ -79,6 +79,7 @@
 
   - dimension: cancellation_charge_to
     type: yesno
+    hidden: true
     sql: ${TABLE}.cancellation_charge_to
 
   - dimension: cancellation_late_hours
@@ -313,7 +314,7 @@
 
   - dimension: treatment_cycle_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.treatment_cycle_id
 
   - dimension: treatment_cycle_referral_id

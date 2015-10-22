@@ -73,6 +73,13 @@
       sql_on: ${charge.product_id} = ${product.product_id}
       fields: [product_name, sage_reference]  
       
+    - join: contract
+      type: left_outer
+      view_label: 'Appointment'
+      relationship: many_to_one
+      sql_on: ${charge.contract_id} = ${contract.contract_id}
+      fields: [contract_name]    
+      
     - join: location_address
       from: address
       view_label: 'Location'
@@ -202,7 +209,7 @@
       
   
 - explore: appointment
-  label: Appointments
+  label: 'Appointments'
   joins:
     - join: individual
       view_label: 'Patient'
@@ -210,7 +217,15 @@
       relationship: many_to_one
       sql_on: ${appointment.patient_id} = ${patient.individual_id}
       
+    - join: appointment_type
+      view_label: 'Appointments'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      fields: [appointment_type_name]   
+      
     - join: charge
+      view_label: 'Charges'
       type: left_outer
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charges.appointment_id}  
@@ -221,5 +236,106 @@
       required_joins: [individual]
       relationship: one_to_one
       sql_on: ${patient_id} = ${individual.individual_id}  
-             
-            
+      
+    - join: practitioner
+      from: individual
+      view_label: 'Practitioner'
+      type: inner
+      relationship: one_to_one
+      sql_on: ${appointment.primary_doctor_id} = ${individual_id} 
+      fields: [full_name, dob_date]
+      
+    - join: location
+      view_label: 'Appointment Location'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.location_id} = ${location.location_id}
+      
+    - join: location_address
+      from: address
+      view_label: 'Appointment location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: location.address_id=address.address_id
+      required_joins: [location]
+      fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country] 
+      
+    - join: patient_address
+      from: address
+      view_label: 'Patient'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: patient.address_id=${address_id}
+      required_joins: [patient]
+      fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
+      
+      
+- explore: appointment_section
+  label: 'Practitioner Activity'
+  joins:
+  - join: practitioner
+    from: individual
+    view_label: 'Practitioner'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${appointment_section.doctor_id} = ${individual_id}
+    
+  - join: creator
+    from: individual
+    view_label: 'Created by'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${appointment_section.created_by_id} = ${creator.individual_id} 
+    fields: [full_name]
+      
+  - join: appointment
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: appointment_section.appointment_id = appointment.appointment_id
+      
+  - join: appointment_type
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: many_to_one
+    requires: appointment
+    sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+    fields: [appointment_type_name]  
+    
+  - join: class
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: appointment_section.class_id = class.class_id  
+      
+  - join: class_type
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: class.class_type_id = class_type.class_type_id  
+    
+  - join: location
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${appointment.location_id} = ${location.location_id}
+    fields: [location_name]
+      
+  - join: location_address
+    from: address
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${location.address_id} = ${location_address.address_id}
+    required_joins: [location]
+    fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
+      
+  - join: contract
+    type: left_outer
+    view_label: 'Appointments'
+    relationship: many_to_one
+    sql_on: ${appointment.contract_id} = ${appointment.contract_id}
+    fields: [contract_name]    
+    
+  
+  
