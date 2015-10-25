@@ -228,7 +228,7 @@
       view_label: 'Charges'
       type: left_outer
       relationship: one_to_many
-      sql_on: ${appointment.appointment_id} = ${charges.appointment_id}  
+      sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
     
     - join: patient
       view_label: 'Patient'

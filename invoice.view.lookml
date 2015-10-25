@@ -169,7 +169,9 @@
     sql: ${TABLE}.written_off
 
   - measure: count
-    type: count
+    label: 'Number of invoices raised'
+    type: count_distinct
+    sql_distinct_key: ${invoice_id}
     drill_fields: detail*
     
   - measure: sum_outstanding
