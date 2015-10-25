@@ -9,6 +9,7 @@
 
   - dimension: amount
     type: number
+    hidden: true
     sql: ${TABLE}.amount
 
   - dimension: appointment_id
@@ -124,7 +125,7 @@
   - measure: sum_charged
     label: 'Sum of Charges'
     type: sum
-    sql: ${amount} 
+    sql: ${price} 
     value_format: '£0.00'
     
 
