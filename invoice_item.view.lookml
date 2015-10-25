@@ -8,12 +8,12 @@
 
   - dimension: appointment_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.appointment_id
 
   - dimension: charge_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.charge_id
 
   - dimension: comments
@@ -24,16 +24,17 @@
 
   - dimension: doctor_id
     type: int
+    hidden: true
     sql: ${TABLE}.doctor_id
 
   - dimension: invoice_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.invoice_id
 
   - dimension: invoice_item_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.invoice_item_id
 
   - dimension: item_price_net
@@ -62,7 +63,7 @@
 
   - dimension: location_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.location_id
 
   - dimension: modified_by_function
@@ -70,7 +71,7 @@
 
   - dimension: product_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.product_id
 
   - dimension: quantity
@@ -87,6 +88,66 @@
   - measure: count
     type: count
     drill_fields: detail*
+    
+  - measure: number_of_items
+    label: '# of Items invoiced'
+    type: count_distinct
+    sql: ${invoice_item_id}    
+    
+  - measure: sum_invoiced
+    label: 'Sum of Invoice items (inc VAT)'
+    type: sum
+    sql: ${line_price} 
+    #value_format: '£#,##0.00'
+    
+  - measure: sum_invoiced_excl_vat
+    label: 'Sum of Invoice items (excl VAT)'
+    type: sum
+    sql: ${line_price_net} 
+    #value_format: '£#,##0.00'  
+    
+  - measure: sum_vat
+    label: 'Sum of VAT charged'
+    type: sum
+    sql: ${line_price_vat} 
+    #value_format: '£#,##0.00'      
+    
+  - measure: avg_invoiced
+    label: 'Avg of Invoice items (inc VAT)'
+    type: avg
+    sql: ${line_price} 
+    #value_format: '£#,##0.00'
+    
+  - measure: avg_invoiced_excl_vat
+    label: 'Avg of Invoice items (excl VAT)'
+    type: avg
+    sql: ${line_price_net} 
+    #value_format: '£#,##0.00'  
+    
+  - measure: avg_vat
+    label: 'Avg of VAT charged'
+    type: avg
+    sql: ${line_price_vat} 
+    #value_format: '£#,##0.00'
+    
+  - measure: line_billed
+    label: 'Line Price (inc VAT)'
+    type: number
+    sql: ${line_price} 
+    #value_format: '£#,##0.00'
+    
+  - measure: line_billed_net
+    label: 'Line Price (excl VAT)'
+    type: number
+    sql: ${line_price_net} 
+    #value_format: '£#,##0.00'  
+    
+  - measure: line_vat
+    label: 'VAT charged'
+    type: number
+    sql: ${line_price_vat} 
+    #value_format: '£#,##0.00'   
+      
 
 
   # ----- Sets of fields for drilling ------

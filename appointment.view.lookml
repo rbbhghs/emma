@@ -342,6 +342,11 @@
     type: count_distinct
     sql: ${location_id}
     
+  - measure: appt_duration
+    label: 'Appointment duration'
+    type: date_time
+    sql: cast((${TABLE}.end)-(${TABLE}.end) as datetime)
+    
   - measure: count
     type: count
     drill_fields: detail*

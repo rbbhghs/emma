@@ -335,7 +335,277 @@
     view_label: 'Appointments'
     relationship: many_to_one
     sql_on: ${appointment.contract_id} = ${appointment.contract_id}
-    fields: [contract_name]    
+    fields: [contract_name]  
     
+- explore: diary
+  label: 'Diary Utilisation'  
+  joins:
+  - join: diary_section
+    view_label: 'Diary Utilisation'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${diary_section.diary_id} = ${diary.diary_id}
   
+  - join: practitioner
+    from: individual
+    view_label: 'Practitioner'
+    type: left_outer
+    relationship: many_to_one
+    requires: diary
+    sql_on: ${diary.doctor_id} = ${individual.individual_id}
+    
+  - join: diary_template
+    view_label: 'Diary Template'
+    type: left_outer
+    relationship: many_to_one
+    requires: diary
+    sql_on: ${diary.diary_template_id} = ${diary_template.diary_template_id} 
+    
+  - join: appointment_section
+    view_label: 'Appointment Activity'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${diary.diary_id} = ${appointment_section.diary_id} 
+    fields: [start_time, end_time, reservation]
+    
+  - join: appointment
+    view_label: 'Appointment Activity'
+    type: left_outer
+    relationship: many_to_one
+    requires: appointment_section
+    sql_on: ${appointment_section.appointment_id} = ${appointment.appointment_id}
+      
+  - join: appointment_type
+    view_label: 'Appointment Activity'
+    type: left_outer
+    relationship: many_to_one
+    requires: appointment
+    sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+    fields: [appointment_type_name]  
+    
+  - join: class
+    view_label: 'Appointment Activity'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${appointment_section.class_id} = ${class.class_id} 
+    fields: [class_id]
+      
+  - join: class_type
+    view_label: 'Appointment Activity'
+    type: left_outer
+    relationship: many_to_one
+    requires: class
+    sql_on: ${class.class_type_id} = ${class_type.class_type_id} 
+    fields: [class_type_name]
+   
+  - join: room
+    view_label: 'Location'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${diary.room_id} = ${room.room_id}
+    fields: [room_name]  
   
+  - join: location
+    view_label: 'Location'
+    type: left_outer
+    relationship: many_to_one
+    requires: room
+    sql_on: ${room.location_id} = ${location.location_id}
+    fields: [location_name]  
+    
+    
+- explore: invoices
+  from: invoice
+  label: 'Invoices'
+  #fields: [charge.amount, charge.quantity, charge.effective_time, charge.effective_date, charge.effective_week, charge.price, charge.status]  
+  joins:
+    - join: payor
+      view_label: 'Invoices'
+      type: inner
+      relationship: one_to_many
+      sql_on: ${invoices.invoicee_id} = ${payor.individual_id}
+      fields: [payor]
+      
+    - join: issuing_company
+      view_label: 'Invoices'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${invoices.issued_by_id} = ${issuing_company.issuing_company_id}
+      fields: [issuing_company_name]
+      
+    - join: patient
+      from: individual
+      view_label: 'Patient'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${invoices.patient_id} = ${patient.individual_id}
+      fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
+      
+    - join: invoice_item
+      view_label: 'Invoice Items'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${invoices.invoice_id} = ${invoice_item.invoice_id}
+      
+    - join: charge
+      view_label: 'Charges'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${charge.charge_id} = ${invoice_item.charge_id}  
+
+    - join: location
+      view_label: 'Invoice Location'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${invoices.location_id} = ${location.location_id}
+      fields: [location_name]
+      
+    - join: product
+      type: left_outer
+      view_label: 'Charges'
+      relationship: one_to_one
+      sql_on: ${charge.product_id} = ${product.product_id}
+      fields: [product_name, sage_reference]  
+      
+    - join: contract
+      type: left_outer
+      view_label: 'Charges'
+      relationship: many_to_one
+      sql_on: ${charge.contract_id} = ${contract.contract_id}
+      fields: [contract_name]    
+      
+    - join: location_address
+      from: address
+      view_label: 'Invoice Location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${location.address_id}=${address_id}
+      required_joins: [location]
+      fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
+      
+    - join: appointment
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${charge.appointment_id}
+      fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
+  
+    - join: practitioner
+      from: individual
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
+      fields: [full_name]  
+      
+    - join: appointment_location
+      from: location
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.location_id} = ${location.location_id} 
+      fields: [location_name]
+  
+    - join: appointment_type
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+      fields: [appointment_type_name] 
+      required_joins: [appointment]   
+      
+    - join: payment_allocation
+      view_label: 'Payment Allocation'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${invoices.invoice_id} = ${payment_allocation.to_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
+    
+    - join: payment
+      view_label: 'Payment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payment.payment_id} = ${payment_allocation.from_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
+      required_joins: [payment_allocation]   
+
+    - join: payment_location
+      from: location
+      view_label: 'Payment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payment.location_id} = ${location.location_id} 
+      fields: [location_name]
+      required_joins: [payment, payment_allocation] 
+  
+- explore: payments
+  from: payment
+  label: 'Payments'
+  joins:
+    - join: payor
+      view_label: 'Payments'
+      type: inner
+      relationship: one_to_many
+      sql_on: ${payments.payer_id} = ${payor.individual_id}
+      fields: [payor]
+      
+    - join: issuing_company
+      view_label: 'Payments'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${payments.issuing_company_id} = ${issuing_company.issuing_company_id}
+      fields: [issuing_company_name]
+      
+    - join: payment_method
+      view_label: 'Payments'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${payments.payment_method_id} = ${payment_method.payment_method_id}
+      fields: [payment_method_name]  
+      
+    - join: payment_location
+      from: location
+      view_label: 'Payments'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payments.location_id} = ${location.location_id} 
+      fields: [location_name]
+    
+    - join: patient
+      from: individual
+      view_label: 'Patient'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${payments.patient_id} = ${patient.individual_id}
+      fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
+      
+    - join: appointment
+      view_label: 'Appointment paid in advance'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payments.appointment_id} = ${appointment.appointment_id}    
+      
+    - join: payment_allocation
+      view_label: 'Payment Allocation'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payments.payment_id} = ${payment_allocation.from_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
+  
+    - join: invoice
+      view_label: 'Invoice allocated'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${invoice.invoice_id} = ${payment_allocation.to_id}  
+      required_joins: [payment_allocation]
+      fields: [external_invoice_number, invoice_id, created_date, created_time, created_week, created_month, total_price, total_price_net, outstanding]
+      
+    - join: location
+      view_label: 'Invoice allocated'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${invoice.location_id} = ${location.location_id}
+      fields: [location_name]  
+      
+    - join: invoice_item
+      view_label: 'Invoice Items'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${invoice.invoice_id} = ${invoice_item.invoice_id}  

@@ -17,15 +17,17 @@
 
   - dimension: diary_template_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.diary_template_id
 
   - dimension: diary_type
     type: int
+    hidden: true
     sql: ${TABLE}.diary_type
 
   - dimension: doctor_id
     type: int
+    hidden: true
     sql: ${TABLE}.doctor_id
 
   - dimension_group: last_modified
@@ -34,14 +36,16 @@
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: room_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.room_id
 
   - dimension: status

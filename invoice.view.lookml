@@ -46,14 +46,16 @@
     sql: ${TABLE}.external_invoice_number
 
   - dimension: external_invoice_reference_1
+    hidden: true
     sql: ${TABLE}.external_invoice_reference_1
 
   - dimension: external_invoice_reference_2
+    hidden: true
     sql: ${TABLE}.external_invoice_reference_2
 
   - dimension: invoice_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.invoice_id
 
   - dimension: invoice_reissue_reason_id
@@ -96,6 +98,7 @@
     sql: ${TABLE}.location_id
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: notes
@@ -133,10 +136,12 @@
 
   - dimension: show_patient_details
     type: yesno
+    hidden: true
     sql: ${TABLE}.show_patient_details
 
   - dimension: show_patient_names
     type: yesno
+    hidden: true
     sql: ${TABLE}.show_patient_names
 
   - dimension: status
@@ -153,7 +158,11 @@
   - dimension: total_vat
     type: number
     sql: ${TABLE}.total_vat
-
+    
+  - dimension: payments_allocated
+    type: number
+    sql: ${TABLE}.total_price-${TABLE}.outstanding
+      
   - dimension_group: written_off
     type: time
     timeframes: [time, date, week, month]
@@ -162,6 +171,55 @@
   - measure: count
     type: count
     drill_fields: detail*
+    
+  - measure: sum_outstanding
+    label: 'Sum Outstanding'
+    type: sum_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${outstanding}   
+    
+  - measure: total_billed
+    label: 'Sum Billed (incl VAT)'
+    type: sum_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${total_price} 
+    
+  - measure: sum_total_vat
+    label: 'Total VAT'
+    type: sum_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${total_vat} 
+    
+  - measure: avg_total_vat
+    label: 'Avg VAT'
+    type: avg_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${total_vat}   
+    
+  - measure: total_billed_net
+    label: 'Sum Billed (excl VAT)'
+    type: sum_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${total_price_net}  
+    
+  - measure: avg_outstanding
+    label: 'Avg Outstanding'
+    type: avg_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${outstanding}   
+    
+  - measure: avg_billed_net
+    label: 'Avg Billed (incl VAT)'
+    type: avg_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${total_price}  
+    
+  - measure: avg_billed
+    label: 'Avg Billed (excl VAT)'
+    type: avg_distinct
+    sql_distinct_key: ${invoice_id}
+    sql: ${total_price_net} 
+    
 
 
   # ----- Sets of fields for drilling ------

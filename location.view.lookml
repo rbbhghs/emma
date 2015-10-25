@@ -4,9 +4,11 @@
   - dimension: billing_location_id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.billing_location_id
 
   - dimension: access_key
+    hidden: true
     sql: ${TABLE}.access_key
 
   - dimension: additional_detail
@@ -14,90 +16,109 @@
 
   - dimension: address_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.address_id
 
   - dimension: appointment_letter_template_id
     type: int
+    hidden: true
     sql: ${TABLE}.appointment_letter_template_id
 
   - dimension: bupa_no
+    hidden: true
     sql: ${TABLE}.bupa_no
 
   - dimension: bupa_payee_no
+    hidden: true
     sql: ${TABLE}.bupa_payee_no
 
   - dimension: company_credit_note_template
+    hidden: true
     sql: ${TABLE}.company_credit_note_template
 
   - dimension: company_invoice_template
+    hidden: true
     sql: ${TABLE}.company_invoice_template
 
   - dimension: company_payment_template
+    hidden: true
     sql: ${TABLE}.company_payment_template
 
   - dimension: company_refund_template
+    hidden: true
     sql: ${TABLE}.company_refund_template
 
   - dimension: default_task_assign_to_id
     type: int
+    hidden: true
     sql: ${TABLE}.default_task_assign_to_id
 
   - dimension: email
     sql: ${TABLE}.email
 
   - dimension: external_practitioner_credit_note_template
+    hidden: true
     sql: ${TABLE}.external_practitioner_credit_note_template
 
   - dimension: external_practitioner_invoice_template
+    hidden: true
     sql: ${TABLE}.external_practitioner_invoice_template
 
   - dimension: fax_no
     sql: ${TABLE}.fax_no
 
   - dimension: healthcode_id
+    hidden: true
     sql: ${TABLE}.healthcode_id
 
   - dimension: individual_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.individual_id
 
   - dimension: insurance_credit_note_template
+    hidden: true
     sql: ${TABLE}.insurance_credit_note_template
 
   - dimension: insurance_invoice_template
+    hidden: true
     sql: ${TABLE}.insurance_invoice_template
 
   - dimension: insurance_payment_template
+    hidden: true
     sql: ${TABLE}.insurance_payment_template
 
   - dimension: insurance_refund_template
+    hidden: true
     sql: ${TABLE}.insurance_refund_template
 
   - dimension: issuing_company_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.issuing_company_id
 
   - dimension: lab_code
+    hidden: true
     sql: ${TABLE}.lab_code
 
   - dimension_group: last_modified
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: last_register
     type: int
+    hidden: true
     sql: ${TABLE}.last_register
 
   - dimension: location_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.location_id
 
   - dimension: location_name
@@ -107,12 +128,15 @@
     sql: ${TABLE}.location_name_short
 
   - dimension: logo
+    hidden: true
     sql: ${TABLE}.logo
 
   - dimension: map
+    hidden: true
     sql: ${TABLE}.map
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: notes
@@ -120,19 +144,23 @@
 
   - dimension: organization_group_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.organization_group_id
 
   - dimension: patient_credit_note_template
+    hidden: true
     sql: ${TABLE}.patient_credit_note_template
 
   - dimension: patient_invoice_template
+    hidden: true
     sql: ${TABLE}.patient_invoice_template
 
   - dimension: patient_payment_template
+    hidden: true
     sql: ${TABLE}.patient_payment_template
 
   - dimension: patient_refund_template
+    hidden: true
     sql: ${TABLE}.patient_refund_template
 
   - dimension: status
@@ -146,7 +174,7 @@
 
   - dimension: time_zone_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.time_zone_id
 
   - measure: count
