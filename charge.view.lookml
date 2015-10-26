@@ -111,6 +111,8 @@
     label: '# of Charges'
     type: count_distinct
     sql: ${charge_id}
+    sql_distinct_key: ${charge_id}
+
     
   - measure: number_of_appts
     label: '# of Appts'
@@ -120,13 +122,16 @@
   - measure: number_of_invoices
     label: '# of Invoices'
     type: count_distinct
-    sql: ${invoice_id}    
+    sql: ${invoice_id}  
+    sql_distinct_key: ${invoice_id}
+
     
   - measure: sum_charged
     label: 'Sum of Charges'
-    type: sum
+    type: sum_distinct
     sql: ${price} 
-    value_format: '£0.00'
+    sql_distinct_key: ${charge_id}
+
     
 
 

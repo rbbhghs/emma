@@ -24,6 +24,14 @@
       sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
       fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
   
+    - join: appointment_type
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      fields: [appointment_type_name] 
+      required_joins: [appointment]
+      
     - join: location
       view_label: 'Appointment location'
       type: left_outer
@@ -44,6 +52,103 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
+           
+           
+- explore: radiology_referrals
+  from: treatment_cycle_referral
+  label: 'Radiology referrals'
+  joins:
+    - join: payor
+      type: inner
+      relationship: many_to_one
+      sql_on: ${radiology_referrals.charge_to_id} = ${payor.individual_id}
+      
+    - join: patient
+      type: inner
+      relationship: many_to_one
+      sql_on: ${radiology_referrals.patient_id} = ${patient.individual_id}
+
+    - join: appointment
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${radiology_referrals.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
+      fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
+  
+    - join: appointment_type
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      fields: [appointment_type_name] 
+      required_joins: [appointment]  
+      
+    - join: location
+      view_label: 'Appointment location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${appointment.location_id} = ${location.location_id}
+      fields: [location_name]
+      
+    - join: location_address
+      from: address
+      view_label: 'Appointment location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: location.address_id=address.address_id
+      required_joins: [location]
+      fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
+      
+    - join: referrer
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${radiology_referrals.from_practitioner_id} = ${referrer.individual_id}  
+      
+    - join: appointment_section
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
+      required_joins: [appointment]
+      
+    - join: appointment_section_study
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
+      required_joins: [appointment_section,appointment]
+      fields: []
+      
+    - join: dicom_procedure
+      view_label: 'Procedure'
+      type: left_outer
+      relationship: many_to_one
+      required_joins: [appointment_section_study,appointment_section,appointment]
+      sql_on: ${appointment_section_study.dicom_procedure_id} = ${dicom_procedure.dicom_procedure_id}    
+      fields: [procedure_description, procedure_description_list, procedure_code_list, procedure_code, count, dicom_procedure_id]
+           
+    - join: dashboard_event
+      view_label: 'Activity'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${radiology_referrals.treatment_cycle_referral_id} = ${dashboard_event.treatment_cycle_referral_id}
+      fields: [created_time, created_date, created_week, created_month, datetime,date, average_date, min_date,max_date]
+      
+    - join: dashboard_action
+      type: left_outer
+      view_label: 'Activity'
+      relationship: one_to_one
+      required_joins: [dashboard_event]
+      sql_on: ${dashboard_event.dashboard_action_id} = ${dashboard_action.dashboard_action_id}
+      fields: [dashboard_action_name]  
+      
+    - join: creator
+      type: left_outer
+      view_label: 'Activity'
+      relationship: many_to_one
+      required_joins: [dashboard_event]
+      sql_on: ${dashboard_event.created_by_id} = ${creator.individual_id}
+      fields: [created_by]          
       
 - explore: charge
   label: Charge
@@ -123,13 +228,13 @@
       sql_on: ${dashboard_event.dashboard_action_id} = ${dashboard_action.dashboard_action_id}
       fields: [dashboard_action_name]  
       
-    - join: individual
+    - join: creator
       type: left_outer
       label: 'Activity'
       relationship: many_to_one
       required_joins: [dashboard_event]
-      sql_on: ${dashboard_event.created_by_id} = ${individual.individual_id}
-      fields: [full_name, dob_date]       
+      sql_on: ${dashboard_event.created_by_id} = ${creator.individual_id}
+      fields: [created_by]       
       
     - join: charge
       type: left_outer
@@ -298,7 +403,7 @@
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    requires: appointment
+    required_joins: appointment
     sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
     fields: [appointment_type_name]  
     
@@ -351,14 +456,14 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    requires: diary
+    required_joins: diary
     sql_on: ${diary.doctor_id} = ${individual.individual_id}
     
   - join: diary_template
     view_label: 'Diary Template'
     type: left_outer
     relationship: many_to_one
-    requires: diary
+    required_joins: diary
     sql_on: ${diary.diary_template_id} = ${diary_template.diary_template_id} 
     
   - join: appointment_section
@@ -372,14 +477,13 @@
     view_label: 'Appointment Activity'
     type: left_outer
     relationship: many_to_one
-    requires: appointment_section
+    required_joins: appointment_section
     sql_on: ${appointment_section.appointment_id} = ${appointment.appointment_id}
       
   - join: appointment_type
     view_label: 'Appointment Activity'
     type: left_outer
     relationship: many_to_one
-    requires: appointment
     sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
     fields: [appointment_type_name]  
     
@@ -394,7 +498,7 @@
     view_label: 'Appointment Activity'
     type: left_outer
     relationship: many_to_one
-    requires: class
+    required_joins: class
     sql_on: ${class.class_type_id} = ${class_type.class_type_id} 
     fields: [class_type_name]
    
@@ -409,7 +513,7 @@
     view_label: 'Location'
     type: left_outer
     relationship: many_to_one
-    requires: room
+    required_joins: room
     sql_on: ${room.location_id} = ${location.location_id}
     fields: [location_name]  
     
@@ -484,7 +588,7 @@
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
     - join: appointment
-      view_label: 'Appointment'
+      view_label: 'Appointment Information'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}
@@ -492,7 +596,7 @@
   
     - join: practitioner
       from: individual
-      view_label: 'Appointment'
+      view_label: 'Appointment Information'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
@@ -500,14 +604,14 @@
       
     - join: appointment_location
       from: location
-      view_label: 'Appointment'
+      view_label: 'Appointment Information'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.location_id} = ${location.location_id} 
       fields: [location_name]
   
     - join: appointment_type
-      view_label: 'Appointment'
+      view_label: 'Appointment Information'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
@@ -521,20 +625,53 @@
       sql_on: ${invoices.invoice_id} = ${payment_allocation.to_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
     
     - join: payment
-      view_label: 'Payment'
+      view_label: 'Payment Allocation'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${payment.payment_id} = ${payment_allocation.from_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
+      sql_on: ${payment.payment_id} = ${payment_allocation.from_id} #and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
       required_joins: [payment_allocation]   
-
+      
     - join: payment_location
       from: location
-      view_label: 'Payment'
+      view_label: 'Payment Allocation'
       type: left_outer
       relationship: many_to_one
       sql_on: ${payment.location_id} = ${location.location_id} 
       fields: [location_name]
       required_joins: [payment, payment_allocation] 
+      
+    - join: refund_allocation
+      from: payment_allocation
+      view_label: 'Refund Allocation'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payment.payment_id} = ${refund_allocation.from_id} and ${refund_allocation.from_type}='3' and ${refund_allocation.to_type}='4' and ${refund_allocation.status}='A'
+    
+    - join: refund
+      from: payment
+      view_label: 'Refund Allocation'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${refund.payment_id} = ${refund_allocation.to_id} #and ${refund_allocation.from_type}='4' and ${payment_allocation.to_type}='1' and ${refund_allocation.status}='A'
+      required_joins: [refund_allocation]     
+      
+    - join: cn_allocation
+      from: payment_allocation
+      view_label: 'Credit Note Allocation'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${invoice.invoice_id} = ${cn_allocation.from_id} and ${cn_allocation.from_type}='3' and ${cn_allocation.to_type}='4' and ${cn_allocation.status}='A'
+  
+    - join: credit_note
+      from: invoice
+      view_label: 'Credit Note Allocation'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${credit_note.invoice_id} = ${cn_allocation.to_id}  
+      required_joins: [cn_allocation]
+      fields: [external_invoice_number, invoice_id, created_date, created_time, created_week, created_month, total_price, total_price_net, outstanding]
+  
+      
   
 - explore: payments
   from: payment

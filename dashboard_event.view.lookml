@@ -4,14 +4,14 @@
   - measure: count
     type: count
     drill_fields: detail*
-    
+  
   - measure: datetime
-    type: time
-    sql: ${TABLE}.created
+    type: date_time
+    sql: cast(${TABLE}.created as datetime)
     
   - measure: date
-    type: date
-    sql: ${TABLE}.created  
+    type: date_time
+    sql: cast(${TABLE}.created as datetime)  
     
   - measure: average_date
     type: date
