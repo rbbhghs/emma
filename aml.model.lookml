@@ -456,15 +456,13 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    required_joins: diary
-    sql_on: ${diary.doctor_id} = ${individual.individual_id}
+    sql_on: ${doctor_id} = ${individual.individual_id}
     
   - join: diary_template
     view_label: 'Diary Template'
     type: left_outer
     relationship: many_to_one
-    required_joins: diary
-    sql_on: ${diary.diary_template_id} = ${diary_template.diary_template_id} 
+    sql_on: ${diary_template_id} = ${diary_template.diary_template_id} 
     
   - join: appointment_section
     view_label: 'Appointment Activity'
