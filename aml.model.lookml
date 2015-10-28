@@ -3,6 +3,8 @@
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
 
+- explore: outcomes
+  label: Outcomes
 
 - explore: treatment_cycle_referral
   label: Referrals
@@ -334,6 +336,18 @@
       type: left_outer
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
+      
+    - join: goal
+      view_label: 'Goals'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${appointment.goal_id} = ${goal.goal_id}   
+      
+    - join: goal_score
+      view_label: 'Goals'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${goal.goal_id} = ${goal_score.goal_id}     
     
     - join: patient
       view_label: 'Patient'
