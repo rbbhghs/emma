@@ -8,7 +8,7 @@
 
   - dimension: body_part_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.body_part_id
 
   - dimension_group: closed
@@ -18,6 +18,7 @@
 
   - dimension: closed_by_id
     type: int
+    hidden: true
     sql: ${TABLE}.closed_by_id
 
   - dimension_group: create
@@ -26,6 +27,7 @@
     sql: ${TABLE}.create_date
 
   - dimension: created_by
+    hidden: true
     sql: ${TABLE}.created_by
 
   - dimension: goal_description
@@ -33,16 +35,19 @@
 
   - dimension_group: last_modified
     type: time
+    hidden: true
     timeframes: [time, date, week, month]
     sql: ${TABLE}.last_modified
 
   - dimension: last_modified_by
+    hidden: true
     sql: ${TABLE}.last_modified_by
 
   - dimension: marker_type
     sql: ${TABLE}.marker_type
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: notes
@@ -66,7 +71,7 @@
 
   - dimension: treatment_cycle_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.treatment_cycle_id
 
   - measure: count

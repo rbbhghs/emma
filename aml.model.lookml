@@ -344,7 +344,7 @@
       sql_on: ${appointment.goal_id} = ${goal.goal_id}   
       
     - join: goal_score
-      view_label: 'Goals'
+      view_label: 'Goal Scores'
       type: left_outer
       relationship: one_to_many
       sql_on: ${goal.goal_id} = ${goal_score.goal_id}     

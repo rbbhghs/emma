@@ -191,6 +191,18 @@
     type: int
     hidden: true
     sql: ${TABLE}.user_id
+    
+  - measure: created_date_avg
+    type: date
+    sql: AVG(${TABLE}.created_date)  
+    
+  - measure: received_date_avg
+    type: date
+    sql: AVG(${TABLE}.received) 
+    
+  - measure: referred_date_avg
+    type: date
+    sql: AVG(${TABLE}.referred)   
 
   - measure: count
     type: count
