@@ -204,17 +204,17 @@
     type: date
     sql: AVG(${TABLE}.referred)   
     
-  - measure: created_date
-    type: date_time
-    sql: cast(${TABLE}.created_date as datetime)  
+#  - measure: created_date
+ #   type: date_time
+#    sql: cast(${TABLE}.created_date as datetime)  
 
-  - measure: received_date
-    type: date_time
-    sql: cast(${TABLE}.received as datetime)  
+ # - measure: received_date
+#    type: date_time
+#    sql: cast(${TABLE}.received as datetime)  
 
-  - measure: referred_date
-    type: date_time
-    sql: cast(${TABLE}.referred as datetime)
+ # - measure: referred_date
+#    type: date_time
+#    sql: cast(${TABLE}.referred as datetime)
 
   - measure: count
     type: count
