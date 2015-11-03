@@ -173,9 +173,11 @@
     
     
   - measure: relative_effect_avg
+    label: 'Relative effect (%)'
     type: number
     type: avg
     sql: ${relative_effect_} 
+    value_format: '0.000'  
 
   # ----- Sets of fields for drilling ------
   sets:
