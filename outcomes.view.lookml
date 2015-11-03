@@ -170,6 +170,12 @@
     type: avg
     sql: ${latest_score}  
     value_format: '0.000'  
+    
+    
+  - measure: relative_effect_avg
+    type: number
+    type: avg
+    sql: ${relative_effect_} 
 
   # ----- Sets of fields for drilling ------
   sets:
