@@ -14,10 +14,10 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.charge_to_id} = ${payor.individual_id}
       
-    - join: patient
+    - join: patients
       type: inner
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.patient_id} = ${patient.individual_id}
+      sql_on: ${treatment_cycle_referral.patient_id} = ${individual_id}
 
     - join: appointment
       view_label: 'Appointment'
@@ -161,11 +161,11 @@
       relationship: many_to_one
       sql_on: ${charge.charge_to_id} = ${payor.individual_id}
       
-    - join: patient
+    - join: patients
       view_label: 'Patient'
       type: inner
       relationship: many_to_one
-      sql_on: ${charge.patient_id} = ${patient.individual_id}
+      sql_on: ${charge.patient_id} = ${individual_id}
       
     - join: location
       view_label: 'Location'
@@ -175,14 +175,14 @@
       
     - join: product
       type: left_outer
-      view_label: 'Appointment'
+      view_label: 'Charge'
       relationship: one_to_one
       sql_on: ${charge.product_id} = ${product.product_id}
       fields: [product_name, sage_reference]  
       
     - join: contract
       type: left_outer
-      view_label: 'Appointment'
+      view_label: 'Charge'
       relationship: many_to_one
       sql_on: ${charge.contract_id} = ${contract.contract_id}
       fields: [contract_name]    
@@ -304,7 +304,7 @@
       type: left_outer
       label: 'Patient'
       relationship: many_to_one
-      sql_on: ${patient_id} = ${individual.individual_id}
+      sql_on: ${patient_id} = $individual.individual_id}
       fields: [full_name, dob_date]   
       
     - join: form_question_version 
@@ -322,7 +322,7 @@
       view_label: 'Patient'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${appointment.patient_id} = ${patient.individual_id}
+      sql_on: appointment.patient_id = individual.individual_id
       
     - join: appointment_type
       view_label: 'Appointments'
@@ -337,31 +337,47 @@
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
       
-    - join: goal
-      view_label: 'Goals'
-      type: left_outer
-      relationship: one_to_many
-      sql_on: ${appointment.goal_id} = ${goal.goal_id}   
+   # - join: goal
+    #  view_label: 'Goals'
+    #  type: left_outer
+    #  relationship: one_to_many
+    #  sql_on: ${appointment.goal_id} = ${goal.goal_id}   
       
-    - join: goal_score
-      view_label: 'Goal Scores'
-      type: left_outer
-      relationship: one_to_many
-      sql_on: ${goal.goal_id} = ${goal_score.goal_id}     
+    #- join: goal_score
+    #  view_label: 'Goal Scores'
+    #  type: left_outer
+    #  relationship: one_to_many
+    #  sql_on: ${goal.goal_id} = ${goal_score.goal_id}     
     
     - join: patient
       view_label: 'Patient'
       type: left_outer
       required_joins: [individual]
       relationship: one_to_one
-      sql_on: ${patient_id} = ${individual.individual_id}  
+      sql_on: patient.individual_id = individual.individual_id 
+      
+    - join: insurance_company  
+      view_label: 'Patient'
+      type: left_outer
+      required_joins: [patient]
+      relationship: many_to_one
+      sql_on: patient.insurance_company_id=insurance_company.individual_id
+      fields: [insurance_company_name]
+      
+    - join: company  
+      view_label: 'Patient'
+      type: left_outer
+      required_joins: [patient]
+      relationship: many_to_one
+      sql_on: patient.employer_id=company.individual_id
+      fields: [company_name]  
       
     - join: practitioner
       from: individual
       view_label: 'Practitioner'
       type: inner
       relationship: one_to_one
-      sql_on: ${appointment.primary_doctor_id} = ${individual_id} 
+      sql_on: ${appointment.primary_doctor_id} = practitioner.individual_id
       fields: [full_name, dob_date]
       
     - join: location
@@ -375,7 +391,7 @@
       view_label: 'Appointment location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=address.address_id
+      sql_on: location.address_id=location_address.address_id
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country] 
       
