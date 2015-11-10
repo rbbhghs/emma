@@ -81,7 +81,6 @@
 
   - dimension: outstanding
     type: number
-    hidden: true
     sql: ${TABLE}.outstanding
 
   - dimension: patient_id
