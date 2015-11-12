@@ -15,6 +15,7 @@
 
   - dimension: annual_reminder
     sql: ${TABLE}.annual_reminder
+    hidden: true
 
   - dimension: balance
     type: number
@@ -25,10 +26,12 @@
     sql: ${TABLE}.barcode
 
   - dimension: birthplace
+    hidden: true
     sql: ${TABLE}.birthplace
 
   - dimension: clinic_code
     sql: ${TABLE}.clinic_code
+    hidden: true
 
   - dimension: comments
     sql: ${TABLE}.comments
@@ -40,6 +43,7 @@
     sql: ${TABLE}.comments_important
 
   - dimension: company_contact_name
+    hidden: true
     sql: ${TABLE}.company_contact_name
 
   - dimension: company_id
@@ -64,10 +68,12 @@
     type: time
     timeframes: [date, week, month]
     convert_tz: false
+    hidden: true
     sql: ${TABLE}.consent_date
 
   - dimension: contact_method
     type: yesno
+    hidden: true
     sql: ${TABLE}.contact_method
 
   - dimension: contract_id
@@ -88,9 +94,11 @@
 
   - dimension: default_invoicee_id
     type: int
+    hidden: true
     sql: ${TABLE}.default_invoicee_id
 
   - dimension: disability
+    hidden: true
     sql: ${TABLE}.disability
 
   - dimension: eligibility_level
@@ -112,6 +120,7 @@
 
   - dimension: employee_sequence_number
     type: int
+    hidden: true
     sql: ${TABLE}.employee_sequence_number
 
   - dimension: employer_id
@@ -125,6 +134,7 @@
     sql: ${TABLE}.enquiry_source_id
 
   - dimension: entered_company
+    hidden: true
     sql: ${TABLE}.entered_company
 
   - dimension: ethnicity
@@ -138,15 +148,18 @@
     sql: ${TABLE}.ethnicity_id
 
   - dimension: extended_eligibility_level
+    hidden: true
     sql: ${TABLE}.extended_eligibility_level
 
   - dimension_group: extended_eligibility_level_end
+    hidden: true
     type: time
     timeframes: [date, week, month]
     convert_tz: false
     sql: ${TABLE}.extended_eligibility_level_end
 
   - dimension_group: extended_eligibility_level_start
+    hidden: true
     type: time
     timeframes: [date, week, month]
     convert_tz: false
@@ -214,6 +227,7 @@
     type: time
     timeframes: [date, week, month]
     convert_tz: false
+    hidden: true
     sql: ${TABLE}.last_annual_date
 
   - dimension_group: last_modified
@@ -226,6 +240,7 @@
 
   - dimension_group: left_scheme
     type: time
+    hidden: true
     timeframes: [date, week, month]
     convert_tz: false
     sql: ${TABLE}.left_scheme
@@ -240,6 +255,7 @@
 
   - dimension: managing_practitioner_id
     type: int
+    hidden: true
     sql: ${TABLE}.managing_practitioner_id
 
   - dimension: marital_status
@@ -247,6 +263,7 @@
     sql: ${TABLE}.marital_status
 
   - dimension: max_visits_per_month
+    hidden: true
     sql: ${TABLE}.max_visits_per_month
 
   - dimension: medical_record_number
@@ -270,9 +287,11 @@
     sql: ${TABLE}.mobility_issues
 
   - dimension: modified_by_function
+    hidden: true
     sql: ${TABLE}.modified_by_function
 
   - dimension: next_of_kin
+    hidden: true
     sql: ${TABLE}.next_of_kin
 
   - dimension: nhs_number
@@ -283,6 +302,7 @@
 
   - dimension: no_insurance_company
     type: yesno
+    hidden: true
     sql: ${TABLE}.no_insurance_company
 
   - dimension: no_recall
@@ -295,11 +315,12 @@
 
   - dimension: notes_location_id
     type: int
+    hidden: true
     sql: ${TABLE}.notes_location_id
 
   - dimension: occupation_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.occupation_id
 
   - dimension: office_reference
@@ -307,14 +328,17 @@
 
   - dimension: old_patient
     type: yesno
+    hidden: true
     sql: ${TABLE}.old_patient
 
   - dimension: on_hold
     type: yesno
+    hidden: true
     sql: ${TABLE}.on_hold
 
   - dimension: optometrist_id
     type: int
+    hidden: true
     sql: ${TABLE}.optometrist_id
 
   - dimension: owner_id
@@ -329,6 +353,7 @@
 
   - dimension: payment_day_of_month
     type: int
+    hidden: true
     sql: ${TABLE}.payment_day_of_month
 
   - dimension: pesel_number
@@ -346,6 +371,7 @@
 
   - dimension: preferred_location_id
     type: int
+    hidden: true
     sql: ${TABLE}.preferred_location_id
 
   - dimension: preferred_middlename
@@ -353,6 +379,7 @@
 
   - dimension: preferred_practitioner_id
     type: int
+    hidden: true
     sql: ${TABLE}.preferred_practitioner_id
 
   - dimension: preferred_surname
@@ -377,14 +404,17 @@
 
   - dimension: referral_source_id
     type: int
+    hidden: true
     sql: ${TABLE}.referral_source_id
 
   - dimension: religion
     type: yesno
+    hidden: true
     sql: ${TABLE}.religion
 
   - dimension: reminder
     type: yesno
+    hidden: true
     sql: ${TABLE}.reminder
 
   - dimension: requires_guardian
@@ -401,6 +431,7 @@
 
   - dimension: scn
     type: int
+    hidden: true
     sql: ${TABLE}.scn
 
   - dimension: signed_data_consent_form
@@ -417,14 +448,17 @@
 
   - dimension: source_gp_id
     type: int
+    hidden: true
     sql: ${TABLE}.source_gp_id
 
   - dimension: source_id
     type: int
+    hidden: true
     sql: ${TABLE}.source_id
 
   - dimension: source_insurance_company_id
     type: int
+    hidden: true
     sql: ${TABLE}.source_insurance_company_id
 
   - dimension: source_name
@@ -443,7 +477,7 @@
 
   - dimension: written_consent_document_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.written_consent_document_id
 
   - measure: count

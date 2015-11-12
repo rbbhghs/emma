@@ -6,6 +6,10 @@
     type: int
     hidden: true
     sql: ${TABLE}.cloned_from_charge_id
+    
+  - dimension: self_payer
+    type: yesno  
+    sql: ${charge_to_id} = ${patient_id}  
 
   - dimension: amount
     type: number

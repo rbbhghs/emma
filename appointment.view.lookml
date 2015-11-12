@@ -120,6 +120,10 @@
     type: int
     hidden: true
     sql: ${TABLE}.charge_to_id
+    
+  - dimension: self_payer
+    type: yesno  
+    sql: ${charge_to_id} = ${patient_id}
 
   - dimension: class_id
     type: int

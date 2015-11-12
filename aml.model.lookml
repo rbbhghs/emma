@@ -325,7 +325,7 @@
       sql_on: appointment.patient_id = individual.individual_id
       
     - join: appointment_type
-      view_label: 'Appointments'
+      view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
       sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
@@ -388,7 +388,7 @@
       
     - join: location_address
       from: address
-      view_label: 'Appointment location'
+      view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
       sql_on: location.address_id=location_address.address_id
