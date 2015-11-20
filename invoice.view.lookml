@@ -149,14 +149,17 @@
 
   - dimension: total_price
     type: number
+    label: 'Invoice amount'
     sql: ${TABLE}.total_price
 
   - dimension: total_price_net
     type: number
+    label: 'Invoice amount (ex VAT)'
     sql: ${TABLE}.total_price_net
 
   - dimension: total_vat
     type: number
+    label: 'Invoice VAT amount'
     sql: ${TABLE}.total_vat
     
   - dimension: payments_allocated
