@@ -51,6 +51,7 @@
 
   - dimension: line_price
     type: number
+    label: 'Line price (billed)'
     sql: ${TABLE}.line_price
 
   - dimension: line_price_net
