@@ -14,10 +14,19 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.charge_to_id} = ${payor.individual_id}
       
-    - join: patients
-      type: inner
+    - join: individual
+      view_label: 'Patient'
+      type: left_outer
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.patient_id} = ${individual_id}
+      sql_on: treatment_cycle_referral.patient_id = individual.individual_id
+      fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
+
+    - join: patient
+      view_label: 'Patient'
+      type: left_outer
+      required_joins: [individual]
+      relationship: one_to_one
+      sql_on: patient.individual_id = individual.individual_id 
 
     - join: appointment
       view_label: 'Appointment'
