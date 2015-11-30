@@ -304,7 +304,7 @@
       type: left_outer
       label: 'Patient'
       relationship: many_to_one
-      sql_on: ${patient_id} = $individual.individual_id}
+      sql_on: ${patient_id} = individual.individual_id
       fields: [full_name, dob_date]   
       
     - join: form_question_version 
