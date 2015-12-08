@@ -23,7 +23,7 @@
 
   - dimension: address_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.address_type_id
 
   - dimension: country
