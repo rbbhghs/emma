@@ -409,7 +409,7 @@
       view_label: 'Patient'
       type: left_outer
       relationship: one_to_one
-      sql_on: patient.address_id=${address_id}
+      sql_on: patient.address_id=patient_address.address_id
       required_joins: [patient]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
       
