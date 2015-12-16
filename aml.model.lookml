@@ -620,7 +620,7 @@
       view_label: 'Invoice Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: ${location.address_id}=${address_id}
+      sql_on: ${location.address_id}=location_address.address_id
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
@@ -697,7 +697,8 @@
       view_label: 'Credit Note Allocation'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${invoice.invoice_id} = ${cn_allocation.from_id} and ${cn_allocation.from_type}='3' and ${cn_allocation.to_type}='4' and ${cn_allocation.status}='A'
+      sql_on: invoice.invoice_id = cn_allocation.from_id and cn_allocation.from_type='3' and cn_allocation.to_type='4' and cn_allocation.status='A'
+
   
     - join: credit_note
       from: invoice
