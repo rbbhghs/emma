@@ -61,7 +61,7 @@
     type: count
     drill_fields: [payment_allocation_id, payment_line_item_allocation.count]
 
-  - dimension: sum_allocated
+  - measure: sum_allocated
     type: sum_distinct
     sql: ${TABLE}.amount
     sql_distinct_key: ${payment_allocation_id}

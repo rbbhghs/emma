@@ -1,4 +1,4 @@
-- connection: emma
+- connection: demo
 
 - include: "*.view.lookml"       # include all the views
 - include: "*.dashboard.lookml"  # include all the dashboards
@@ -174,7 +174,7 @@
       view_label: 'Patient'
       type: inner
       relationship: many_to_one
-      sql_on: ${charge.patient_id} = ${individual_id}
+      sql_on: charge.patient_id = patients.individual_id
       
     - join: location
       view_label: 'Location'
@@ -201,7 +201,7 @@
       view_label: 'Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=${address_id}
+      sql_on: location.address_id=location_address.address_id
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
@@ -225,7 +225,7 @@
   label: 'Referral log'
   joins:
     - join: dashboard_event
-      label: 'Activity'
+      #label: 'Activity'
       type: inner
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral_id} = ${dashboard_event.treatment_cycle_referral_id}
@@ -233,7 +233,7 @@
       
     - join: dashboard_action
       type: left_outer
-      label: 'Activity'
+      #label: 'Activity'
       relationship: one_to_one
       required_joins: [dashboard_event]
       sql_on: ${dashboard_event.dashboard_action_id} = ${dashboard_action.dashboard_action_id}
@@ -241,7 +241,7 @@
       
     - join: creator
       type: left_outer
-      label: 'Activity'
+      #label: 'Activity'
       relationship: many_to_one
       required_joins: [dashboard_event]
       sql_on: ${dashboard_event.created_by_id} = ${creator.individual_id}
@@ -266,7 +266,7 @@
       view_label: 'Referred to location'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.to_location_id} = ${location.location_id}
+      sql_on: ${to_location_id} = location.location_id
       fields: [location_name]  
       
     - join: location_address
@@ -274,7 +274,7 @@
       view_label: 'Referred to location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=${address_id}
+      sql_on: location.address_id=location_address.address_id
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
     
@@ -311,13 +311,13 @@
 
     - join: individual
       type: left_outer
-      label: 'Patient'
+      #label: 'Patient'
       relationship: many_to_one
       sql_on: ${patient_id} = individual.individual_id
       fields: [full_name, dob_date]   
       
     - join: form_question_version 
-      label: 'Form data'
+      #label: 'Form data'
       type: left_outer
       relationship: one_to_many
       sql_on: ${form_question_version_id}=${form_question_version.form_question_version_id}
@@ -422,7 +422,7 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    sql_on: ${appointment_section.doctor_id} = ${individual_id}
+    sql_on: appointment_section.doctor_id = practitioner.individual_id
     
   - join: creator
     from: individual
@@ -495,7 +495,7 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    sql_on: ${doctor_id} = ${individual.individual_id}
+    sql_on: ${doctor_id} = practitioner.individual_id}
     
   - join: diary_template
     view_label: 'Diary Template'

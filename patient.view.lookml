@@ -179,7 +179,8 @@
 
   - dimension: individual_id
     type: int
-    # hidden: true
+    primary_key: true
+    hidden: true
     sql: ${TABLE}.individual_id
 
   - dimension_group: initial_payment
