@@ -4,7 +4,7 @@
   - dimension: id
     primary_key: true
     type: int
-    hide: true
+    hidden: true
     sql: ${TABLE}.id
 
   - dimension: latitude

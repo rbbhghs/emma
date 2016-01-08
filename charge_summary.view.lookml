@@ -1,11 +1,20 @@
-- view: charge
+- view: charge_summary
+
+# # Specify the table name if it's different from the view name:
+  sql_table_name: charge
+#
+# # Or, you could make this view a derived table, like this:
+#   derived_table:
+#     sql: |
+#       SELECT
+#         users.id as user_id
+#         , COUNT(*) as lifetime_orders
+#         , MAX(orders.date) as most_recent_purchase_date
+#       FROM orders
+#       GROUP BY user.id
+
   fields:
 
-  - dimension: cloned_from_charge_id
-    type: int
-    hidden: true
-    sql: ${TABLE}.cloned_from_charge_id
-    
   - dimension: self_payer
     type: yesno  
     sql: ${charge_to_id} = ${patient_id}  
@@ -26,11 +35,12 @@
     sql: ${TABLE}.available_product_id
 
   - dimension: batch
+    hidden: true
     sql: ${TABLE}.batch
 
   - dimension: charge_id
-    type: int
     primary_key: true
+    type: int
     hidden: true
     sql: ${TABLE}.charge_id
 
@@ -40,6 +50,7 @@
     sql: ${TABLE}.charge_to_id
 
   - dimension: comments
+    hidden: true
     sql: ${TABLE}.comments
 
   - dimension: contract_id
@@ -54,7 +65,7 @@
   - dimension: currency
     sql: ${TABLE}.currency
 
-  - dimension_group: effective
+  - dimension_group: date_charged
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.effective
@@ -64,7 +75,7 @@
     hidden: true
     sql: ${TABLE}.invoice_id
 
-  - dimension_group: invoiced
+  - dimension_group: date_invoiced
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.invoiced
@@ -102,6 +113,7 @@
     sql: ${TABLE}.product_id
 
   - dimension: purchase_order_no
+    hidden: true
     sql: ${TABLE}.purchase_order_no
 
   - dimension: quantity
