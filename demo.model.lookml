@@ -814,6 +814,7 @@
   joins:
     - join: patient
       type: inner
+      view_label: 'Patients'
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${Patients.individual_id}
       
@@ -863,7 +864,7 @@
       view_label: 'Charges'
       relationship: many_to_one
       sql_on: ${Patients.individual_id} = ${charge_summary.patient_id}
-      fields: [price, quantity] 
+      #fields: [price, quantity] 
       
     - join: product
       type: left_outer
