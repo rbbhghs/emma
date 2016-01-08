@@ -71,3 +71,16 @@
       relationship: one_to_many
       sql_on: ${charge_summary.product_id} = ${product.product_id}
       fields: [product_name, sage_reference]   
+      
+      
+- explore: address
+  label: 'Addresses'    
+  
+  joins:  
+       - join: location_coords  
+         from: postcodelatlng
+         view_label: 'Address details'
+         type: left_outer
+         relationship: one_to_one
+         sql_on: address.postcode=location_coords.postcode
+         fields: [postcode, coordinate]  
