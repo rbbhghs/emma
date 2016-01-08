@@ -17,13 +17,13 @@
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${Patients.individual_id}
       
-   # - join: contract
-    #  view_label: 'Billing details'
-  ##    type: left_outer
-  #    relationship: one_to_many
-   #   sql_on: ${contract.contract_id} = ${patient.contract_id}
-    #  required_joins: [patient]
-     # fields: [contract_name] 
+    - join: contract
+      view_label: 'Billing details'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${contract.contract_id} = ${patient.contract_id}
+      required_joins: [patient]
+      fields: [contract_name] 
       
     - join: company
       type: left_outer
