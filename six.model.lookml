@@ -16,6 +16,7 @@
       view_label: 'Patients'
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${Patients.individual_id}
+      fields: []
       
     - join: contract
       view_label: 'Billing details'
