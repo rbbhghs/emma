@@ -65,6 +65,29 @@
       sql_on: ${Patients.individual_id} = ${charge_summary.patient_id}
       #fields: [price, quantity] 
       
+    - join: location
+      type: left_outer
+      view_label: 'Location details'
+      relationship: many_to_one
+      sql_on: ${charge_summary.location_id}=${location.location_id}
+      
+    - join: location_address
+      from: address
+      view_label: 'Location details'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: location.address_id=location_address.address_id
+      fields: [address_1, address_2, address_3, address_4, address_5, town, country]
+      
+    - join: clinic_coords  
+      from: postcodelatlng
+      view_label: 'Location details'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: location_address.postcode=clinic_coords.postcode
+      required_joins: [location_address]
+      fields: [postcode, coordinate]    
+      
     - join: product
       type: left_outer
       view_label: 'Charges'
