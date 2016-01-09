@@ -69,6 +69,7 @@
       type: left_outer
       view_label: 'Location details'
       relationship: many_to_one
+      required_joins: [charge_summary]
       sql_on: ${charge_summary.location_id}=${location.location_id}
       
     - join: location_address
@@ -76,7 +77,8 @@
       view_label: 'Location details'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=location_address.address_id
+      required_joins: [location]
+      sql_on: ${location.address_id}=${location_address.address_id}
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]
       
     - join: clinic_coords  
@@ -84,7 +86,7 @@
       view_label: 'Location details'
       type: left_outer
       relationship: one_to_one
-      sql_on: location_address.postcode=clinic_coords.postcode
+      sql_on: ${location_address.postcode}=${clinic_coords.postcode}
       required_joins: [location_address]
       fields: [postcode, coordinate]    
       
