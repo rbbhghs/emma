@@ -44,7 +44,7 @@
       
     - join: patient_address
       from: address
-      view_label: 'Address details'
+      view_label: 'Patient address details'
       type: left_outer
       relationship: one_to_one
       sql_on: Patients.individual_id=patient_address.individual_id
@@ -52,7 +52,7 @@
       
     - join: location_coords  
       from: postcodelatlng
-      view_label: 'Address details'
+      view_label: 'Patient address details'
       type: left_outer
       relationship: one_to_one
       sql_on: patient_address.postcode=location_coords.postcode
