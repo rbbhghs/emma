@@ -25,6 +25,22 @@
       sql_on: ${contract.contract_id} = ${patient.contract_id}
       required_joins: [patient]
       fields: [contract_name] 
+    
+    - join: appointment
+      view_label: 'Appointment details'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${Patients.individual_id} = ${appointment.patient_id}
+      #fields: [contract_name] 
+      
+    - join: practitioner
+      from: individual
+      view_label: 'Appointment details'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
+      required_joins: [appointment]
+      fields: [full_name] 
       
     - join: company
       type: left_outer
