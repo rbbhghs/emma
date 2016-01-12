@@ -152,9 +152,11 @@
     hidden: true
     sql: ${TABLE}.user_permission_id
 
-  - measure: count
-    type: count
-    drill_fields: detail*
+  - measure: number_of_individuals
+    label: '# of Individuals'
+    type: count_distinct
+    sql: ${individual_id}  
+    sql_distinct_key: ${individual_id}  
 
 
   # ----- Sets of fields for drilling ------

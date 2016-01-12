@@ -44,7 +44,7 @@
       required_joins: [appointment]
       
     - join: location
-      view_label: 'Appointment location'
+      view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
       sql_on: ${appointment.location_id} = ${location.location_id}
@@ -53,12 +53,12 @@
       
     - join: location_address
       from: address
-      view_label: 'Appointment location'
+      view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
       sql_on: location.address_id=address.address_id
       required_joins: [location]
-      fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
+      fields: [address_1, address_2, address_3, address_4, address_5, town, country]
       
     - join: referrer
       type: left_outer
@@ -96,7 +96,7 @@
       required_joins: [appointment]  
       
     - join: location
-      view_label: 'Appointment location'
+      view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
       sql_on: ${appointment.location_id} = ${location.location_id}
@@ -104,7 +104,7 @@
       
     - join: location_address
       from: address
-      view_label: 'Appointment location'
+      view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
       sql_on: location.address_id=address.address_id
@@ -407,7 +407,7 @@
       
     - join: location_coords  
       from: postcodelatlng
-      view_label: 'Appointment location'
+      view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
       sql_on: location_address.postcode=location_coords.postcode

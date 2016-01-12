@@ -128,6 +128,12 @@
     type: count_distinct
     sql: ${invoice_id}  
     sql_distinct_key: ${invoice_id}
+    
+  - measure: number_of_patients
+    label: '# of Patients'
+    type: count_distinct
+    sql: ${patient_id}  
+    sql_distinct_key: ${patient_id}  
 
     
   - measure: sum_charged

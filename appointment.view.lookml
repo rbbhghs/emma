@@ -7,6 +7,7 @@
     sql: ${TABLE}.appointment_id
 
   - dimension: account_number
+    hidden: true
     sql: ${TABLE}.account_number
 
   - dimension: alternate_destination
@@ -28,6 +29,7 @@
 
   - dimension: appointment_requires_transport
     type: yesno
+    hidden: true
     sql: ${TABLE}.appointment_requires_transport
 
   - dimension: appointment_type_id
@@ -51,9 +53,11 @@
 
   - dimension: booked_manually
     type: yesno
+    hidden: true
     sql: ${TABLE}.booked_manually
 
   - dimension: booking_information_accepted
+    hidden: true
     sql: ${TABLE}.booking_information_accepted
 
   - dimension: cab_cancellation_reason_code
@@ -61,7 +65,6 @@
     sql: ${TABLE}.cab_cancellation_reason_code
 
   - dimension: cab_cancellation_reason_text
-    hidden: true
     sql: ${TABLE}.cab_cancellation_reason_text
 
   - dimension: cab_dna_reason_code
@@ -350,6 +353,13 @@
     label: 'Appointment duration'
     type: date_time
     sql: cast((${TABLE}.end)-(${TABLE}.end) as datetime)
+    
+    
+  - measure: number_of_patients
+    label: '# of Patients'
+    type: count_distinct
+    sql: ${patient_id}  
+    sql_distinct_key: ${patient_id}    
     
   - measure: count
     type: count
