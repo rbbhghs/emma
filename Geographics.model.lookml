@@ -111,8 +111,25 @@
       type: left_outer
       view_label: 'Charges'
       relationship: one_to_many
-      sql_on: ${charge_summary.product_id} = ${product.product_id}
-      fields: [product_name, sage_reference]   
+      sql_on: ${charge_summary.product_id} = ${Patients.individual_id}
+      fields: [product_name, sage_reference] 
+      
+    - join: treatment_cycle
+      type: left_outer
+      view_label: 'Treatments'
+      relationship: one_to_many
+      sql_on: ${treatment_cycle.patient_id} = ${product.product_id}
+      #fields: [product_name, sage_reference]
+      
+    - join: simple_diagnosis_type
+      type: left_outer
+      view_label: 'Treatments'
+      relationship: one_to_many
+      sql_on: ${treatment_cycle.diagnosis_type_id} = ${simple_diagnosis_type.diagnosis_type_id}
+      required_joins: [treatment_cycle]
+      fields: [diagnosis_type_name, diagnosis_type_short_name]
+      
+      
       
       
 - explore: address

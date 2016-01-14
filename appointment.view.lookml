@@ -338,7 +338,14 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.view
 
+  - measure: status_a
+    label: 'a status count'
+    type: count_distinct
+    sql: ${appointment_id}
+    filters:
+      status: 'A'
 
+    
   - measure: number_of_appts
     label: '# of Appts'
     type: count_distinct
