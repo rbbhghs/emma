@@ -118,7 +118,7 @@
       type: left_outer
       view_label: 'Treatments'
       relationship: one_to_many
-      sql_on: ${treatment_cycle.patient_id} = ${product.product_id}
+      sql_on: ${treatment_cycle.patient_id} = ${Patients.individual_id}
       fields: [opened_date, closed_date]
       
     - join: owner
