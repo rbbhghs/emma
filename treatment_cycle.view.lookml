@@ -102,6 +102,16 @@
   - measure: count
     type: count
     drill_fields: detail*
+    
+  - measure: number_of_treatments
+    label: '# of Treatments'
+    type: count_distinct
+    sql: ${treatment_cycle_id}  
+    
+  - measure: number_of_patients
+    label: '# of Patients'
+    type: count_distinct
+    sql: ${patient_id}   
 
 
   # ----- Sets of fields for drilling ------

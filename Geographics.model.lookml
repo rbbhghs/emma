@@ -119,7 +119,16 @@
       view_label: 'Treatments'
       relationship: one_to_many
       sql_on: ${treatment_cycle.patient_id} = ${product.product_id}
-      #fields: [product_name, sage_reference]
+      fields: [opened_date, closed_date]
+      
+    - join: owner
+      from: individual
+      view_label: 'Treatments'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${treatment_cycle.owner_id} = ${owner.individual_id}
+      required_joins: [treatment_cycle]
+      fields: [full_name]   
       
     - join: simple_diagnosis_type
       type: left_outer
