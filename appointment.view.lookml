@@ -357,7 +357,7 @@
     sql: ${location_id}
     
   - measure: appt_duration
-    label: 'Appointment duration'
+    label: 'Appointment Duration in Mins'
     type: sum
     sql: TIMESTAMPDIFF(SECOND,(${TABLE}.end),(${TABLE}.start))/60.00
     
