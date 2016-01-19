@@ -359,7 +359,7 @@
   - measure: appt_duration
     label: 'Appointment duration'
     type: sum
-    sql: cast((${TABLE}.end)-(${TABLE}.start) as datetime)
+    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.end),(${TABLE}.start))/60.00
     
     
   - measure: number_of_patients
