@@ -361,6 +361,10 @@
     type: sum
     sql: TIMESTAMPDIFF(SECOND,(${TABLE}.end),(${TABLE}.start))/60.00
     
+  - measure: time_to_view
+    label: 'Time to be Seen in Mins'
+    type: sum
+    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.view),(${TABLE}.start))/60.00    
     
   - measure: number_of_patients
     label: '# of Patients'
