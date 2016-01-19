@@ -358,8 +358,8 @@
     
   - measure: appt_duration
     label: 'Appointment duration'
-    type: date_time
-    sql: cast((${TABLE}.end)-(${TABLE}.end) as datetime)
+    type: sum
+    sql: cast((${TABLE}.end)-(${TABLE}.start) as datetime)
     
     
   - measure: number_of_patients
