@@ -398,7 +398,7 @@
     - join: first_appointment
       view_label: 'First Appointment'
       type: left_outer
-      relationship: one_to_one
+      relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${first_appointment.first_appointment_id}
       #fields: [new_appointments]  
       
