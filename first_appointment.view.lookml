@@ -3,7 +3,7 @@
     sql: |
       SELECT first_appointment_id,count(*) new_appointments 
       FROM
-      (select patient_id,min(appointment_id) first_appointment_idfirst_appointment_idfirst_appointment_id,DATE(min(start)) first_appointment_date from appointment group by patient_id)x
+      (select patient_id,min(appointment_id) first_appointment_id from appointment group by patient_id)x
       GROUP BY first_appointment_id;
 
   fields:
