@@ -7,7 +7,7 @@
       GROUP BY first_appointment_id;
 
   fields:
-  - measure: count
+  - measure: new_appointments
     type: count
     drill_fields: detail*
 
@@ -15,9 +15,9 @@
     type: integer
     sql: ${TABLE}.first_appointment_id
 
-  - dimension: new_appointments
-    type: int
-    sql: ${TABLE}.new_appointments
+#  - dimension: new_appointments
+#    type: int
+#    sql: ${TABLE}.new_appointments
 
   sets:
     detail:
