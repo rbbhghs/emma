@@ -43,6 +43,10 @@
     convert_tz: false
     sql: ${TABLE}.dob
 
+  - dimension: age
+    type: int
+    sql: YEAR(CURRENT_TIMESTAMP) - YEAR(${TABLE}.dob) - (RIGHT(CURRENT_TIMESTAMP, 5) < RIGHT(${TABLE}.dob, 5))
+
   - dimension: email
     sql: ${TABLE}.email
 

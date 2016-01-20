@@ -49,8 +49,7 @@
       relationship: one_to_one
       sql_on: ${appointment.location_id} = ${location.location_id}
       fields: [location_name]
-      
-      
+
     - join: location_address
       from: address
       view_label: 'Appointment Location'

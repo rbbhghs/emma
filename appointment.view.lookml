@@ -361,6 +361,11 @@
     type: sum
     sql: TIMESTAMPDIFF(SECOND,(${TABLE}.end),(${TABLE}.start))/60.00
     
+  - measure: actual_appt_duration
+    label: 'Actual Appointment Duration in Mins'
+    type: sum
+    sql: TIMESTAMPDIFF(SECOND,ifnull((${TABLE}.leave),(${TABLE}.end)),ifnull((${TABLE}.view),(${TABLE}.start)))/60.00    
+    
   - measure: time_to_view
     label: 'Time to be Seen in Mins'
     type: sum
