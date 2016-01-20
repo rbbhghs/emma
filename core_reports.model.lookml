@@ -395,6 +395,13 @@
       relationship: many_to_one
       sql_on: ${appointment.location_id} = ${location.location_id}
       
+    - join: first_appointment
+      view_label: 'First Appointment'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${appointment.appointment_id} = ${first_appointment.first_appointment_id}
+      #fields: [new_appointments]  
+      
     - join: location_address
       from: address
       view_label: 'Appointment Location'

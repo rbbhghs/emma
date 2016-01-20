@@ -12,7 +12,8 @@
     drill_fields: detail*
 
   - dimension: first_appointment_id
-    type: integer
+    type: int
+    primary_key: true
     sql: ${TABLE}.first_appointment_id
 
 #  - dimension: new_appointments
