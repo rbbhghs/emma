@@ -41,7 +41,7 @@
     type: time
     timeframes: [date, week, month]
     convert_tz: false
-    sql: ${TABLE}.dob
+    sql: if(${TABLE}.dob,'0000-00-00','1900-00-00')
 
   - dimension: age
     type: int
