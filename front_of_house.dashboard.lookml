@@ -33,8 +33,8 @@
     show_y_axis_label: false
     show_y_axis_ticks: true
 
-  - name: all_appointments
-    title: All/New Appointments
+  - name: all_active_appts
+    title: All/New Appts
     type: looker_line
     model: core_reports
     explore: appointment
@@ -42,7 +42,7 @@
     measures: [appointment.number_of_appts, derived_first_appointment.new_appointments]
     filters:
       appointment.status: '"A"'
-    sorts: [appointment.start_date desc]
+    sorts: [derived_first_appointment.new_appointments desc]
     limit: 500
     colors: ['#62bad4', '#a9c574', '#929292', '#9fdee0', '#1f3e5a', '#90c8ae', '#92818d',
       '#c5c6a6', '#82c2ca', '#cee0a0', '#928fb4', '#9fc190']
@@ -50,6 +50,9 @@
     legend_position: center
     y_axis_gridlines: true
     show_view_names: true
+    series_labels:
+      derived_first_appointment.new_appointments: New Appts
+      appointment.number_of_appts: Total Appts
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
