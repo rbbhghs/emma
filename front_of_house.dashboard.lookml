@@ -44,6 +44,8 @@
       appointment.status: '"A"'
     sorts: [appointment.start_date desc]
     limit: 500
+    colors: ['#62bad4', '#a9c574', '#929292', '#9fdee0', '#1f3e5a', '#90c8ae', '#92818d',
+      '#c5c6a6', '#82c2ca', '#cee0a0', '#928fb4', '#9fc190']
     label_density: 25
     legend_position: center
     y_axis_gridlines: true
@@ -51,10 +53,14 @@
     y_axis_combined: true
     show_y_axis_labels: true
     show_y_axis_ticks: true
+    y_axis_labels: [Appts]
     y_axis_tick_density: default
     show_x_axis_label: true
+    x_axis_label: Date
     show_x_axis_ticks: true
+    x_axis_datetime_label: '%d-%b-%y'
     x_axis_scale: auto
+    x_axis_label_rotation: -45
     show_null_points: true
     point_style: none
     interpolation: linear
