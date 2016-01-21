@@ -37,6 +37,11 @@
 
   - dimension: status
     sql: ${TABLE}.status
+    
+  - measure: diary_duration_hours
+    label: 'Diary Open Duration in Hours'
+    type: sum
+    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.end_time),(${TABLE}.start_time))/3600.00  
 
   - measure: count
     type: count
