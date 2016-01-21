@@ -396,7 +396,7 @@
       sql_on: ${appointment.location_id} = ${location.location_id}
       
     - join: derived_first_appointment
-      view_label: 'First Appointment'
+      view_label: 'Derived First Appointment'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_first_appointment.first_appointment_id}
