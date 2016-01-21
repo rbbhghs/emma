@@ -1,4 +1,4 @@
-- view: first_appointment
+- view: derived_first_appointment
   derived_table:
     sql: |
       SELECT first_appointment_id,count(*) new_appointments 
