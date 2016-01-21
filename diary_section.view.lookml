@@ -19,6 +19,14 @@
   - dimension: end_time
     type: int
     sql: ${TABLE}.end_time
+    
+  - dimension: actual_start_time
+    type: string
+    sql: DATE_FORMAT(date_add(DATE(now()),interval ${TABLE}.start_time second),'%H:%i')    
+
+  - dimension: actual_end_time
+    type: string
+    sql: DATE_FORMAT(date_add(DATE(now()),interval ${TABLE}.end_time second),'%H:%i')
 
   - dimension_group: last_modified
     type: time
