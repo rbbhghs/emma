@@ -7,8 +7,8 @@
 
   elements:
 
-  - name: unattended_appts
-    title: Unattended Appointments 
+  - name: dna_appts
+    title: DNA Appointments 
     type: looker_area
     model: core_reports
     explore: appointment
