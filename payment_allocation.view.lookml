@@ -65,3 +65,10 @@
     type: sum_distinct
     sql: ${TABLE}.amount
     sql_distinct_key: ${payment_allocation_id}
+    
+  - measure: sum_unallocated
+    type: sum
+    sql: ${TABLE}.amount-payment.sum_paid
+    
+    
+    
