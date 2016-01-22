@@ -127,8 +127,14 @@
     drill_fields: detail*
     
   - measure: sum_paid
+    label: 'Total Paid'
     type: sum
     sql: ${TABLE}.amount  
+    
+  - measure: sum_outstanding
+    label: 'Total Outstanding'
+    type: sum
+    sql: ${TABLE}.outstanding   
 
 
   # ----- Sets of fields for drilling ------
