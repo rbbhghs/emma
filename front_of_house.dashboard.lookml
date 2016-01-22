@@ -67,3 +67,18 @@
     show_null_points: true
     point_style: none
     interpolation: linear
+    
+  - name: add_a_unique_name_1453457337245
+    title: Untitled Visualization
+    type: single_value
+    model: core_reports
+    explore: invoices
+    measures: [charge.number_of_invoices]
+    filters:
+      charge.invoiced_date: 180 days
+      charge.self_payer: 'Yes'
+      invoices.sum_outstanding: '>0'
+    sorts: [charge.number_of_invoices desc]
+    limit: 500
+    font_size: medium
+    
