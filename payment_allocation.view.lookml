@@ -68,7 +68,7 @@
     
   - measure: sum_unallocated
     type: sum
-    sql: ${TABLE}.amount-payment_allocation.sum_paid
+    sql: ${TABLE}.amount-payment.sum_paid
     
     
     
