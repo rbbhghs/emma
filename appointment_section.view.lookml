@@ -114,6 +114,10 @@
   - dimension: ubrn
     sql: ${TABLE}.ubrn
 
+  - measure: busy_hours
+    type: int
+    sql: time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00
+
   - measure: count
     type: count
     drill_fields: detail*
