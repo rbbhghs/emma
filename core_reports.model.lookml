@@ -535,6 +535,7 @@
     relationship: many_to_one
     sql_on: ${diary.diary_id} = ${appointment_section.diary_id} 
     fields: [start_time, end_time, reservation]
+    #fields: [start, end, reservation]
     
   - join: appointment
     view_label: 'Appointment Activity'
