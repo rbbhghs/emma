@@ -135,6 +135,8 @@
     - class.class_id
     - busy_type.busy_type_id
     - busy_type.busy_type_name
+    - appointment_section.start
+    - appointment_section.end
     - appointment_section_study.count
     - diary_slot.count
 
