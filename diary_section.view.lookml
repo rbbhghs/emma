@@ -49,7 +49,7 @@
   - measure: diary_duration_hours
     label: 'Diary Open Duration in Hours'
     type: sum
-    sql: round((end_time-start_time)/3600.00,2)  
+    sql: round((${TABLE}.end_time-${TABLE}.start_time)/3600.00,2)  
 
   - measure: count
     type: count
