@@ -81,4 +81,16 @@
     sorts: [charge.number_of_invoices desc]
     limit: 500
     font_size: medium
+
+  - name: new_patients_appts
+    title: New Patients Joined in 3 Months
+    type: single_value
+    model: core_reports
+    explore: appointment
+    measures: [derived_first_appointment.new_appointments]
+    filters:
+      appointment.start_date: 3 months
+    sorts: [derived_first_appointment.new_appointments desc]
+    limit: 500
+    font_size: medium
     
