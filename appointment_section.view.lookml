@@ -115,7 +115,7 @@
     sql: ${TABLE}.ubrn
 
   - measure: busy_hours
-    label: 'Actual Appointment Duration in Mins'
+    label: 'Busy Hours'
     type: sum
     sql: time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00
 
