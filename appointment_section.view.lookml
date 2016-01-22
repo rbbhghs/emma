@@ -117,7 +117,7 @@
   - measure: busy_hours
     label: 'Busy Hours'
     type: sum
-    sql: time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00
+    sql: round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00,2)
 
   - measure: count
     type: count
