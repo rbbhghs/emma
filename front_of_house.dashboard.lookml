@@ -68,8 +68,8 @@
     point_style: none
     interpolation: linear
     
-  - name: add_a_unique_name_1453457337245
-    title: Untitled Visualization
+  - name: total_outstanding_invoices
+    title: Outstanding Invoices
     type: single_value
     model: core_reports
     explore: invoices
