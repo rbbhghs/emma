@@ -401,7 +401,7 @@
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_first_appointment.first_appointment_id}
       #fields: [new_appointments]  
-      
+
     - join: location_address
       from: address
       view_label: 'Appointment Location'
@@ -536,6 +536,12 @@
     sql_on: ${diary.diary_id} = ${appointment_section.diary_id} 
     fields: [start_time, end_time, reservation]
     #fields: [start, end, reservation]
+
+  - join: derived_busy_duration
+    view_label: 'Derived Busy Duration'
+    type: left_outer
+    relationship: many_to_one
+    sql_on: ${diary.diary_id} = ${derived_busy_duration.diary_id}
     
   - join: appointment
     view_label: 'Appointment Activity'
