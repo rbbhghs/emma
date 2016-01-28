@@ -521,7 +521,7 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    sql_on: ${doctor_id} = practitioner.individual_id}
+    sql_on: ${doctor_id} = ${practitioner.individual_id}
     
   - join: diary_template
     view_label: 'Diary Template'
