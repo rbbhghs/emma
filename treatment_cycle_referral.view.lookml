@@ -11,7 +11,7 @@
     type: time
     timeframes: [date, week, month]
     convert_tz: false
-    sql: ${TABLE}.appointment_date
+    sql: ${TABLE}.appointment_date_test
 
   - dimension: appointment_type_id
     type: int
