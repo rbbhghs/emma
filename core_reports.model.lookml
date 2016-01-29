@@ -547,7 +547,7 @@
     view_label: 'Appointment Activity'
     type: left_outer
     relationship: many_to_one
-    required_joins: appointment_section
+    #required_joins: appointment_section
     sql_on: ${appointment_section.appointment_id} = ${appointment.appointment_id}
       
   - join: appointment_type
