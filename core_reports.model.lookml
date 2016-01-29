@@ -653,7 +653,7 @@
       view_label: 'Invoice Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: ${location.address_id}=location_address.address_id
+      sql_on: ${location.address_id}= ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
