@@ -448,7 +448,7 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    sql_on: appointment_section.doctor_id = practitioner.individual_id
+    sql_on: ${appointment_section.doctor_id} = ${practitioner.individual_id}
     
   - join: creator
     from: individual
@@ -462,27 +462,27 @@
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    sql_on: appointment_section.appointment_id = appointment.appointment_id
+    sql_on: ${appointment_section.appointment_id} = ${appointment.appointment_id}
       
   - join: appointment_type
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
     required_joins: appointment
-    sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+    sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
     fields: [appointment_type_name]  
     
   - join: class
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    sql_on: appointment_section.class_id = class.class_id  
+    sql_on: ${appointment_section.class_id} = ${class.class_id}  
       
   - join: class_type
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    sql_on: class.class_type_id = class_type.class_type_id  
+    sql_on: ${class.class_type_id} = ${class_type.class_type_id}  
     
   - join: location
     view_label: 'Appointments'
@@ -730,7 +730,7 @@
       view_label: 'Credit Note Allocation'
       type: left_outer
       relationship: many_to_one
-      sql_on: invoice.invoice_id = cn_allocation.from_id and cn_allocation.from_type='3' and cn_allocation.to_type='4' and cn_allocation.status='A'
+      sql_on: ${invoices.invoice_id} = ${cn_allocation.from_id} and cn_allocation.from_type = '3' and cn_allocation.to_type = '4' and cn_allocation.status ='A'
 
   
     - join: credit_note
@@ -860,7 +860,7 @@
       view_label: 'Address details'
       type: left_outer
       relationship: one_to_one
-      sql_on: Patients.individual_id=patient_address.individual_id
+      sql_on: ${patient.individual_id} = ${patient_address.individual_id}
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]
       
     - join: location_coords  
@@ -868,7 +868,7 @@
       view_label: 'Address details'
       type: left_outer
       relationship: one_to_one
-      sql_on: patient_address.postcode=location_coords.postcode
+      sql_on: ${patient_address.postcode} = ${location_coords.postcode}
       required_joins: [patient_address]
       fields: [postcode, coordinate]  
       
