@@ -12,14 +12,15 @@
   #fields: [charge.amount, charge.quantity, charge.effective_time, charge.effective_date, charge.effective_week, charge.price, charge.status]  
   joins:
     - join: individual
-      view_label: 'Individual'
+      view_label: 'Click tracking'
       type: inner
       relationship: many_to_one
       sql_on: ${click_tracking.individual_id} = ${individual.individual_id} 
+      fields: [full_name]
       
     - join: individual_type
       type: inner
-      view_label: 'Individual'
+      view_label: 'Click tracking'
       required_joins: [individual]
       relationship: one_to_many
       sql_on: ${individual.individual_type_id} = ${individual_type.individual_type_id}  
