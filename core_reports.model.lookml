@@ -5,6 +5,22 @@
 
 - explore: outcomes
   label: Outcomes
+  
+  
+- explore: click_tracking
+  label: System usage
+  #fields: [charge.amount, charge.quantity, charge.effective_time, charge.effective_date, charge.effective_week, charge.price, charge.status]  
+  joins:
+    - join: individual
+      type: inner
+      relationship: many_to_one
+      sql_on: ${click_tracking.individual_id} = ${individual.individual_id} 
+      
+    - join: individual_type
+      type: inner
+      required_joins: [individual]
+      relationship: one_to_many
+      sql_on: ${individual.individual_type_id} = ${individual_type.individual_type_id}  
 
 - explore: treatment_cycle_referral
   label: Referrals
@@ -159,7 +175,26 @@
       relationship: many_to_one
       required_joins: [dashboard_event]
       sql_on: ${dashboard_event.created_by_id} = ${creator.individual_id}
-      fields: [created_by]          
+      fields: [created_by] 
+      
+      
+#i'm 99% sure this is wrong!!!       the join should be against pacs_order shouldn't it?
+    - join: clinical_report
+      type: left_outer
+      view_label: 'Report'
+      relationship: many_to_one
+      required_joins: [appointment]
+      sql_on: ${appointment.appointment_id} = ${clinical_report.appointment_id}
+      fields: [first_published_date, first_published_time, report_status] 
+      
+    - join: clinical_report_version
+      type: left_outer
+      view_label: 'Report'
+      relationship: many_to_one
+      required_joins: [clinical_report]
+      sql_on: ${clinical_report.report_id} = ${clinical_report_version.report_id} 
+       
+  
       
 - explore: charge
   label: Charge
