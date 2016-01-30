@@ -173,6 +173,8 @@
     - dental_tooth_treatment_charge.count
     - emr2_scheduled_service.count
     - invoice_item.count
+    - invoice.invoice_id
+    - invoice.number_of_invoices
     - preemp_response.count
     - prescription_item_charge.count
     - task_charge.count

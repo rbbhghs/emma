@@ -34,7 +34,7 @@
       view_label: 'Patient'
       type: left_outer
       relationship: many_to_one
-      sql_on: treatment_cycle_referral.patient_id = individual.individual_id
+      sql_on: ${treatment_cycle_referral.patient_id} = ${individual.individual_id}
       fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
 
     - join: patient
@@ -42,7 +42,7 @@
       type: left_outer
       required_joins: [individual]
       relationship: one_to_one
-      sql_on: patient.individual_id = individual.individual_id 
+      sql_on: ${patient.individual_id} = ${individual.individual_id} 
 
     - join: appointment
       view_label: 'Appointment'
@@ -55,7 +55,7 @@
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name] 
       required_joins: [appointment]
       
@@ -71,7 +71,7 @@
       view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=address.address_id
+      sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]
       
@@ -106,7 +106,7 @@
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name] 
       required_joins: [appointment]  
       
@@ -122,7 +122,7 @@
       view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=address.address_id
+      sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
@@ -209,7 +209,7 @@
       view_label: 'Patient'
       type: inner
       relationship: many_to_one
-      sql_on: charge.patient_id = patients.individual_id
+      sql_on: ${charge.patient_id} = ${patients.individual_id}
       
     - join: location
       view_label: 'Location'
@@ -236,7 +236,7 @@
       view_label: 'Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=location_address.address_id
+      sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
@@ -244,14 +244,14 @@
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_id = charge.appointment_id
+      sql_on: ${appointment.appointment_id} = ${charge.appointment_id}
       fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
   
     - join: appointment_type
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name] 
       required_joins: [appointment]
 
@@ -301,7 +301,7 @@
       view_label: 'Referred to location'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${to_location_id} = location.location_id
+      sql_on: ${to_location_id} = ${location.location_id}
       fields: [location_name]  
       
     - join: location_address
@@ -309,7 +309,7 @@
       view_label: 'Referred to location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=location_address.address_id
+      sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
     
@@ -340,7 +340,7 @@
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       required_joins: [appointment]
       fields: [appointment_type_name] 
 
@@ -348,7 +348,7 @@
       type: left_outer
       #label: 'Patient'
       relationship: many_to_one
-      sql_on: ${patient_id} = individual.individual_id
+      sql_on: ${patient_id} = ${individual.individual_id}
       fields: [full_name, dob_date]   
       
     - join: form_question_version 
@@ -366,13 +366,13 @@
       view_label: 'Patient'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.patient_id = individual.individual_id
+      sql_on: ${appointment.patient_id} = ${individual.individual_id}
       
     - join: appointment_type
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
-      sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name]   
       
     - join: charge
@@ -398,14 +398,14 @@
       type: left_outer
       required_joins: [individual]
       relationship: one_to_one
-      sql_on: patient.individual_id = individual.individual_id 
+      sql_on: ${patient.individual_id} = ${individual.individual_id} 
       
     - join: insurance_company  
       view_label: 'Patient'
       type: left_outer
       required_joins: [patient]
       relationship: many_to_one
-      sql_on: patient.insurance_company_id=insurance_company.individual_id
+      sql_on: ${patient.insurance_company_id} = ${insurance_company.individual_id}
       fields: [insurance_company_name]
       
     - join: company  
@@ -413,7 +413,7 @@
       type: left_outer
       required_joins: [patient]
       relationship: many_to_one
-      sql_on: patient.employer_id=company.individual_id
+      sql_on: ${patient.employer_id} = ${company.individual_id}
       fields: [company_name]  
       
     - join: practitioner
@@ -421,7 +421,7 @@
       view_label: 'Practitioner'
       type: inner
       relationship: one_to_one
-      sql_on: ${appointment.primary_doctor_id} = practitioner.individual_id
+      sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
       fields: [full_name, dob_date]
       
     - join: location
@@ -442,7 +442,7 @@
       view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location.address_id=location_address.address_id
+      sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, country] 
       
@@ -451,7 +451,7 @@
       view_label: 'Appointment Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: location_address.postcode=location_coords.postcode
+      sql_on: ${location_address.postcode} = ${location_coords.postcode}
       required_joins: [location_address]
       fields: [postcode, coordinate]  
       
@@ -460,7 +460,7 @@
       view_label: 'Patient'
       type: left_outer
       relationship: one_to_one
-      sql_on: patient.individual_id=patient_address.individual_id
+      sql_on: ${patient.individual_id} = ${patient_address.individual_id}
       required_joins: [patient]
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]  
       
@@ -470,7 +470,7 @@
       view_label: 'Patient'
       type: left_outer
       relationship: one_to_one
-      sql_on: patient_address.postcode=patient_coords.postcode
+      sql_on: ${patient_address.postcode} = ${patient_coords.postcode}
       required_joins: [patient_address]
       fields: [postcode, coordinate]    
       
@@ -483,7 +483,7 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    sql_on: appointment_section.doctor_id = practitioner.individual_id
+    sql_on: ${appointment_section.doctor_id} = ${practitioner.individual_id}
     
   - join: creator
     from: individual
@@ -497,27 +497,27 @@
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    sql_on: appointment_section.appointment_id = appointment.appointment_id
+    sql_on: ${appointment_section.appointment_id} = ${appointment.appointment_id}
       
   - join: appointment_type
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
     required_joins: appointment
-    sql_on: appointment.appointment_type_id = appointment_type.appointment_type_id
+    sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
     fields: [appointment_type_name]  
     
   - join: class
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    sql_on: appointment_section.class_id = class.class_id  
+    sql_on: ${appointment_section.class_id} = ${class.class_id}  
       
   - join: class_type
     view_label: 'Appointments'
     type: left_outer
     relationship: many_to_one
-    sql_on: class.class_type_id = class_type.class_type_id  
+    sql_on: ${class.class_type_id} = ${class_type.class_type_id}  
     
   - join: location
     view_label: 'Appointments'
@@ -556,7 +556,7 @@
     view_label: 'Practitioner'
     type: left_outer
     relationship: many_to_one
-    sql_on: ${doctor_id} = practitioner.individual_id}
+    sql_on: ${doctor_id} = ${practitioner.individual_id}
     
   - join: diary_template
     view_label: 'Diary Template'
@@ -582,7 +582,7 @@
     view_label: 'Appointment Activity'
     type: left_outer
     relationship: many_to_one
-    required_joins: appointment_section
+    #required_joins: appointment_section
     sql_on: ${appointment_section.appointment_id} = ${appointment.appointment_id}
       
   - join: appointment_type
@@ -688,7 +688,7 @@
       view_label: 'Invoice Location'
       type: left_outer
       relationship: one_to_one
-      sql_on: ${location.address_id}=location_address.address_id
+      sql_on: ${location.address_id}= ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
@@ -765,7 +765,7 @@
       view_label: 'Credit Note Allocation'
       type: left_outer
       relationship: many_to_one
-      sql_on: invoice.invoice_id = cn_allocation.from_id and cn_allocation.from_type='3' and cn_allocation.to_type='4' and cn_allocation.status='A'
+      sql_on: ${invoices.invoice_id} = ${cn_allocation.from_id} and ${cn_allocation.from_type} = '3' ${and cn_allocation.to_type} = '4' and ${cn_allocation.status} = 'A'
 
   
     - join: credit_note
@@ -895,7 +895,7 @@
       view_label: 'Address details'
       type: left_outer
       relationship: one_to_one
-      sql_on: Patients.individual_id=patient_address.individual_id
+      sql_on: ${patient.individual_id} = ${patient_address.individual_id}
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]
       
     - join: location_coords  
@@ -903,7 +903,7 @@
       view_label: 'Address details'
       type: left_outer
       relationship: one_to_one
-      sql_on: patient_address.postcode=location_coords.postcode
+      sql_on: ${patient_address.postcode} = ${location_coords.postcode}
       required_joins: [patient_address]
       fields: [postcode, coordinate]  
       
