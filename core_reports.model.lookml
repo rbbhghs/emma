@@ -53,6 +53,19 @@
       sql_on: ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} = ${treatment_cycle_referral.treatment_cycle_referral_type_id} 
       fields: [treatment_cycle_referral_type_name]
 
+    - join: treatment_cycle
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${treatment_cycle_referral.to_treatment_cycle_id} = ${treatment_cycle.treatment_cycle_id} 
+      fields: [treatment_cycle_name]
+      
+    - join: tc_opened_by_practitioner 
+      from: individual 
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${individual.individual_id} = ${treatment_cycle.opened_by_id} 
+      fields: [full_name, telephone_mobile, telephone_day, telephone_evening, email]
+
     - join: appointment
       view_label: 'Appointment'
       type: left_outer
