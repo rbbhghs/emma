@@ -63,11 +63,25 @@
       November: ${arrive_month_num} = 11
       December: ${arrive_month_num} = 12
 
+  - dimension: formatted_month_name
+    sql_case:
+      concat(January: ${arrive_month_num} = 1
+      Febuary: ${arrive_month_num} = 2
+      March: ${arrive_month_num} = 3
+      April: ${arrive_month_num} = 4
+      May: ${arrive_month_num} = 5
+      June: ${arrive_month_num} = 6
+      July: ${arrive_month_num} = 7
+      August: ${arrive_month_num} = 8
+      September: ${arrive_month_num} = 9
+      October: ${arrive_month_num} = 10
+      November: ${arrive_month_num} = 11
+      December: ${arrive_month_num} = 12,'-',' ', ${arrive_month_num})
 
   - dimension: billed
     type: yesno
     sql: ${TABLE}.billed
-
+  
   - dimension: booked_manually
     type: yesno
     hidden: true
