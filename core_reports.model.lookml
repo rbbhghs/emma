@@ -61,6 +61,7 @@
       
     - join: tc_opened_by_practitioner 
       from: individual 
+      view_label: 'Treatment Cycle'
       type: left_outer
       relationship: one_to_one
       sql_on: ${tc_opened_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
