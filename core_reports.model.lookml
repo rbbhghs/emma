@@ -57,7 +57,13 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${treatment_cycle_referral.to_treatment_cycle_id} = ${treatment_cycle.treatment_cycle_id} 
-      fields: [treatment_cycle_name]
+      fields: [treatment_cycle_name,opened_date, closed_date]
+    
+    - join: treatment_cycle_close_type 
+      type: left_outer 
+      relationship: one_to_one
+      sql_on: ${treatment_cycle_close_type.treatment_cycle_close_type_id} = ${treatment_cycle.treatment_cycle_close_type_id}
+      fields: [treatment_cycle_close_type_name]
       
     - join: tc_opened_by_practitioner 
       from: individual 
