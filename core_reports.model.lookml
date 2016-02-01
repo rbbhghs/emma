@@ -74,7 +74,7 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${treatment_cycle_referral.to_treatment_cycle_id} = ${treatment_cycle.treatment_cycle_id} 
-      fields: [treatment_cycle_name,opened_date, closed_date, treatment_cycle_status]
+      fields: [treatment_cycle_name,opened_date, closed_date, treatment_cycle_status, count]
     
     - join: treatment_cycle_close_type 
       type: left_outer 

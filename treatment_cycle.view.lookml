@@ -100,7 +100,7 @@
     sql: ${TABLE}.treatment_cycle_name
 
   - dimension: treatment_cycle_status
-    sql: CASE WHEN ${TABLE}.opened_by_id = 1 and ${TABLE}.closed_by_id = 0 then 'Open' else 'Closed' End
+    sql: CASE WHEN ${TABLE}.opened is not null and ${TABLE}.closed is null then 'Open' else 'Closed' End
 
   - measure: count
     type: count

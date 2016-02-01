@@ -77,6 +77,10 @@
               WHEN ${arrive_month_num} = 11 then 'Nov' 
               WHEN ${arrive_month_num} = 12 then 'Dec' else '' End,'-',DATE_FORMAT(${TABLE}.arrive,'%y'))
 
+  - dimension: unaccounted_patient_arrival
+    type: yesno
+    sql: case when ${TABLE}.arrive is not null then 1 else 0 End
+
   - dimension: billed
     type: yesno
     sql: ${TABLE}.billed
