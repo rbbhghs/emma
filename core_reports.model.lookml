@@ -427,7 +427,7 @@
       relationship: many_to_one
       required_joins: [treatment_cycle_referral]
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}
-      fields: [full_name, dob_date]    
+      fields: [full_name]    #savanp, removed dob as practitioner data at this level is not relevant for analytics
 
     - join: individual
       type: left_outer
@@ -570,8 +570,15 @@
       view_label: 'Appointment' 
       type: left_outer
       relationship: one_to_one
-      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' 
+      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' #savanp, appointment created date
       fields: [user_id, created_date]  
+      
+#    - join: event 
+#      view_label: 'Appointment' 
+#      type: left_outer
+#      relationship: one_to_one
+#      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='10' #savanp, appointment rescheduled date
+#      fields: [user_id, created_date]        
       
 # savanp, issue remains in presenting the fields.  i.e. duplicated field names and currently unable to implement an alias 
 #    - join: appt_rechedule 
