@@ -521,7 +521,7 @@
       relationship: one_to_one
       sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' 
 #      required_joins: [appointment]
-      fields: [user_id]      
+      fields: [user_id, company_id, created_date]      
       
 - explore: appointment_section
   label: 'Practitioner Activity'
