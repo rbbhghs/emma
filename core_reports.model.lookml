@@ -25,6 +25,16 @@
       relationship: one_to_many
       sql_on: ${individual.individual_type_id} = ${individual_type.individual_type_id}  
 
+- explore: event
+  label: 'Event Tracking'
+  joins:
+    - join: event_type
+      view_label: 'Event Type'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${event_type.event_type_id} = ${event.event_type_id} 
+      fields: [event_type_description]
+
 - explore: treatment_cycle_referral
   label: Referrals
   joins:
