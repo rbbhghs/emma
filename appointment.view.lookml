@@ -75,7 +75,7 @@
               WHEN ${arrive_month_num} = 9 then 'Sept' 
               WHEN ${arrive_month_num} = 10 then 'Oct' 
               WHEN ${arrive_month_num} = 11 then 'Nov' 
-              WHEN ${arrive_month_num} = 12 then 'Dec' else '' End,'-',DATE_FORMAT(${TABLE}.arrive,'%y')
+              WHEN ${arrive_month_num} = 12 then 'Dec' else '' End,'-',DATE_FORMAT(${TABLE}.arrive,'%y'))
 
   - dimension: billed
     type: yesno
