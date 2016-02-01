@@ -506,7 +506,6 @@
       required_joins: [patient]
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]  
       
-      
     - join: patient_coords  
       from: postcodelatlng
       view_label: 'Patient'
@@ -515,7 +514,14 @@
       sql_on: ${patient_address.postcode} = ${patient_coords.postcode}
       required_joins: [patient_address]
       fields: [postcode, coordinate]    
-      
+
+    - join: event 
+      view_label: 'Appointment' 
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' 
+#      required_joins: [appointment]
+      fields: [user_id,]      
       
 - explore: appointment_section
   label: 'Practitioner Activity'
