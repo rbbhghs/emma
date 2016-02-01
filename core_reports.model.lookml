@@ -61,10 +61,18 @@
       
     - join: tc_opened_by_practitioner 
       from: individual 
-      view_label: 'Treatment Cycle'
+      view_label: 'Treatment Cycle Opened by'
       type: left_outer
       relationship: one_to_one
       sql_on: ${tc_opened_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
+      fields: [full_name, telephone_mobile, telephone_day, telephone_evening, email]
+
+    - join: tc_closed_by_practitioner 
+      from: individual 
+      view_label: 'Treatment Cycle Closed by'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${tc_closed_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
       fields: [full_name, telephone_mobile, telephone_day, telephone_evening, email]
 
     - join: appointment
