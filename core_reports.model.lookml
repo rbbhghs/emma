@@ -47,6 +47,12 @@
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${individual.individual_id} 
 
+    - join: treatment_cycle_referral_type
+      type: inner
+      relationship: one_to_one
+      sql_on: ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} = ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} 
+      fields: [treatment_cycle_referral_type_name]
+
     - join: appointment
       view_label: 'Appointment'
       type: left_outer
