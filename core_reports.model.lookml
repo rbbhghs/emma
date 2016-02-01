@@ -346,20 +346,59 @@
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       required_joins: [appointment]
       fields: [appointment_type_name] 
+      
+    - join: form_question_instance
+      type: left_outer
+      view_label: 'Form Data'
+      relationship: many_to_one
+      sql_on: ${form_data.form_question_instance_id} = ${form_question_instance.form_question_instance_id}
+      fields: []
+      
+    - join: form
+      view_label: 'Form Data'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${form_question_instance.form_id} = ${form.form_id}
+      fields: []     
+      
+    - join: treatment_cycle_referral
+      view_label: 'Referral'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${form.treatment_cycle_referral_id} = ${treatment_cycle_referral.treatment_cycle_referral_id}
+      required_joins: [form]
+      #fields: []   
+      
+    - join: referrer
+      from: individual
+      type: left_outer
+      view_label: 'Referral'
+      relationship: many_to_one
+      required_joins: [treatment_cycle_referral]
+      sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}
+      fields: [full_name, dob_date]    
 
     - join: individual
       type: left_outer
-      #label: 'Patient'
+      view_label: 'Patient'
       relationship: many_to_one
       sql_on: ${patient_id} = ${individual.individual_id}
       fields: [full_name, dob_date]   
       
     - join: form_question_version 
-      #label: 'Form data'
+      view_label: 'Form Data'
       type: left_outer
       relationship: one_to_many
       sql_on: ${form_question_version_id}=${form_question_version.form_question_version_id}
       fields: [question_name]
+      
+    - join: user
+      from: individual
+      type: left_outer
+      view_label: 'Entering user details'
+      relationship: many_to_one
+      sql_on: ${created_by_id} = ${user.individual_id}
+      fields: [full_name]    
       
   
 - explore: appointment
