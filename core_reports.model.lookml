@@ -520,8 +520,16 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' 
-#      required_joins: [appointment]
-      fields: [user_id, company_id, created_date]      
+      fields: [user_id, created_date]  
+      
+    - join: appt_rechedule 
+      from: event
+      view_label: 'Appointment' 
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='10' 
+      fields: [user_id, created_date]       
+      
       
 - explore: appointment_section
   label: 'Practitioner Activity'
@@ -815,7 +823,6 @@
       relationship: many_to_one
       sql_on: ${invoices.invoice_id} = ${cn_allocation.from_id} and ${cn_allocation.from_type} = '3' ${and cn_allocation.to_type} = '4' and ${cn_allocation.status} = 'A'
 
-  
     - join: credit_note
       from: invoice
       view_label: 'Credit Note Allocation'
@@ -824,9 +831,8 @@
       sql_on: ${credit_note.invoice_id} = ${cn_allocation.to_id}  
       required_joins: [cn_allocation]
       fields: [external_invoice_number, invoice_id, created_date, created_time, created_week, created_month, total_price, total_price_net, outstanding]
-  
-      
-  
+
+
 - explore: payments
   from: payment
   label: 'Payments'
@@ -909,8 +915,6 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${invoice.invoice_id} = ${invoice_item.invoice_id} 
-      
-      
       
 - explore: Patients
   from: individual
