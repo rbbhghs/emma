@@ -873,7 +873,16 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${payments.payment_id} = ${payment_allocation.from_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
-  
+      fields:  [sum_unallocated, sum_allocated, amount, status]
+      
+    - join: payment_allocator
+      from: individual
+      view_label: 'Payment Allocation'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payment_allocation.allocated_by} = ${payment_allocator.individual_id}
+      fields: [full_name]
+    
     - join: invoice
       view_label: 'Invoice allocated'
       type: left_outer
