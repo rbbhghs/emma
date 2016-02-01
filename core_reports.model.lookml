@@ -63,7 +63,7 @@
       from: individual 
       type: left_outer
       relationship: one_to_one
-      sql_on: ${individual.individual_id} = ${treatment_cycle.opened_by_id} 
+      sql_on: ${tc_opened_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
       fields: [full_name, telephone_mobile, telephone_day, telephone_evening, email]
 
     - join: appointment
