@@ -39,7 +39,7 @@
       view_label: 'Appointment'
       type: inner
       relationship: many_to_one
-      sql_on: ${appointment.appointment_id} = ${event.entity_id} 
+      sql_on: ${event.entity_id} = ${appointment.appointment_id} and ${event.entity_type_id} = '1' #get appointment related data only
       fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
 
 - explore: treatment_cycle_referral
