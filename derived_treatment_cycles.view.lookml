@@ -2,7 +2,7 @@
   derived_table:
     sql: |
       select patient_id,to_treatment_cycle_id,count(*) unique_treatment_cycle_count,min(created_date) referral_created_date,min(referred) referral_referred_date
-      from treatment_cycle_referral where to_treatment_cycle_id is not null group by patient_id,to_treatment_cycle_id order by 2
+      from treatment_cycle_referral where to_treatment_cycle_id is not null group by patient_id,to_treatment_cycle_id 
 
   fields:
   - measure: count
