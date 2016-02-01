@@ -35,6 +35,9 @@
 
   - dimension: datacash_auth_code
     sql: ${TABLE}.datacash_auth_code
+    
+  - dimension: payment_type
+    sql: CASE WHEN ${TABLE}.payment > 0 then 'Refund' else 'Payment' End
 
   - dimension: datacash_card_token
     sql: ${TABLE}.datacash_card_token
