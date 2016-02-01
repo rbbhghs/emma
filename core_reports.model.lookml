@@ -50,7 +50,7 @@
     - join: treatment_cycle_referral_type
       type: inner
       relationship: one_to_one
-      sql_on: ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} = ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} 
+      sql_on: ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} = ${treatment_cycle_referral.treatment_cycle_referral_type_id} 
       fields: [treatment_cycle_referral_type_name]
 
     - join: appointment
