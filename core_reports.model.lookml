@@ -35,6 +35,13 @@
       sql_on: ${event_type.event_type_id} = ${event.event_type_id} 
       fields: [event_type_description]
 
+    - join: appointment
+      view_label: 'Appointment'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${event.entity_id} 
+      fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
+
 - explore: treatment_cycle_referral
   label: Referrals
   joins:
