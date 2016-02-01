@@ -522,13 +522,14 @@
       sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' 
       fields: [user_id, created_date]  
       
-    - join: appt_rechedule 
-      from: event
-      view_label: 'Appointment' 
-      type: left_outer
-      relationship: one_to_one
-      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='10' 
-      fields: [user_id, created_date]       
+# savanp, issue remains in presenting the fields.  i.e. duplicated field names and currently unable to implement an alias 
+#    - join: appt_rechedule 
+#      from: event
+#      view_label: 'Appointment' 
+#      type: left_outer
+#      relationship: one_to_one
+#      sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='10' 
+#      fields: [user_id, created_date]       
       
       
 - explore: appointment_section
