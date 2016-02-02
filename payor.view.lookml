@@ -9,8 +9,9 @@
                     ' ',
                     individual.forename,
                     ' ',
-                    individual.surname)) as payor,individual_type_name,
-            coalesce(company.company_name,insurance_company.insurance_company_name,'Patient/Self-Pay') payor_type
+                    individual.surname)) as payor,
+            coalesce(company.company_name,insurance_company.insurance_company_name,'Patient/Self-Pay') payor_type_old,
+            CASE WHEN individual.individual_type_id in (6,7) then individual_type_name else 'Patient/Self-Pay' End payor_type
         from
         individual
         left join
@@ -29,6 +30,9 @@
        
      - dimension: payor
        sql: ${TABLE}.payor
+       
+     - dimension: payor_type
+       sql: ${TABLE}.payor_type       
 #
 #     - measure: total_profit
 #       type: sum
