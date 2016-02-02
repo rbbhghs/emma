@@ -70,7 +70,7 @@
       type: inner 
       relationship: many_to_one
       sql_on: ${workflow_activity.event_id} = ${derived_workflow_state_duration.from_event_id}
-      fields: [state_duration]
+      fields: [state_duration, from_workstate, next_workstate]
       
   
 - explore: click_tracking
