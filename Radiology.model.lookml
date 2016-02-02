@@ -40,6 +40,14 @@
       relationship: many_to_one
       sql_on: ${workflow_activity.treatment_cycle_referral_id} = ${treatment_cycle_referral.treatment_cycle_referral_id} 
       #fields: [full_name, dob]
+
+      #added by savanp
+    - join: speciality
+      view_label: 'Referral details'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${speciality.speciality_id} = ${treatment_cycle_referral.to_speciality_id} 
+      fields: [speciality_name]
       
     - join: workflow_state_from
       from: workflow_state
