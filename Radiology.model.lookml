@@ -64,7 +64,14 @@
       relationship: many_to_one
       sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
       fields: [name, short_name, order]
-  
+
+    - join: derived_workflow_state_duration 
+#      view_label: 'Workflow Tracking' 
+      type: inner 
+      relationship: many_to_one
+      sql_on: ${workflow_activity.event_id} = ${derived_workflow_state_duration.from_event_id}
+      fields: [state_duration]
+      
   
 - explore: click_tracking
   label: System usage
