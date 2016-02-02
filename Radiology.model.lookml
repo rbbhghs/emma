@@ -124,21 +124,21 @@
       sql_on: ${patient.individual_id} = ${individual.individual_id} 
 
     - join: treatment_cycle_referral_type 
-      view_label: 'Referral Details'
+      view_label: 'Treatment Cycle Referral'
       type: inner
       relationship: one_to_one
       sql_on: ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} = ${treatment_cycle_referral.treatment_cycle_referral_type_id} 
       fields: [treatment_cycle_referral_type_name]
 
     - join: treatment_cycle
-      view_label: 'Referral Details'
+      view_label: 'Treatment Cycle Referral'
       type: left_outer
       relationship: one_to_one
       sql_on: ${treatment_cycle_referral.to_treatment_cycle_id} = ${treatment_cycle.treatment_cycle_id} 
       fields: [treatment_cycle_name,opened_date, closed_date, treatment_cycle_status]
     
     - join: treatment_cycle_close_type 
-      view_label: 'Referral Details'
+      view_label: 'Treatment Cycle Referral'
       type: left_outer 
       relationship: one_to_one
       sql_on: ${treatment_cycle_close_type.treatment_cycle_close_type_id} = ${treatment_cycle.treatment_cycle_close_type_id}
@@ -198,7 +198,7 @@
 
       #added by savanp
     - join: speciality
-      view_label: 'Referral Details'
+      view_label: 'Treatment Cycle Referral'
       type: left_outer
       relationship: many_to_one
       sql_on: ${speciality.speciality_id} = ${treatment_cycle_referral.to_speciality_id} 
