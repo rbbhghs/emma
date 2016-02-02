@@ -3,7 +3,8 @@
     sql: |
       select e.event_type_id,e.event_id from_event_id,e.created,e.treatment_cycle_referral_id,ws_from.name from_workstate,ws_to.name next_workstate,
       min(e1.event_id) to_event_id,min(e1.created) next_state_date,
-      time_to_sec(timediff(min(e1.created),e.created)) state_duration
+      time_to_sec(timediff(min(e1.created),e.created)) state_duration_in_seconds,
+      round(time_to_sec(timediff(min(e1.created),e.created))/60.00,2) state_duration_in_minutes,round(time_to_sec(timediff(min(e1.created),e.created))/3600.00,2) state_duration_in_hours
       from event e 
       JOIN event e1 ON (e1.event_id > e.event_id and e1.treatment_cycle_referral_id = e.treatment_cycle_referral_id) 
       JOIN workflow_state ws_from ON (ws_from.workflow_state_id = e.from_id) 
@@ -14,9 +15,17 @@
       group by e.event_type_id,e.event_id,e.created,e.treatment_cycle_referral_id;
 
   fields:
-  - measure: state_duration
+  - measure: state_duration_in_seconds
     type: sum
     drill_fields: detail*
+
+  - measure: state_duration_in_minutes
+    type: sum
+    drill_fields: detail*
+    
+  - measure: state_duration_in_hours
+    type: sum
+    drill_fields: detail*    
 
   - measure: event_id
     type: count
