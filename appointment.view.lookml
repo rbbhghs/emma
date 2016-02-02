@@ -393,7 +393,7 @@
   - measure: appt_duration
     label: 'Appointment Duration in Mins'
     type: sum
-    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.end),(${TABLE}.start))/60.00
+    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.start),(${TABLE}.end))/60.00
     
   - measure: actual_appt_duration
     label: 'Actual Appointment Duration in Mins'
