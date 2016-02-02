@@ -94,3 +94,34 @@
     limit: 500
     font_size: medium
     
+  - name: outstanding_self_pay_invoices
+    title: Outstanding Self Pay Invoices
+    type: looker_line
+    model: core_reports
+    explore: invoices
+    dimensions: [appointment.start_month, appointment_type.appointment_type_name]
+    pivots: [appointment_type.appointment_type_name]
+    measures: [invoices.sum_outstanding]
+    filters:
+      charge.self_payer: 'Yes'
+      invoices.outstanding: '>0'
+    sorts: [appointment.start_month, appointment_type.appointment_type_name]
+    limit: 500
+    column_limit: 50
+    total: true
+    label_density: 25
+    legend_position: center
+    y_axis_gridlines: true
+    show_view_names: true
+    y_axis_combined: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    x_axis_scale: auto
+    point_style: none
+    interpolation: linear
+  
+
+    
