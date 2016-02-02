@@ -688,7 +688,7 @@
     #fields: [start, end, reservation]
 
   - join: derived_busy_duration
-    view_label: 'Diary'
+    view_label: 'Diary Utilisation'
     type: left_outer
     relationship: many_to_one
     sql_on: ${diary.diary_id} = ${derived_busy_duration.diary_id} 
