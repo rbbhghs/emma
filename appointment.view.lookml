@@ -399,7 +399,7 @@
     label: 'Actual Appointment Duration in Mins'
     type: sum
     #sql: TIMESTAMPDIFF(SECOND,ifnull((${TABLE}.view),(${TABLE}.start)),ifnull((${TABLE}.leave),(${TABLE}.end)))/60.00
-    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.view,${TABLE}.leave)))/60.00    
+    sql: TIMESTAMPDIFF(SECOND,(${TABLE}.view,${TABLE}.leave))/60.00    
     
   - measure: time_to_view
     label: 'Time to be Seen in Mins'
