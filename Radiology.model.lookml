@@ -66,7 +66,7 @@
       fields: [name, short_name, order]
 
     - join: derived_workflow_state_duration 
-#      view_label: 'Workflow Tracking' 
+      view_label: 'Workflow Activity' 
       type: inner 
       relationship: many_to_one
       sql_on: ${workflow_activity.event_id} = ${derived_workflow_state_duration.from_event_id}
