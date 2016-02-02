@@ -524,7 +524,8 @@
       sql_on: ${appointment.location_id} = ${location.location_id}
       
     - join: derived_first_appointment
-      view_label: 'Derived First Appointment'
+      #view_label: 'Derived First Appointment'
+      view_label: 'Appointments'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_first_appointment.first_appointment_id}
@@ -901,7 +902,7 @@
       type: inner
       relationship: one_to_many
       sql_on: ${payments.payer_id} = ${payor.individual_id}
-      fields: [payor]
+      fields: [payor,payor_type]
       
     - join: issuing_company
       view_label: 'Payments'
