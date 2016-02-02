@@ -456,7 +456,6 @@
   label: 'Appointments'
   joins:
     - join: derived_first_appointment
-      #view_label: 'Derived First Appointment'
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
