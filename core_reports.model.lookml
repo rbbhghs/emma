@@ -939,6 +939,14 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${payments.appointment_id} = ${appointment.appointment_id}    
+
+    - join: appointment_type
+      view_label: 'Appointment paid in advance'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+      fields: [appointment_type_name] 
+      required_joins: [appointment]
       
     - join: payment_allocation
       view_label: 'Payment Allocation'
