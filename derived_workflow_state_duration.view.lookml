@@ -28,10 +28,10 @@
     sql: ${TABLE}.from_event_id
 
   - dimension: from_workstate
-    sql: ${TABLE}.event_id
+    sql: ${TABLE}.from_workstate
     
   - dimension: next_workstate
-    sql: ${TABLE}.event_id    
+    sql: ${TABLE}.next_workstate    
 
 #  - dimension: new_appointments
 #    type: int
