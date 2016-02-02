@@ -13,6 +13,9 @@
       and e1.from_id > 0 and e1.to_id > 0 
       and e1.event_type_id = 223 
       group by e.event_type_id,e.event_id,e.created,e.treatment_cycle_referral_id;
+    sql_trigger_value: SELECT CURDATE()
+    indexes: [treatment_cycle_referral_id]
+
 
   fields:
   - measure: state_duration_in_seconds
