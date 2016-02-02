@@ -893,6 +893,7 @@
       fields: [external_invoice_number, invoice_id, created_date, created_time, created_week, created_month, total_price, total_price_net, outstanding]
 
 
+  #when running sum(amount) against SQL runner produces different results to "Payments" explore 
 - explore: payments
   from: payment
   label: 'Payments'
@@ -926,10 +927,11 @@
       sql_on: ${payments.location_id} = ${location.location_id} 
       fields: [location_name]
     
+      #amended the join which causes missing records.  changed from inner type to left_outer
     - join: patient
       from: individual
       view_label: 'Patient'
-      type: inner
+      type: left_outer
       relationship: many_to_one
       sql_on: ${payments.patient_id} = ${patient.individual_id}
       fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
