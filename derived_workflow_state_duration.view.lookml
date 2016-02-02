@@ -25,7 +25,7 @@
   - dimension: from_event_id
     type: int
     primary_key: true
-    sql: ${TABLE}.event_id
+    sql: ${TABLE}.from_event_id
 
   - dimension: from_workstate
     sql: ${TABLE}.event_id
