@@ -933,20 +933,24 @@
       relationship: many_to_one
       sql_on: ${payments.patient_id} = ${patient.individual_id}
       fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
-      
-    - join: appointment
-      view_label: 'Appointment paid in advance'
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${payments.appointment_id} = ${appointment.appointment_id}    
 
-    - join: appointment_type
+      #edited by savanp (for advanced payment appointments)
+    - join: advanced_payment_appointment 
+      from: appointment 
       view_label: 'Appointment paid in advance'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+      sql_on: ${payments.appointment_id} = ${advanced_payment_appointment.appointment_id}    
+
+      #added by savanp 
+    - join: advanced_appointment_type 
+      from: appointment_type 
+      view_label: 'Appointment paid in advance'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${advanced_appointment_type.appointment_type_id} = ${advanced_payment_appointment.appointment_type_id}
       fields: [appointment_type_name] 
-      required_joins: [appointment]
+      required_joins: [advanced_payment_appointment]
       
     - join: payment_allocation
       view_label: 'Payment Allocation'
@@ -970,7 +974,7 @@
       sql_on: ${invoice.invoice_id} = ${payment_allocation.to_id}  
       required_joins: [payment_allocation]
       fields: [external_invoice_number, invoice_id, created_date, created_time, created_week, created_month, total_price, total_price_net, outstanding]
-      
+
     - join: location
       view_label: 'Invoice allocated'
       type: left_outer
@@ -983,7 +987,25 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${invoice.invoice_id} = ${invoice_item.invoice_id} 
-      
+
+      #added by savanp
+    - join: payment_appointment 
+      from: appointment
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${invoice_item.appointment_id} = ${payment_appointment.appointment_id}    
+
+      #added by savanp
+    - join: payment_appointment_type 
+      from: appointment_type 
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${payment_appointment_type.appointment_type_id} = ${payment_appointment.appointment_type_id}
+      fields: [appointment_type_name] 
+      required_joins: [payment_appointment]
+
 - explore: Patients
   from: individual
   label: 'Patients'
