@@ -8,7 +8,7 @@
 
   - dimension: company_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.company_id
 
   - dimension_group: created
@@ -34,16 +34,17 @@
 
   - dimension: event_type_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.event_type_id
 
   - dimension: external_practitice_id
     type: int
+    hidden: true
     sql: ${TABLE}.external_practitice_id
 
   - dimension: external_practitioner_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.external_practitioner_id
 
   - dimension_group: follow_up
@@ -68,7 +69,7 @@
 
   - dimension: patient_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.patient_id
 
   - dimension: reviewed_by
@@ -81,7 +82,7 @@
 
   - dimension: treatment_cycle_referral_id
     type: int
-    # hidden: true
+    hidden: true
     sql: ${TABLE}.treatment_cycle_referral_id
 
   - dimension: user_id

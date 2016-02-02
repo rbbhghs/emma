@@ -6,6 +6,57 @@
 - explore: outcomes
   label: Outcomes
   
+ 
+- explore: workflow_activity
+  from: event
+  label: 'Workflow Tracking'
+  joins:
+    - join: patient
+      from: individual
+      view_label: 'Patient'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${workflow_activity.patient_id} = ${patient.individual_id} 
+      fields: [full_name]
+
+  #  - join: appointment
+  #    view_label: 'Appointment'
+  #    type: left_outer
+  #    relationship: many_to_one
+  #    sql_on: ${event.entity_id} = ${appointment.appointment_id} and ${event.entity_type_id} = '1' #get appointment related data only
+  #    fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
+    
+  #  - join: appointment_type
+  #    view_label: 'Appointment'
+  #    type: left_outer
+  #    relationship: many_to_one
+  #    sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+  #    fields: [appointment_type_name] 
+  #    required_joins: [appointment]
+  
+    - join: treatment_cycle_referral
+      view_label: 'Referral details'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_activity.treatment_cycle_referral_id} = ${treatment_cycle_referral.treatment_cycle_referral_id} 
+      #fields: [full_name, dob]
+      
+    - join: workflow_state_from
+      from: workflow_state
+      view_label: 'Workflow State From'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_activity.from_id} = ${workflow_state_from.workflow_state_id}
+      fields: [name, short_name, order]
+      
+    - join: workflow_state_to
+      from: workflow_state
+      view_label: 'Workflow State To'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
+      fields: [name, short_name, order]
+  
   
 - explore: click_tracking
   label: System usage
