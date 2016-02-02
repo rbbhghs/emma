@@ -14,7 +14,7 @@
       and e1.event_type_id = 223 
       group by e.event_type_id,e.event_id,e.created,e.treatment_cycle_referral_id;
     sql_trigger_value: SELECT CURDATE()
-    indexes: [treatment_cycle_referral_id]
+    indexes: [from_event_id, treatment_cycle_referral_id]
 
 
   fields:
