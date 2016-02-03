@@ -226,6 +226,14 @@
       relationship: many_to_one
       sql_on: ${radiology_referrals.patient_id} = ${patient.individual_id}
 
+      #added by savanp
+    - join: speciality
+      view_label: 'Radiology Referrals'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${speciality.speciality_id} = ${radiology_referrals.to_speciality_id} 
+      fields: [speciality_name]      
+
     - join: appointment
       view_label: 'Appointment'
       type: left_outer
