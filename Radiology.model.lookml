@@ -275,6 +275,14 @@
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
       fields: []
+
+#    - join: appointment_section_study_clinical_report
+#      view_label: 'Appointment'
+#      type: left_outer
+#      relationship: many_to_one
+#      sql_on: ${appointment_section_study.appointment_section_study_id} = ${appointment_section_study_clinical_report.appointment_section_study_id} 
+#      required_joins: [appointment_section,appointment]
+#      fields: []
       
     - join: dicom_procedure
       view_label: 'Procedure'
@@ -306,23 +314,41 @@
       required_joins: [dashboard_event]
       sql_on: ${dashboard_event.created_by_id} = ${creator.individual_id}
       fields: [created_by] 
-      
+
+    - join: derived_clinical_report
+      view_label: 'Report'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment_section_study.appointment_section_study_id} = ${derived_clinical_report.appointment_section_study_id} 
+      fields: [appointment_section_study_id, report_id, created_date, report_name, published_date]
+
       
 #i'm 99% sure this is wrong!!!       the join should be against pacs_order shouldn't it?
-    - join: clinical_report
-      type: left_outer
-      view_label: 'Report'
-      relationship: many_to_one
-      required_joins: [appointment]
-      sql_on: ${appointment.appointment_id} = ${clinical_report.appointment_id}
-      fields: [first_published_date, first_published_time, report_status] 
+#savanp, i assume so.  the join i understand is via appointment_section_study_clinical_report to 
+#    - join: clinical_report
+#      type: left_outer
+#      view_label: 'Report'
+#      relationship: many_to_one
+#      required_joins: [appointment]
+#      sql_on: ${appointment.appointment_id} = ${clinical_report.appointment_id}
+#      fields: [first_published_date, first_published_time, report_status] 
+
+#savanp, too slow this way, cannot control the indexes for AML dataload
+
+#    - join: clinical_report
+#      type: left_outer
+#      view_label: 'Report'
+#      relationship: many_to_one
+#      required_joins: [appointment_section_study_clinical_report]
+#      sql_on: ${clinical_report.report_id} = ${appointment_section_study_clinical_report.clinical_report_id}
+#      fields: [first_published_date, first_published_time, report_status] 
       
-    - join: clinical_report_version
-      type: left_outer
-      view_label: 'Report'
-      relationship: many_to_one
-      required_joins: [clinical_report]
-      sql_on: ${clinical_report.report_id} = ${clinical_report_version.report_id} 
+#    - join: clinical_report_version
+#      type: left_outer
+#      view_label: 'Report'
+#      relationship: many_to_one
+#      required_joins: [clinical_report]
+#      sql_on: ${clinical_report.report_id} = ${clinical_report_version.report_id} 
        
   
       

@@ -15,13 +15,13 @@
 #    type: sum
 #    drill_fields: detail*
 
-  - measure: report_id
-    type: count
-    drill_fields: detail*
+#  - measure: report_id
+#    type: count
+#    drill_fields: detail*
 
-  - measure: appointment_section_study_id
-    type: count
-    drill_fields: detail*
+#  - measure: appointment_section_study_id
+#    type: count
+#    drill_fields: detail*
     
   - dimension: appointment_section_study_id
     type: int
@@ -30,6 +30,9 @@
 
   - dimension: report_id
     sql: ${TABLE}.report_id
+
+  - dimension: created_date
+    sql: ${TABLE}.created_date
 
   - dimension: report_name
     sql: ${TABLE}.report_name
