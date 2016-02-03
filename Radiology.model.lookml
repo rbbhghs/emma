@@ -1078,6 +1078,7 @@
       sql_on: ${payment_allocation.allocated_by} = ${payment_allocator.individual_id}
       fields: [full_name]
     
+      #small mistake with reserving the relationship value.  reverted back by savanp from one_to_many to many_to_one
     - join: invoice
       view_label: 'Invoice allocated'
       type: left_outer
@@ -1099,12 +1100,12 @@
       relationship: many_to_one
       sql_on: ${invoice.invoice_id} = ${invoice_item.invoice_id} 
 
-#    - join: product
-#      type: left_outer
-#      view_label: 'Invoice Items'
-#      relationship: one_to_one
-#      sql_on: ${product.product_id} = ${invoice_item.product_id}
-#      fields: [product_name, sage_reference]  
+    - join: product
+      type: left_outer
+      view_label: 'Invoice Items'
+      relationship: one_to_one
+      sql_on: ${product.product_id} = ${invoice_item.product_id}
+      fields: [product_name, sage_reference]  
       
 - explore: Patients
   from: individual
