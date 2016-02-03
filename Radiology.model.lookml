@@ -1081,7 +1081,7 @@
     - join: invoice
       view_label: 'Invoice allocated'
       type: left_outer
-      relationship: one_to_many
+      relationship: many_to_one
       sql_on: ${invoice.invoice_id} = ${payment_allocation.to_id}  
       required_joins: [payment_allocation]
       fields: [external_invoice_number, invoice_id, created_date, created_time, created_week, created_month, total_price, total_price_net, outstanding]
