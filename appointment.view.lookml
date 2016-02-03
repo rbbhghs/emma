@@ -388,7 +388,7 @@
     type: count_distinct
     sql: ${appointment_id}
 #    drill_fields: detail*
-    drill_fields: [appointment_id, full_name, start_time, end_time]
+    drill_fields: [appointment_id, individual.forename, start_time, end_time]
     
   - measure: number_of_locations
     label: '# of Locations'
@@ -435,7 +435,7 @@
     - patient.preferred_middlename
     - patient.preferred_surname
     - patient.provided_gp_name
-    - patient.full_name
+    - individual.forename
     - location.location_name
     - location.billing_location_id
     - contract.contract_id
