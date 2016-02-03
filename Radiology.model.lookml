@@ -1098,6 +1098,13 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${invoice.invoice_id} = ${invoice_item.invoice_id} 
+
+    - join: product
+      type: left_outer
+      view_label: 'Invoice Items'
+      relationship: one_to_one
+      sql_on: ${product.product_id} = ${invoice_item.product_id}
+      fields: [product_name, sage_reference]  
       
 - explore: Patients
   from: individual
