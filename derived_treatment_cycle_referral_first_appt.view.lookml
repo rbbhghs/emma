@@ -38,6 +38,13 @@
     type: int
     sql: ${TABLE}.treatment_cycle_referral_id
 
+  - measure: referral_to_treat_duration_days
+    type: number
+    sql: round(time_to_sec(TIMEDIFF(${treatment_cycle_referral.created_date},${first_referral_appt})/86400,2)
+
+
+
+
 #  - dimension: new_appointments
 #    type: int
 #    sql: ${TABLE}.new_appointments
