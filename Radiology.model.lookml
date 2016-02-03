@@ -242,17 +242,13 @@
       required_joins: [appointment]  
 
       #added by savanp for treatment cycle referral date to first appt
-#    - join: derived_first_appointment
-#      view_label: 'Appointment'
-#      type: left_outer
-#      relationship: many_to_one
-#      sql_on: ${appointment.appointment_id} = ${derived_first_appointment.first_appointment_id}
-#      fields: [new_appointments, new_patient_appt, first_appointment_id]  
+    - join: derived_treatment_cycle_referral_first_appt
+#      view_label: 'Radiology referrals'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${derived_treatment_cycle_referral_first_appt.first_referral_appointment_id}
+      fields: [first_referral_appointment_id, new_appointments_by_referral, new_referral_appt, first_referral_appt_date]  
 
-
-
-
-      
     - join: location
       view_label: 'Appointment Location'
       type: left_outer
