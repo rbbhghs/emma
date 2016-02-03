@@ -435,6 +435,7 @@
     - patient.preferred_middlename
     - patient.preferred_surname
     - patient.provided_gp_name
+    - patient.full_name
     - location.location_name
     - location.billing_location_id
     - contract.contract_id
