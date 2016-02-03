@@ -65,6 +65,7 @@
       sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
       fields: [name, short_name, order]
 
+      #added by savanp to optimise query performance
     - join: derived_workflow_state_duration 
       view_label: 'Workflow Activity' 
       type: inner 
@@ -276,14 +277,20 @@
       required_joins: [appointment_section,appointment]
       fields: []
 
-#    - join: appointment_section_study_clinical_report
-#      view_label: 'Appointment'
-#      type: left_outer
-#      relationship: many_to_one
-#      sql_on: ${appointment_section_study.appointment_section_study_id} = ${appointment_section_study_clinical_report.appointment_section_study_id} 
+    - join: appointment_section_study_clinical_report
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment_section_study_clinical_report.appointment_section_study_id} = ${appointment_section_study.appointment_section_study_id} 
 #      required_joins: [appointment_section,appointment]
-#      fields: []
-      
+      fields: [appointment_section_study_clinical_report_id, appointment_section_study_id, clinical_report_id]
+
+    - join: pacs_order
+      view_label: 'Procedure'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
+
     - join: dicom_procedure
       view_label: 'Procedure'
       type: left_outer
