@@ -1,10 +1,11 @@
 - view: derived_first_appointment
   derived_table:
     sql: |
-      SELECT first_appointment_id,count(*) new_appointments,first_appt 
+      SELECT a.patient_id,a.appointment_id first_appointment_id,first_appt,a.treatment_cycle_referral_id,count(*) new_appointments 
       FROM
-      (select patient_id,min(appointment_id) first_appointment_id,min(start) first_appt from appointment group by patient_id)x
-      GROUP BY first_appointment_id,first_appt;
+      (select patient_id,min(start) first_appt from appointment where ifnull(dna,0) = 0 and status = 'A' group by patient_id)x 
+      JOIN appointment a ON (x.patient_id = a.patient_id and x.first_appt = a.start)
+      ;
 
   fields:
   - measure: new_appointments
@@ -25,6 +26,10 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.first_appt
 
+  - dimension: treatment_cycle_referral_id
+    type: int
+    sql: ${TABLE}.treatment_cycle_referral_id
+
 #  - dimension: new_appointments
 #    type: int
 #    sql: ${TABLE}.new_appointments
@@ -34,4 +39,5 @@
       - first_appointment_id
       - new_appointments
       - new_patient_appt
+      - first_appt
 
