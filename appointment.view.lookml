@@ -83,7 +83,7 @@
 
   - dimension: unaccounted_patient_arrival
     type: yesno
-    sql: case when ${TABLE}.arrive is not null then 1 else 0 End
+    sql: case when ${TABLE}.arrive is null then 1 else 0 End
 
   - dimension: billed
     type: yesno
@@ -448,7 +448,8 @@
     - treatment_cycle_referral.treatment_cycle_referral_id
     - appointment_type_problem.appointment_type_problem_id
     - transport_provider.transport_provider_id
-    - transport_provider.provider_name
+    - transport_provider.provider_name 
+    - unaccounted_patient_arrival 
     - appointment_dictation.count
     - appointment_review.count
     - appointment_search.count
