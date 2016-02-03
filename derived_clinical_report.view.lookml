@@ -1,7 +1,7 @@
 - view: derived_clinical_report
   derived_table:
     sql: |
-      select appointment_section_study_id, cr.report_id, crv.created_date, crtv.name report_name, crv.published_date
+      select appointment_section_study_id, cr.report_id, crv.created_date, crtv.name report_name, crv.published_date, crv.report_version_id
       from appointment_section_study_clinical_report 
       LEFT JOIN clinical_report cr ON clinical_report_id = cr.report_id
       LEFT JOIN clinical_report_version crv ON cr.report_id = crv.report_id AND crv.version_number = (SELECT MAX(version_number) FROM clinical_report_version crv2 WHERE crv2.report_id = crv.report_id AND crv2.status = 'A')
@@ -40,6 +40,9 @@
   - dimension: published_date
     sql: ${TABLE}.published_date    
 
+  - dimension: report_version_id
+    sql: ${TABLE}.report_version_id   
+    
 #  - dimension: new_appointments
 #    type: int
 #    sql: ${TABLE}.new_appointments
@@ -50,5 +53,6 @@
       - appointment_section_study_id
       - created_date
       - report_name 
-      - published_date
+      - published_date 
+      - report_version_id
 
