@@ -15,7 +15,7 @@
     type: count
     drill_fields: detail*
 
-  - measure: referral_to_treat_duration_days_meassure
+  - measure: referral_to_treat_duration_days
     type: sum
     sql: time_to_sec(TIMEDIFF(${TABLE}.first_referral_appt,${TABLE}.referral_created))/86400 
 
@@ -43,7 +43,7 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.first_referred
 
-  - dimension: referral_to_treat_duration_days
+  - dimension: referral_to_treat_duration_days_dim
     type: number
     sql: time_to_sec(TIMEDIFF(${TABLE}.first_referral_appt,${TABLE}.referral_created))/86400 
     
