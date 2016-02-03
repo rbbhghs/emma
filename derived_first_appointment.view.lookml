@@ -4,7 +4,8 @@
       SELECT a.patient_id,a.appointment_id first_appointment_id,first_appt,a.treatment_cycle_referral_id,count(*) new_appointments 
       FROM
       (select patient_id,min(start) first_appt from appointment where ifnull(dna,0) = 0 and status = 'A' group by patient_id)x 
-      JOIN appointment a ON (x.patient_id = a.patient_id and x.first_appt = a.start)
+      JOIN appointment a ON (x.patient_id = a.patient_id and x.first_appt = a.start) 
+      GROUP BY a.patient_id,a.appointment_id first_appointment_id,first_appt,a.treatment_cycle_referral_id 
       ;
 
   fields:
