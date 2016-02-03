@@ -322,6 +322,14 @@
       sql_on: ${dashboard_event.created_by_id} = ${creator.individual_id}
       fields: [created_by] 
 
+    - join: clinical_report
+      type: left_outer
+      view_label: 'Report'
+      relationship: many_to_one
+      required_joins: [appointment]
+      sql_on: ${appointment.appointment_id} = ${clinical_report.appointment_id}
+      fields: [first_published_date, first_published_time, report_status] 
+
     - join: derived_clinical_report
       view_label: 'Report'
       type: left_outer
