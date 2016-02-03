@@ -959,7 +959,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${payments.payment_id} = ${payment_allocation.from_id} and ${payment_allocation.from_type}='3' and ${payment_allocation.to_type}='1' and ${payment_allocation.status}='A'
-      fields:  [sum_unallocated, sum_allocated, amount, status]
+      fields:  [sum_allocated, amount, status]
       
     - join: payment_allocator
       from: individual

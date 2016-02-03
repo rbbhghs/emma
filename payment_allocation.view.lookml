@@ -63,12 +63,15 @@
 
   - measure: sum_allocated
     type: sum_distinct
-    sql: ${TABLE}.amount
+    sql: ${TABLE}.amount #-${TABLE}.outstanding
     sql_distinct_key: ${payment_allocation_id}
     
-  - measure: sum_unallocated
-    type: sum
-    sql: ${TABLE}.amount-${TABLE}.paid
+#  - measure: sum_unallocated
+#    type: sum
+#    sql: ${TABLE}.amount-${TABLE}.paid
     
+#  - measure: sum_unallocated
+#    type: sum
+#    sql: ${TABLE}.outstanding 
     
     
