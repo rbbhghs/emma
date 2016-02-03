@@ -247,7 +247,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_treatment_cycle_referral_first_appt.first_referral_appointment_id}
-      fields: [first_referral_appointment_id, new_appointments_by_referral, new_referral_appt, first_referral_appt_date]  
+      fields: [first_referral_appointment_id, new_appointments_by_referral, new_referral_appt, first_referral_appt_date, first_referral_appt_time]  
 
     - join: location
       view_label: 'Appointment Location'
