@@ -18,6 +18,7 @@
   - measure: referral_to_treat_duration_days
     type: sum
     sql: round(time_to_sec(TIMEDIFF(${TABLE}.first_referral_appt,${TABLE}.referral_created))/86400,2) 
+    value_format: '#,##0.00'
 
   - dimension: first_referral_appointment_id
     type: int
