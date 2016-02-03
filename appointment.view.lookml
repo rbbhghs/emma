@@ -387,6 +387,7 @@
     label: '# of Appts'
     type: count_distinct
     sql: ${appointment_id}
+    drill_fields: detail*
     
   - measure: number_of_locations
     label: '# of Locations'
