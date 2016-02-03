@@ -584,7 +584,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_first_appointment.first_appointment_id}
-      #fields: [new_appointments]  
+      fields: [new_appointments, new_patient_appt, ]  
       
     - join: individual
       view_label: 'Patient'
