@@ -31,14 +31,25 @@
   - dimension: report_id
     sql: ${TABLE}.report_id
 
-  - dimension: created_date
-    sql: ${TABLE}.created_date
+#  - dimension: created_date
+#    sql: ${TABLE}.created_date
 
+  - dimension_group: created_date
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.created_date
+    
   - dimension: report_name
     sql: ${TABLE}.report_name
     
-  - dimension: published_date
-    sql: ${TABLE}.published_date    
+#  - dimension: published_date
+#    sql: ${TABLE}.published_date    
+
+  - dimension_group: published_date
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.published_date
+
 
   - dimension: report_version_id
     sql: ${TABLE}.report_version_id   

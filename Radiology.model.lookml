@@ -320,7 +320,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment_section_study.appointment_section_study_id} = ${derived_clinical_report.appointment_section_study_id} 
-      fields: [appointment_section_study_id, report_id, created_date, report_name, published_date, report_version_id]
+      fields: [appointment_section_study_id, report_id, created_date_date, report_name, published_date_date, report_version_id]
 
       
 #i'm 99% sure this is wrong!!!       the join should be against pacs_order shouldn't it?
