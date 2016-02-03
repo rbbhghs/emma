@@ -15,12 +15,6 @@
     type: count
     drill_fields: detail*
 
-  - measure: referral_to_treat_duration_days
-    type: number
-    sql: time_to_sec(TIMEDIFF(${first_referral_appt},${referral_created}))/86400
-
-#round(time_to_sec(TIMEDIFF(tcr.created_date,a.start))/86400,2)
-
   - dimension: first_referral_appointment_id
     type: int
     primary_key: true
@@ -35,10 +29,19 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.first_referral_appt
 
+  - dimension: referral_created
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.referral_created
+
   - dimension: first_referred
     type: time
     timeframes: [time, date, week, month]
     sql: ${TABLE}.first_referred
+
+  - dimension: referral_to_treat_duration_days
+    type: number
+    sql: time_to_sec(TIMEDIFF(${TABLE}.first_referral_appt,${TABLE}.referral_created))/86400 
     
   - dimension: treatment_cycle_referral_id
     type: int
@@ -53,5 +56,6 @@
       - first_referral_appointment_id
       - new_appointments_by_referral
       - new_referral_appt
-      - first_referral_appt
+      - first_referral_appt 
+      - referral_to_treat_duration_days
 
