@@ -243,7 +243,7 @@
 
       #added by savanp for treatment cycle referral date to first appt
     - join: derived_treatment_cycle_referral_first_appt
-#      view_label: 'Radiology referrals'
+      view_label: 'Radiology referrals'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_treatment_cycle_referral_first_appt.first_referral_appointment_id}
