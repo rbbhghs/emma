@@ -123,12 +123,13 @@
   - measure: busy_duration_seconds
     label: 'Busy Minutes'
     type: sum
-    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then 0 else time_to_sec(timediff(${TABLE}.end,${TABLE}.start) End
+    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then 0 else time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) End
 
   - measure: appointment_section_duration_in_seconds
     label: 'App Section Duration in Seconds'
     type: sum
-    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then time_to_sec(timediff(${TABLE}.end,${TABLE}.start) else 0 End
+    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) else 0 End 
+
 
   - measure: count
     type: count
