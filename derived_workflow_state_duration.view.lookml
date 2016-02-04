@@ -21,6 +21,10 @@
   - measure: state_duration_in_seconds
     type: sum
     drill_fields: detail*
+    
+  - measure: avg_state_duration_in_seconds
+    type: avg
+    drill_fields: detail*  
 
   - measure: state_duration_in_minutes
     type: sum
