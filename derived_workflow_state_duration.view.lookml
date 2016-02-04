@@ -39,6 +39,11 @@
     primary_key: true
     sql: ${TABLE}.from_event_id
 
+  - dimension: next_state_date 
+    type: time 
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.next_state_date    
+
   - dimension: from_workstate
     sql: ${TABLE}.from_workstate
     
