@@ -453,7 +453,6 @@
       required_joins: [appointment]
       fields: [appointment_section_id, status]
   
-      
     - join: appointment_section_study
       view_label: 'Appointment'
       type: left_outer
