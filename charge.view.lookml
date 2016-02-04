@@ -141,6 +141,7 @@
     type: sum_distinct
     sql: ${price} 
     sql_distinct_key: ${charge_id} 
+    drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
     value_format: '#,##0.00'
 
     
