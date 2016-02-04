@@ -66,7 +66,27 @@
   - dimension: full_name
     type: string
     sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})
+    
+  - dimension: full_patient_name
+    type: string
+    sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})
+    
+  - dimension: full_practitioner_name
+    type: string
+    sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})
+    
+  - dimension: full_user_name
+    type: string
+    sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})
+    
+  - dimension: full_creator_name
+    type: string
+    sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})  
 
+  - dimension: full_referrer_name
+    type: string
+    sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})
+    
   - dimension: forename
     sql: ${TABLE}.forename
 

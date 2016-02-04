@@ -6,6 +6,80 @@
 - explore: outcomes
   label: Outcomes
   
+  
+- explore: workflow_activity_referral
+  from: treatment_cycle_referral
+  label: 'Workflow Tracking Referral'
+  joins:
+    - join: patient
+      from: individual
+      view_label: 'Patient'
+      type: inner
+      relationship: many_to_one
+      sql_on: ${workflow_activity_referral.patient_id} = ${patient.individual_id} 
+      fields: [full_patient_name]
+
+  #  - join: appointment
+  #    view_label: 'Appointment'
+  #    type: left_outer
+  #    relationship: many_to_one
+  #    sql_on: ${event.entity_id} = ${appointment.appointment_id} and ${event.entity_type_id} = '1' #get appointment related data only
+  #    fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
+    
+  #  - join: appointment_type
+  #    view_label: 'Appointment'
+  #    type: left_outer
+  #    relationship: many_to_one
+  #    sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
+  #    fields: [appointment_type_name] 
+  #    required_joins: [appointment]
+  
+    - join: from_event
+      from: event
+      view_label: 'Workflow State From'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_activity_referral.treatment_cycle_referral_id} = ${from_event.treatment_cycle_referral_id} 
+      #fields: [full_name, dob]
+      
+    - join: to_event
+      from: event
+      view_label: 'Workflow State To'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_activity_referral.treatment_cycle_referral_id} = ${to_event.treatment_cycle_referral_id}   
+
+      #added by savanp
+    - join: speciality
+      view_label: 'Referral details'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${speciality.speciality_id} = ${workflow_activity_referral.to_speciality_id} 
+      fields: [speciality_name]
+      
+    - join: workflow_state_from
+      from: workflow_state
+      view_label: 'Workflow State From'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${from_event.from_id} = ${workflow_state_from.workflow_state_id}
+      fields: [name, short_name, order]
+      
+    - join: workflow_state_to
+      from: workflow_state
+      view_label: 'Workflow State To'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${to_event.to_id} = ${workflow_state_to.workflow_state_id}  
+      fields: [name, short_name, order]
+
+      #added by savanp to optimise query performance
+   # - join: derived_workflow_state_duration 
+  #    view_label: 'Workflow Activity' 
+  #    type: inner 
+  #    relationship: many_to_one
+  #    sql_on: ${workflow_activity_referral.event_id} = ${derived_workflow_state_duration.from_event_id}
+  #    fields: [from_workstate, next_workstate, state_duration_in_seconds, state_duration_in_minutes, state_duration_in_hours]  
  
 - explore: workflow_activity
   from: event
@@ -122,7 +196,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.patient_id} = ${individual.individual_id}
-      fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
+      fields: [full_patient_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
 
     - join: patient
       view_label: 'Patient'
@@ -158,7 +232,7 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${tc_opened_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
-      fields: [full_name, telephone_mobile, telephone_day, telephone_evening, email]
+      fields: [full_practitioner_name, telephone_mobile, telephone_day, telephone_evening, email]
 
     - join: tc_closed_by_practitioner 
       from: individual 
@@ -166,7 +240,7 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${tc_closed_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
-      fields: [full_name, telephone_mobile, telephone_day, telephone_evening, email]
+      fields: [full_practitioner_name, telephone_mobile, telephone_day, telephone_evening, email]
 
     - join: appointment
       view_label: 'Appointment'
@@ -567,14 +641,14 @@
       relationship: many_to_one
       required_joins: [treatment_cycle_referral]
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}
-      fields: [full_name]    #savanp, removed dob as practitioner data at this level is not relevant for analytics
+      fields: [full_practitioner_name]    #savanp, removed dob as practitioner data at this level is not relevant for analytics
 
     - join: individual
       type: left_outer
       view_label: 'Patient'
       relationship: many_to_one
       sql_on: ${patient_id} = ${individual.individual_id}
-      fields: [full_name, dob_date]   
+      fields: [full_patient_name, dob_date]   
       
     - join: form_question_version 
       view_label: 'Form Data'
@@ -586,10 +660,10 @@
     - join: user
       from: individual
       type: left_outer
-      view_label: 'Entering user details'
+      view_label: 'Form Data'
       relationship: many_to_one
       sql_on: ${created_by_id} = ${user.individual_id}
-      fields: [full_name]    
+      fields: [full_user_name]    
       
   
 - explore: appointment
@@ -607,6 +681,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.patient_id} = ${individual.individual_id}
+      fields: [full_patient_name]
       
     - join: appointment_type
       view_label: 'Appointment'
@@ -662,7 +737,7 @@
       type: inner
       relationship: one_to_one
       sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
-      fields: [full_name, dob_date]
+      fields: [full_practitioner_name, dob_date]
       
     - join: location
       view_label: 'Appointment Location'
@@ -746,7 +821,7 @@
     type: left_outer
     relationship: many_to_one
     sql_on: ${appointment_section.created_by_id} = ${creator.individual_id} 
-    fields: [full_name]
+    fields: [full_user_name]
       
   - join: appointment
     view_label: 'Appointments'
@@ -903,7 +978,7 @@
       type: inner
       relationship: many_to_one
       sql_on: ${invoices.patient_id} = ${patient.individual_id}
-      fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
+      fields: [full_patient_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
       
     - join: invoice_item
       view_label: 'Invoice Items'
@@ -1071,7 +1146,7 @@
       type: inner
       relationship: many_to_one
       sql_on: ${payments.patient_id} = ${patient.individual_id}
-      fields: [full_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
+      fields: [full_patient_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
       
     - join: appointment
       view_label: 'Appointment paid in advance'
@@ -1092,7 +1167,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${payment_allocation.allocated_by} = ${payment_allocator.individual_id}
-      fields: [full_name]
+      fields: [full_user_name]
     
       #small mistake with reserving the relationship value.  reverted back by savanp from one_to_many to many_to_one
     - join: invoice

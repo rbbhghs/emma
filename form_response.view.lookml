@@ -13,6 +13,7 @@
 
   - dimension: created_by_id
     type: int
+    hidden: true
     sql: ${TABLE}.created_by_id
 
   - dimension_group: created
@@ -27,6 +28,7 @@
 
   - dimension: deleted_by_id
     type: int
+    hidden: true
     sql: ${TABLE}.deleted_by_id
 
   - dimension: emr_page_id

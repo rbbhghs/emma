@@ -40,7 +40,7 @@
       relationship: one_to_many
       sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
       required_joins: [appointment]
-      fields: [full_name] 
+      fields: [full_practitioner_name] 
       
     - join: company
       type: left_outer
@@ -128,7 +128,7 @@
       relationship: one_to_many
       sql_on: ${treatment_cycle.owner_id} = ${owner.individual_id}
       required_joins: [treatment_cycle]
-      fields: [full_name]   
+      fields: [full_practitioner_name]   
       
     - join: simple_diagnosis_type
       type: left_outer
