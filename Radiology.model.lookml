@@ -288,6 +288,15 @@
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, country]
       
+    - join: location_coords  
+      from: postcodelatlng
+      view_label: 'Appointment Location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: location_address.postcode=location_coords.postcode
+      required_joins: [location_address]
+      fields: [postcode, coordinate]    
+      
     - join: referrer
       type: left_outer
       relationship: many_to_one
@@ -362,10 +371,28 @@
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
       
+    - join: location_coords  
+      from: postcodelatlng
+      view_label: 'Appointment Location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: location_address.postcode=location_coords.postcode
+      required_joins: [location_address]
+      fields: [postcode, coordinate]      
+      
     - join: referrer
       type: left_outer
       relationship: many_to_one
-      sql_on: ${radiology_referrals.from_practitioner_id} = ${referrer.individual_id}  
+      sql_on: ${radiology_referrals.from_practitioner_id} = ${referrer.individual_id} 
+      
+    - join: location_referrer 
+      from: postcodelatlng
+      view_label: 'Referrer'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${referrer.postcode} = ${location_referrer.postcode}
+      required_joins: [referrer]
+      fields: [coordinate]    
       
     - join: appointment_section
       view_label: 'Appointment'
@@ -517,6 +544,15 @@
       sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
+
+    - join: location_coords  
+      from: postcodelatlng
+      view_label: 'Location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${location_address.postcode} = ${location_coords.postcode}
+      required_joins: [location_address]
+      fields: [coordinate]  
       
     - join: appointment
       view_label: 'Appointment'
@@ -922,6 +958,15 @@
     sql_on: ${location.address_id} = ${location_address.address_id}
     required_joins: [location]
     fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
+    
+  - join: location_coords  
+    from: postcodelatlng
+    view_label: 'Appointments'
+    type: left_outer
+    relationship: one_to_one
+    sql_on: ${location_address.postcode} = ${location_coords.postcode}
+    required_joins: [location_address]
+    fields: [postcode, coordinate]    
       
   - join: contract
     type: left_outer
@@ -1121,6 +1166,15 @@
       sql_on: ${location.address_id}= ${location_address.address_id}
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]
+      
+    - join: location_coords  
+      from: postcodelatlng
+      view_label: 'Invoice Location'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${location_address.postcode} = ${location_coords.postcode}
+      required_joins: [location_address]
+      fields: [coordinate]    
       
     - join: appointment
       view_label: 'Appointment Information'
