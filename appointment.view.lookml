@@ -396,22 +396,22 @@
     sql: ${location_id}
     
   - measure: appt_duration
-    label: 'Appointment Duration in Mins'
+    label: 'Appointment Duration in Seconds'
     type: sum
-    sql: round(TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.end)/60.00,2)
+    sql: TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.end)
     value_format: '#,##0.00'        
     
   - measure: actual_appt_duration
-    label: 'Actual Appointment Duration in Mins'
+    label: 'Actual Appointment Duration in Seconds'
     type: sum
     #sql: TIMESTAMPDIFF(SECOND,ifnull((${TABLE}.view),(${TABLE}.start)),ifnull((${TABLE}.leave),(${TABLE}.end)))/60.00
-    sql: round(TIMESTAMPDIFF(SECOND,${TABLE}.view,${TABLE}.leave)/60.00,2)    
+    sql: TIMESTAMPDIFF(SECOND,${TABLE}.view,${TABLE}.leave)    
     value_format: '#,##0.00'    
     
   - measure: time_to_view
-    label: 'Time to be Seen in Mins'
+    label: 'Time to be Seen in Seconds'
     type: sum
-    sql: round(TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.view)/60.00,2)    
+    sql: TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.view)    
     value_format: '#,##0.00'
     
   - measure: number_of_patients
