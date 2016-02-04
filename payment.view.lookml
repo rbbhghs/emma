@@ -134,6 +134,7 @@
     label: 'Total Paid'
     type: sum
     sql: ${TABLE}.amount*-1  
+    drill_fields: [invoice_id, product.name, invoice_item.appointment_id]     
     
   - measure: sum_outstanding
     label: 'Total Outstanding'

@@ -109,6 +109,7 @@
     sql: ${TABLE}.start
 
   - dimension: status
+    alias: [app_section_status]  
     sql: ${TABLE}.status
 
   - dimension: ubrn
@@ -118,6 +119,11 @@
     label: 'Busy Hours'
     type: sum
     sql: round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00,2)
+
+  - measure: busy_hours_minutes
+    label: 'Busy Minutes'
+    type: sum
+    sql: round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/60.00,2)
 
   - measure: count
     type: count

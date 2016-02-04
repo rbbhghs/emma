@@ -489,7 +489,8 @@
     label: '# of Patients'
     type: count_distinct
     sql: ${individual_id}  
-    sql_distinct_key: ${individual_id}    
+    sql_distinct_key: ${individual_id}  
+    drill_fields: [individual_id, individual.full_name, individual.dob, individual.age]    
 
 
   # ----- Sets of fields for drilling ------
