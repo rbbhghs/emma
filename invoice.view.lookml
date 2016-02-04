@@ -150,7 +150,7 @@
   - dimension: total_price
     type: number
     label: 'Invoice amount'
-    sql: ${TABLE}.total_price
+    sql: ${TABLE}.total_price 
 
   - dimension: total_price_net
     type: number
@@ -182,6 +182,7 @@
     type: sum_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${outstanding}   
+    value_format: '#,##0.00'    
     
   - measure: total_billed
     label: 'Sum Billed (incl VAT)'
@@ -194,37 +195,42 @@
     type: sum_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${total_vat} 
+    value_format: '#,##0.00'
     
   - measure: avg_total_vat
     label: 'Avg VAT'
     type: avg_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${total_vat}   
+    value_format: '#,##0.00'  
     
   - measure: total_billed_net
     label: 'Sum Billed (excl VAT)'
     type: sum_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${total_price_net}  
+    value_format: '#,##0.00'
     
   - measure: avg_outstanding
     label: 'Avg Outstanding'
     type: avg_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${outstanding}   
+    value_format: '#,##0.00'
     
   - measure: avg_billed_net
     label: 'Avg Billed (incl VAT)'
     type: avg_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${total_price}  
+    value_format: '#,##0.00'
     
   - measure: avg_billed
     label: 'Avg Billed (excl VAT)'
     type: avg_distinct
     sql_distinct_key: ${invoice_id}
     sql: ${total_price_net} 
-    
+    value_format: '#,##0.00'    
 
 
   # ----- Sets of fields for drilling ------

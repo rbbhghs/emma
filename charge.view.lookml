@@ -136,7 +136,6 @@
     sql: ${patient_id}  
     sql_distinct_key: ${patient_id}  
 
-    
   - measure: sum_charged
     label: 'Sum of Charges'
     type: sum_distinct
