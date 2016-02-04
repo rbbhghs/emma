@@ -306,7 +306,8 @@
       view_label: 'Procedure'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
+      sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id} 
+      fields: [accession_number, pacs_order_status]      
 
     - join: dicom_procedure
       view_label: 'Procedure'
@@ -451,7 +452,7 @@
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
       required_joins: [appointment]
-      fields: [appointment_section_id, status]
+#      fields: [appointment_section_id, app_section_status]
   
     - join: appointment_section_study
       view_label: 'Appointment'
@@ -474,6 +475,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
+      fields: [accession_number, pacs_order_status]
 
     - join: dicom_procedure
       view_label: 'Procedure'
