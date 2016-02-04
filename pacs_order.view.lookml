@@ -27,3 +27,13 @@
   - measure: accession_number_list 
     type: list 
     list_field: ${TABLE}.accession_number
+
+  - measure: pacs_order_status_list 
+    type: list 
+    list_field: ${TABLE}.pacs_order_status
+
+  - measure: accession_number_pacs_order_status_list 
+    type: string 
+    sql: group_concat(distinct ${TABLE}.accession_number,${TABLE}.pacs_order_status)    
+    
+    
