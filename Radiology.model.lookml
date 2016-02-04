@@ -157,7 +157,7 @@
 
     - join: contract
       type: left_outer
-      view_label: 'Billing details'
+      view_label: 'Patient'
       relationship: one_to_many
       sql_on: ${contract.contract_id} = ${patient_contract.contract_id}
       required_joins: [patient]
