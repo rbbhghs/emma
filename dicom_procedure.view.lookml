@@ -70,7 +70,7 @@
     
   - measure: procedure_description_consolidated
     type: string
-    sql: GROUP_CONCAT(${procedure_description})
+    sql: GROUP_CONCAT(${distinct procedure_description})
   
 
 
