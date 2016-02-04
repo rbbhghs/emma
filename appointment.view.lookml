@@ -404,12 +404,14 @@
     label: 'Actual Appointment Duration in Mins'
     type: sum
     #sql: TIMESTAMPDIFF(SECOND,ifnull((${TABLE}.view),(${TABLE}.start)),ifnull((${TABLE}.leave),(${TABLE}.end)))/60.00
-    sql: TIMESTAMPDIFF(SECOND,${TABLE}.view,${TABLE}.leave)/60.00    
+    sql: round(TIMESTAMPDIFF(SECOND,${TABLE}.view,${TABLE}.leave)/60.00,2)    
+    value_format: '#,##0.00'    
     
   - measure: time_to_view
     label: 'Time to be Seen in Mins'
     type: sum
-    sql: TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.view)/60.00    
+    sql: round(TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.view)/60.00,2)    
+    value_format: '#,##0.00'
     
   - measure: number_of_patients
     label: '# of Patients'
