@@ -145,7 +145,7 @@
       type: inner 
       relationship: many_to_one
       sql_on: ${workflow_activity.event_id} = ${derived_workflow_state_duration.from_event_id}
-      fields: [from_workstate, next_workstate, next_state_date_time, state_duration_in_seconds, state_duration_in_minutes, state_duration_in_hours]
+      fields: [from_workstate, next_workstate, next_state_date_time, state_duration_in_seconds]
 
     - join: patient_contract 
       from: patient
@@ -423,7 +423,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id} 
-      fields: [accession_number, pacs_order_status, accession_number_list]      
+      fields: [accession_number, pacs_order_status, accession_number_list, pacs_order_status_desc]      
 
     - join: dicom_procedure
       view_label: 'Procedure'
@@ -600,7 +600,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
-      fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list]
+      fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list, pacs_order_status_desc]
 
     - join: dicom_procedure
       view_label: 'Procedure'
@@ -1006,7 +1006,7 @@
     type: left_outer
     relationship: many_to_one
     sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
-    fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list]
+    fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list, pacs_order_status_desc]
 
   - join: dicom_procedure
     view_label: 'Procedure'
