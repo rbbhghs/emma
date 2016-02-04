@@ -172,7 +172,7 @@
       type: inner
       relationship: many_to_one
       sql_on: ${click_tracking.individual_id} = ${individual.individual_id} 
-      fields: [full_name]
+      fields: [full_user_name]
       
     - join: individual_type
       type: inner
@@ -198,117 +198,6 @@
       sql_on: ${event.entity_id} = ${appointment.appointment_id} and ${event.entity_type_id} = '1' #get appointment related data only
       fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
 
-- explore: treatment_cycle_referral
-  label: Referrals
-  joins:
-    - join: payor
-      type: inner
-      relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.charge_to_id} = ${payor.individual_id}
-      
-    - join: individual
-      view_label: 'Patient'
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.patient_id} = ${individual.individual_id}
-      fields: [full_patient_name, dob_date, telephone_mobile, telephone_day, telephone_evening, email]
-
-    - join: patient
-      view_label: 'Patient'
-      type: left_outer
-      required_joins: [individual]
-      relationship: one_to_one
-      sql_on: ${patient.individual_id} = ${individual.individual_id} 
-
-    - join: treatment_cycle_referral_type 
-      view_label: 'Treatment Cycle Referral'
-      type: inner
-      relationship: one_to_one
-      sql_on: ${treatment_cycle_referral_type.treatment_cycle_referral_type_id} = ${treatment_cycle_referral.treatment_cycle_referral_type_id} 
-      fields: [treatment_cycle_referral_type_name]
-
-    - join: treatment_cycle
-      view_label: 'Treatment Cycle Referral'
-      type: left_outer
-      relationship: one_to_one
-      sql_on: ${treatment_cycle_referral.to_treatment_cycle_id} = ${treatment_cycle.treatment_cycle_id} 
-      fields: [treatment_cycle_name,opened_date, closed_date, treatment_cycle_status]
-    
-    - join: treatment_cycle_close_type 
-      view_label: 'Treatment Cycle Referral'
-      type: left_outer 
-      relationship: one_to_one
-      sql_on: ${treatment_cycle_close_type.treatment_cycle_close_type_id} = ${treatment_cycle.treatment_cycle_close_type_id}
-      fields: [treatment_cycle_close_type_name]
-      
-    - join: tc_opened_by_practitioner 
-      from: individual 
-      view_label: 'Treatment Cycle Opened by'
-      type: left_outer
-      relationship: one_to_one
-      sql_on: ${tc_opened_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
-      fields: [full_practitioner_name, telephone_mobile, telephone_day, telephone_evening, email]
-
-    - join: tc_closed_by_practitioner 
-      from: individual 
-      view_label: 'Treatment Cycle Closed by'
-      type: left_outer
-      relationship: one_to_one
-      sql_on: ${tc_closed_by_practitioner.individual_id} = ${treatment_cycle.opened_by_id} 
-      fields: [full_practitioner_name, telephone_mobile, telephone_day, telephone_evening, email]
-
-    - join: appointment
-      view_label: 'Appointment'
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
-      fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
-  
-    - join: appointment_type
-      view_label: 'Appointment'
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
-      fields: [appointment_type_name] 
-      required_joins: [appointment]
-      
-    - join: location
-      view_label: 'Appointment Location'
-      type: left_outer
-      relationship: one_to_one
-      sql_on: ${appointment.location_id} = ${location.location_id}
-      fields: [location_name]
-
-    - join: location_address
-      from: address
-      view_label: 'Appointment Location'
-      type: left_outer
-      relationship: one_to_one
-      sql_on: ${location.address_id} = ${location_address.address_id}
-      required_joins: [location]
-      fields: [address_1, address_2, address_3, address_4, address_5, town, country]
-      
-    - join: location_coords  
-      from: postcodelatlng
-      view_label: 'Appointment Location'
-      type: left_outer
-      relationship: one_to_one
-      sql_on: location_address.postcode=location_coords.postcode
-      required_joins: [location_address]
-      fields: [postcode, coordinate]    
-      
-    - join: referrer
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
-
-      #added by savanp
-    - join: speciality
-      view_label: 'Treatment Cycle Referral'
-      type: left_outer
-      relationship: many_to_one
-      sql_on: ${speciality.speciality_id} = ${treatment_cycle_referral.to_speciality_id} 
-      fields: [speciality_name]           
            
 - explore: radiology_referrals
   from: treatment_cycle_referral
