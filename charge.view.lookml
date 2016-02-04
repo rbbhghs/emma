@@ -12,7 +12,7 @@
 
   - dimension: amount
     type: number
-    hidden: true
+    #hidden: true
     sql: ${TABLE}.amount
 
   - dimension: appointment_id
@@ -144,6 +144,14 @@
     sql_distinct_key: ${charge_id} 
     drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
     value_format: '#,##0.00'
+    
+  - measure: avg_charged
+    label: 'Avg Charged Amount'
+    type: avg_distinct
+    sql: ${price} 
+    sql_distinct_key: ${charge_id} 
+    drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
+    value_format: '#,##0.00'  
 
     
 
