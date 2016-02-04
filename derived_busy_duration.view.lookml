@@ -2,6 +2,8 @@
   derived_table:
     sql: |
       select diary_id,sum(TIMESTAMPDIFF(second,start,end)) total_busy_seconds from appointment_section where ifnull(busy_type_id,0) > 0 and status = 'A' group by diary_id;
+    sql_trigger_value: SELECT CURDATE()
+    indexes: [diary_id]      
 
   fields:
   - measure: total_busy_seconds
@@ -17,5 +19,5 @@
     
   sets:
     detail:
-      - first_appointment_id
-      - new_appointments
+      - diary_id
+
