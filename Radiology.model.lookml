@@ -407,7 +407,7 @@
       relationship: many_to_one
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
-      fields: []
+      fields: [study_uid_desc]
 
     - join: appointment_section_study_clinical_report
       view_label: 'Appointment'
@@ -585,7 +585,7 @@
       relationship: many_to_one
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
-      fields: []
+      fields: [study_uid_desc]
 
     - join: appointment_section_study_clinical_report
       view_label: 'Appointment'
@@ -991,7 +991,7 @@
     relationship: many_to_one
     sql_on: ${appointment_section_o.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
     required_joins: [appointment_section_o,appointment]
-    fields: []
+    fields: [study_uid_desc]
 
   - join: appointment_section_study_clinical_report
     view_label: 'Appointments'
