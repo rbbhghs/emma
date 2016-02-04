@@ -63,11 +63,14 @@
   - measure: procedure_description_list
     type: list
     list_field: procedure_description
-    
+
   - measure: procedure_code_list
     type: list
     list_field: procedure_code  
     
+  - measure: procedure_description_consolidated
+    type: string
+    sql: GROUP_CONCAT(${procedure_description})
   
 
 
