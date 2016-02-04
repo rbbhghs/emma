@@ -44,8 +44,15 @@
   - dimension: modified_by_function
     sql: ${TABLE}.modified_by_function
 
-  - dimension: status
+  - dimension: event_status
     sql: ${TABLE}.status
+
+  - dimension: event_type_category
+    sql: CASE WHEN ${TABLE}.event_type_id in (7,8,9,10,11,25,30,92,93,111,112,132,133,134,201,213,239,240,241,242,243,244,245,246) then 'Appointments' 
+              WHEN ${TABLE}.event_type_id in (223,224) then 'Workflow' 
+              WHEN ${TABLE}.event_type_id in (1,2,3,6,26,82,91,94,106,141,142,170,175,180,196,197,198,199,200,201,206,218,222) then 'Patient Admin'
+              WHEN ${TABLE}.event_type_id in (1,60,88,91,115,121,207,210) then 'Entity Creation' 
+              else 'Other' End 
 
   - measure: count
     type: count
