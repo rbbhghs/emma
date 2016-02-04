@@ -109,7 +109,7 @@
     sql: ${TABLE}.start
 
   - dimension: status
-    alias: [status, app_section_status]  
+    alias: [app_section_status]  
     sql: ${TABLE}.status
 
   - dimension: ubrn
