@@ -34,6 +34,6 @@
 
   - measure: accession_number_pacs_order_status_list 
     type: string 
-    sql: group_concat(distinct ${TABLE}.accession_number,${TABLE}.pacs_order_status)    
+    sql: group_concat(distinct ${TABLE}.accession_number,' (',${TABLE}.pacs_order_status,') ')    
     
     
