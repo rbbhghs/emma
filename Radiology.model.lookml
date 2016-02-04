@@ -307,7 +307,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id} 
-      fields: [accession_number, pacs_order_status]      
+      fields: [accession_number, pacs_order_status, accession_number_list]      
 
     - join: dicom_procedure
       view_label: 'Procedure'

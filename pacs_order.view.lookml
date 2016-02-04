@@ -24,3 +24,6 @@
     type: count
     drill_fields: [id, appointment_section_study.count, study_identifier.count, treatment_cycle_referral_procedure.count]
 
+  - measure: accession_number_list 
+    type: list 
+    list_field: ${TABLE}.accession_number
