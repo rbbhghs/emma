@@ -9,7 +9,7 @@
 
   - dimension: amount
     type: number
-    sql: ${TABLE}.amount
+    sql: ${TABLE}.amount*-1
 
   - dimension: appointment_id
     type: int
@@ -129,10 +129,11 @@
     type: count
     drill_fields: detail*
     
+    #savanp, make positive to reflect revenues in reports
   - measure: sum_paid
     label: 'Total Paid'
     type: sum
-    sql: ${TABLE}.amount  
+    sql: ${TABLE}.amount*-1  
     
   - measure: sum_outstanding
     label: 'Total Outstanding'
