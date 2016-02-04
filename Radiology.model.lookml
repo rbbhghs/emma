@@ -301,6 +301,7 @@
 #      required_joins: [appointment_section,appointment]
       fields: [appointment_section_study_clinical_report_id, appointment_section_study_id, clinical_report_id]
 
+      #added by savanp
     - join: pacs_order
       view_label: 'Procedure'
       type: left_outer
@@ -441,6 +442,45 @@
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name] 
       required_joins: [appointment]
+
+#added by savanp, to link charges to procedures 
+
+    - join: appointment_section
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
+      required_joins: [appointment]
+      
+    - join: appointment_section_study
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
+      required_joins: [appointment_section,appointment]
+      fields: []
+
+    - join: appointment_section_study_clinical_report
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment_section_study_clinical_report.appointment_section_study_id} = ${appointment_section_study.appointment_section_study_id} 
+#      required_joins: [appointment_section,appointment]
+      fields: [appointment_section_study_clinical_report_id, appointment_section_study_id, clinical_report_id]
+
+    - join: pacs_order
+      view_label: 'Procedure'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
+
+    - join: dicom_procedure
+      view_label: 'Procedure'
+      type: left_outer
+      relationship: many_to_one
+      required_joins: [appointment_section_study,appointment_section,appointment]
+      sql_on: ${appointment_section_study.dicom_procedure_id} = ${dicom_procedure.dicom_procedure_id}    
+      fields: [procedure_description, procedure_description_list, procedure_code_list, procedure_code, count, dicom_procedure_id]
 
 - explore: referral_log
   from: treatment_cycle_referral
