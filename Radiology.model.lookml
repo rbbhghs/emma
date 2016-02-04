@@ -451,6 +451,8 @@
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
       required_joins: [appointment]
+      fields: [appointment_section_id, status]
+  
       
     - join: appointment_section_study
       view_label: 'Appointment'
