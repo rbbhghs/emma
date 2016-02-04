@@ -46,6 +46,21 @@
     type: list 
     list_field: ${TABLE}.pacs_order_status
 
+  - measure: pacs_order_status_list_desc 
+    type: list 
+    list_field: CASE WHEN ${TABLE}.pacs_order_status = 'SC' THEN 'Scheduled'
+               WHEN ${TABLE}.pacs_order_status = 'IP' THEN 'Patient Arrived'
+               WHEN ${TABLE}.pacs_order_status = 'OC' THEN 'Validated'
+               WHEN ${TABLE}.pacs_order_status = 'PC' THEN 'Pending Completion'
+               WHEN ${TABLE}.pacs_order_status = 'CM' THEN 'Ready for dictation'
+               WHEN ${TABLE}.pacs_order_status = 'ZA' THEN 'Dictated'
+               WHEN ${TABLE}.pacs_order_status = 'ZD' THEN 'Transcribed'
+               WHEN ${TABLE}.pacs_order_status = 'ZE' THEN 'Report Pending'
+               WHEN ${TABLE}.pacs_order_status = 'ZZ' THEN 'Report Available'
+               WHEN ${TABLE}.pacs_order_status = 'CA' THEN 'Cancelled'
+               WHEN ${TABLE}.pacs_order_status = 'ZY' THEN 'Preliminary Report' 
+          else 'No Description' End
+
   - measure: accession_number_pacs_order_status_list 
     type: string 
     sql: group_concat(distinct ${TABLE}.accession_number,' (',${TABLE}.pacs_order_status,') ')    
