@@ -46,10 +46,10 @@
   - dimension: status
     sql: ${TABLE}.status
     
-  - measure: diary_duration_hours
-    label: 'Diary Open Duration in Hours'
+  - measure: diary_duration_seconds
+    label: 'Diary Open Duration in Seconds'
     type: sum
-    sql: round((${TABLE}.end_time-${TABLE}.start_time)/3600.00,2)  
+    sql: (${TABLE}.end_time-${TABLE}.start_time) 
 
   - measure: count
     type: count
