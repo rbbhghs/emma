@@ -137,22 +137,37 @@
     sql_distinct_key: ${patient_id}  
     drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name]    
 
-  - measure: sum_charged
-    label: 'Sum of Charges'
+  - measure: sum_charged_distinct
+    label: 'Sum of Distinct Charges'
     type: sum_distinct
     sql: ${price} 
     sql_distinct_key: ${charge_id} 
     drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
     value_format: '#,##0.00'
     
-  - measure: avg_charged
-    label: 'Avg Charged Amount'
+  - measure: sum_charged
+    label: 'Sum of Charges'
+    type: sum
+    sql: ${price} 
+    #sql_distinct_key: ${charge_id} 
+    drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
+    value_format: '#,##0.00'  
+    
+  - measure: avg_charged_distinct
+    label: 'Avg Charged Distinct Amount'
     type: avg_distinct
     sql: ${price} 
     sql_distinct_key: ${charge_id} 
     drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
     value_format: '#,##0.00'  
 
+  - measure: avg_charged
+    label: 'Avg Charged Amount'
+    type: avg
+    sql: ${price} 
+    sql_distinct_key: ${charge_id} 
+    drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name, patient.full_name]    
+    value_format: '#,##0.00'  
     
 
 
