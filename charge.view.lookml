@@ -115,8 +115,7 @@
     label: '# of Charges'
     type: count_distinct
     sql: ${charge_id}
-    sql_distinct_key: ${charge_id}
-
+    sql_distinct_key: ${charge_id} 
     
   - measure: number_of_appts
     label: '# of Appts'
@@ -128,6 +127,7 @@
     type: count_distinct
     sql: ${invoice_id}  
     sql_distinct_key: ${invoice_id} 
+    value_format: '#,##0.00'
     drill_fields: [invoice_id, charge_id, price, product.name, appointment_type.appointment_type_name]
     
   - measure: number_of_patients
@@ -141,7 +141,8 @@
     label: 'Sum of Charges'
     type: sum_distinct
     sql: ${price} 
-    sql_distinct_key: ${charge_id}
+    sql_distinct_key: ${charge_id} 
+    value_format: '#,##0.00'
 
     
 
