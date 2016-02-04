@@ -315,7 +315,7 @@
       relationship: many_to_one
       required_joins: [appointment_section_study,appointment_section,appointment]
       sql_on: ${appointment_section_study.dicom_procedure_id} = ${dicom_procedure.dicom_procedure_id}    
-      fields: [procedure_description, procedure_description_list, procedure_code_list, procedure_code, count, dicom_procedure_id]
+      fields: [procedure_description, procedure_description_list, procedure_code_list, procedure_code, count, dicom_procedure_id, procedure_description_consolidated]
            
     - join: dashboard_event
       view_label: 'Activity'
