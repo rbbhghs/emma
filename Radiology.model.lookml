@@ -1043,8 +1043,7 @@
     type: left_outer
     relationship: many_to_one
     sql_on: ${diary.diary_id} = ${appointment_section.diary_id} 
-    fields: [start_time, end_time, reservation]
-    #fields: [start, end, reservation]
+    fields: [start_time, end_time, reservation, appointment_section_duration_in_seconds, busy_duration_seconds]
 
   - join: derived_busy_duration
     view_label: 'Diary'
