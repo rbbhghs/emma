@@ -185,7 +185,7 @@
   label: 'Event Tracking'
   joins:
     - join: event_type
-      view_label: 'Event Tracking'
+      view_label: 'event'
       type: inner
       relationship: many_to_one
       sql_on: ${event_type.event_type_id} = ${event.event_type_id} 
