@@ -127,7 +127,8 @@
     label: '# of Invoices'
     type: count_distinct
     sql: ${invoice_id}  
-    sql_distinct_key: ${invoice_id}
+    sql_distinct_key: ${invoice_id} 
+    drill_fields: [invoice_id, charge_id, price, product.name]
     
   - measure: number_of_patients
     label: '# of Patients'
