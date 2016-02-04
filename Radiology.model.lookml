@@ -146,7 +146,22 @@
       relationship: many_to_one
       sql_on: ${workflow_activity.event_id} = ${derived_workflow_state_duration.from_event_id}
       fields: [from_workstate, next_workstate, next_state_date_time, state_duration_in_seconds, state_duration_in_minutes, state_duration_in_hours]
-      
+
+    - join: patient_contract 
+      from: patient
+      type: inner
+      view_label: 'Patient'
+      relationship: one_to_many
+      sql_on: ${patient_contract.individual_id} = ${patient.individual_id}
+      required_joins: [patient]
+
+    - join: contract
+      type: left_outer
+      view_label: 'Billing details'
+      relationship: one_to_many
+      sql_on: ${contract.contract_id} = ${patient_contract.contract_id}
+      required_joins: [patient]
+      fields: [contract_name]       
   
 - explore: click_tracking
   label: System usage
