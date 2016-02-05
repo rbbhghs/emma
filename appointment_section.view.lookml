@@ -121,7 +121,7 @@
     sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then 0 else round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00,2) End
 
   - measure: busy_duration_seconds
-    label: 'Busy Minutes'
+    label: 'Busy Seconds'
     type: sum
     sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then 0 else time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) End
 
