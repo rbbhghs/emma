@@ -4,6 +4,7 @@
   - dimension: id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.id
 
   - dimension: content_sha224
@@ -14,6 +15,7 @@
 
   - dimension: study_id
     type: int
+    hidden: true
     # hidden: true
     sql: ${TABLE}.study_id
 

@@ -4,6 +4,7 @@
   - dimension: id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.id
 
   - dimension_group: end
@@ -21,6 +22,7 @@
 
   - dimension: router_job_id
     type: int
+    hidden: true
     # hidden: true
     sql: ${TABLE}.router_job_id
 
@@ -34,8 +36,10 @@
 
   - dimension: study_series_id
     type: int
+    hidden: true
     # hidden: true
     sql: ${TABLE}.study_series_id
+    
 
   - measure: count
     type: count

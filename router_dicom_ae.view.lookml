@@ -1,4 +1,4 @@
-- view: router_dicom_ae
+- view: dicom_ae
 
   fields:
   - measure: count
@@ -7,6 +7,7 @@
 
   - dimension: id
     type: int
+    hidden: true
     sql: ${TABLE}.id
 
   - dimension: title

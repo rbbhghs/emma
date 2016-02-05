@@ -1,9 +1,10 @@
-- view: router_study
+- view: study
   fields:
 
   - dimension: id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.id
 
   - dimension: patient_accession
@@ -18,8 +19,8 @@
   - dimension: study_instance_uid
     sql: ${TABLE}.study_instance_uid
 
-  - dimension: study_size_kb
-    type: int
+  - measure: study_size_kb
+    type: sum
     sql: ${TABLE}.study_size_kb
 
   - measure: count

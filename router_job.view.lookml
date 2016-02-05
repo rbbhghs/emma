@@ -4,6 +4,7 @@
   - dimension: id
     primary_key: true
     type: int
+    hidden: true
     sql: ${TABLE}.id
 
   - dimension_group: datetime
@@ -16,6 +17,7 @@
 
   - dimension: destination_ae_id
     type: int
+    hidden: true
     sql: ${TABLE}.destination_ae_id
 
   - dimension: destination_mrn
@@ -55,6 +57,7 @@
 
   - dimension: source_ae_id
     type: int
+    hidden: true
     sql: ${TABLE}.source_ae_id
 
   - dimension: status
@@ -62,6 +65,7 @@
 
   - dimension: study_id
     type: int
+    hidden: true
     # hidden: true
     sql: ${TABLE}.study_id
 
