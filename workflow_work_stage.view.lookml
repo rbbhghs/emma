@@ -14,14 +14,21 @@
   - dimension: last_modified_by
     sql: ${TABLE}.last_modified_by
 
-  - dimension: name
+  - dimension: stage_name
     sql: ${TABLE}.name
 
   - dimension: order
     type: int
     sql: ${TABLE}.`order`
+    
+  - dimension: stage_order
+    type: int
+    sql: ${TABLE}.`order`    
 
   - dimension: short_name
+    sql: ${TABLE}.short_name
+
+  - dimension: stage_short_name
     sql: ${TABLE}.short_name
 
   - dimension: status

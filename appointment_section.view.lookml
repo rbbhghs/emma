@@ -118,12 +118,18 @@
   - measure: busy_hours
     label: 'Busy Hours'
     type: sum
-    sql: round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00,2)
+    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then 0 else round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/3600.00,2) End
 
-  - measure: busy_hours_minutes
-    label: 'Busy Minutes'
+  - measure: busy_duration_seconds
+    label: 'Busy Seconds'
     type: sum
-    sql: round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start))/60.00,2)
+    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then 0 else time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) End
+
+  - measure: appointment_section_duration_in_seconds
+    label: 'App Section Duration in Seconds'
+    type: sum
+    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) else 0 End 
+
 
   - measure: count
     type: count

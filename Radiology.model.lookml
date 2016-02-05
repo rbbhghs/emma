@@ -64,7 +64,15 @@
       relationship: many_to_one
       sql_on: ${from_event.from_id} = ${workflow_state_from.workflow_state_id}
       fields: [name, short_name, order]
-      
+
+    - join: workflow_work_stage_from
+      from: workflow_work_stage
+      view_label: 'Workflow State From'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_from.workflow_work_stage_id} = ${workflow_state_from.workflow_work_stage_id}
+      fields: [stage_name, stage_short_name, stage_order]
+
     - join: workflow_state_to
       from: workflow_state
       view_label: 'Workflow State To'
@@ -72,6 +80,15 @@
       relationship: many_to_one
       sql_on: ${to_event.to_id} = ${workflow_state_to.workflow_state_id}  
       fields: [name, short_name, order]
+
+    - join: workflow_work_stage_to
+      from: workflow_work_stage
+      view_label: 'Workflow State To'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_to.workflow_work_stage_id} = ${workflow_state_to.workflow_work_stage_id}
+      fields: [stage_name, stage_short_name, stage_order]
+
 
       #added by savanp to optimise query performance
    # - join: derived_workflow_state_duration 
@@ -129,7 +146,15 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.from_id} = ${workflow_state_from.workflow_state_id}
-      fields: [name, short_name, order]
+      fields: [workflow_name, workflow_short_name, workflow_order, workflow_status]
+
+    - join: workflow_work_stage_from
+      from: workflow_work_stage
+      view_label: 'Workflow State From'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_from.workflow_work_stage_id} = ${workflow_state_from.workflow_work_stage_id}
+      fields: [stage_name, stage_short_name, stage_order]
       
     - join: workflow_state_to
       from: workflow_state
@@ -137,7 +162,15 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
-      fields: [name, short_name, order]
+      fields: [workflow_name, workflow_short_name, workflow_order, workflow_status]
+
+    - join: workflow_work_stage_to
+      from: workflow_work_stage
+      view_label: 'Workflow State To'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_to.workflow_work_stage_id} = ${workflow_state_to.workflow_work_stage_id}
+      fields: [stage_name, stage_short_name, stage_order]
 
       #added by savanp to optimise query performance
     - join: derived_workflow_state_duration 
@@ -145,7 +178,7 @@
       type: inner 
       relationship: many_to_one
       sql_on: ${workflow_activity.event_id} = ${derived_workflow_state_duration.from_event_id}
-      fields: [from_workstate, next_workstate, next_state_date_time, state_duration_in_seconds, state_duration_in_minutes, state_duration_in_hours]
+      fields: [from_workstate, next_workstate, next_state_date_time, state_duration_in_seconds]
 
     - join: patient_contract 
       from: patient
@@ -157,7 +190,7 @@
 
     - join: contract
       type: left_outer
-      view_label: 'Billing details'
+      view_label: 'Patient'
       relationship: one_to_many
       sql_on: ${contract.contract_id} = ${patient_contract.contract_id}
       required_joins: [patient]
@@ -185,11 +218,11 @@
   label: 'Event Tracking'
   joins:
     - join: event_type
-      view_label: 'Event Type'
+      view_label: 'Event'
       type: inner
       relationship: many_to_one
       sql_on: ${event_type.event_type_id} = ${event.event_type_id} 
-      fields: [event_type_description]
+      fields: [event_type_description, event_status, event_type_category]
 
     - join: appointment
       view_label: 'Appointment'
@@ -296,7 +329,7 @@
       relationship: many_to_one
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
-      fields: []
+      fields: [study_uid_desc]
 
     - join: appointment_section_study_clinical_report
       view_label: 'Appointment'
@@ -312,7 +345,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id} 
-      fields: [accession_number, pacs_order_status, accession_number_list]      
+      fields: [accession_number, pacs_order_status, accession_number_list, pacs_order_status_desc, pacs_order_status_list_desc]      
 
     - join: dicom_procedure
       view_label: 'Procedure'
@@ -474,7 +507,7 @@
       relationship: many_to_one
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
-      fields: []
+      fields: [study_uid_desc]
 
     - join: appointment_section_study_clinical_report
       view_label: 'Appointment'
@@ -489,7 +522,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
-      fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list]
+      fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list, pacs_order_status_desc, pacs_order_status_list_desc]
 
     - join: dicom_procedure
       view_label: 'Procedure'
@@ -880,7 +913,7 @@
     relationship: many_to_one
     sql_on: ${appointment_section_o.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
     required_joins: [appointment_section_o,appointment]
-    fields: []
+    fields: [study_uid_desc]
 
   - join: appointment_section_study_clinical_report
     view_label: 'Appointments'
@@ -895,7 +928,7 @@
     type: left_outer
     relationship: many_to_one
     sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id}
-    fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list]
+    fields: [accession_number, pacs_order_status, accession_number_list, accession_number_pacs_order_status_list, pacs_order_status_desc, pacs_order_status_list_desc]
 
   - join: dicom_procedure
     view_label: 'Procedure'
@@ -932,8 +965,7 @@
     type: left_outer
     relationship: many_to_one
     sql_on: ${diary.diary_id} = ${appointment_section.diary_id} 
-    fields: [start_time, end_time, reservation]
-    #fields: [start, end, reservation]
+    fields: [start_time, end_time, reservation, appointment_section_duration_in_seconds, busy_duration_seconds]
 
   - join: derived_busy_duration
     view_label: 'Diary'

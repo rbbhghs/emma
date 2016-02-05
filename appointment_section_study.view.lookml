@@ -71,6 +71,9 @@
   - dimension: study_uid
     sql: ${TABLE}.study_uid
 
+  - dimension: study_uid_desc
+    sql: CASE WHEN ${TABLE}.study_uid is not null then 'Matched' else 'Unmatched' End
+
   - measure: count
     type: count
     drill_fields: detail*
