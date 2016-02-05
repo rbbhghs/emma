@@ -146,7 +146,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.from_id} = ${workflow_state_from.workflow_state_id}
-      fields: [name, short_name, order]
+      fields: [workflow_name, workflow_short_name, workflow_order, workflow_status]
 
     - join: workflow_work_stage_from
       from: workflow_work_stage
@@ -162,7 +162,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
-      fields: [name, short_name, order]
+      fields: [workflow_name, workflow_short_name, workflow_order, workflow_status]
 
     - join: workflow_work_stage_to
       from: workflow_work_stage
