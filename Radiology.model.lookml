@@ -64,7 +64,15 @@
       relationship: many_to_one
       sql_on: ${from_event.from_id} = ${workflow_state_from.workflow_state_id}
       fields: [name, short_name, order]
-      
+
+    - join: workflow_work_stage_from
+      from: workflow_work_stage
+      view_label: 'Workflow State From'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_from.workflow_work_stage_id} = ${workflow_state_from.workflow_work_stage_id}
+      fields: [stage_name, stage_short_name, stage_order]
+
     - join: workflow_state_to
       from: workflow_state
       view_label: 'Workflow State To'
@@ -72,6 +80,15 @@
       relationship: many_to_one
       sql_on: ${to_event.to_id} = ${workflow_state_to.workflow_state_id}  
       fields: [name, short_name, order]
+
+    - join: workflow_work_stage_to
+      from: workflow_work_stage
+      view_label: 'Workflow State To'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_to.workflow_work_stage_id} = ${workflow_state_to.workflow_work_stage_id}
+      fields: [stage_name, stage_short_name, stage_order]
+
 
       #added by savanp to optimise query performance
    # - join: derived_workflow_state_duration 
