@@ -24,11 +24,11 @@
     sql: ${TABLE}.destination_mrn
 
   - dimension: img_count
-    type: int
+    type: number
     sql: ${TABLE}.img_count
 
   - dimension: img_in_count
-    type: int
+    type: number
     sql: ${TABLE}.img_in_count
 
   - dimension_group: img_in_end
@@ -42,7 +42,7 @@
     sql: ${TABLE}.img_in_start
 
   - dimension: img_out_count
-    type: int
+    type: number
     sql: ${TABLE}.img_out_count
 
   - dimension_group: img_out_end
