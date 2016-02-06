@@ -342,6 +342,9 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
+#  - dimension: appt_last_day
+#    sql: ${TABLE}.status
+
   - dimension: status
     sql: ${TABLE}.status
 
