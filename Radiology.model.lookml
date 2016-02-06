@@ -97,7 +97,19 @@
   #    relationship: many_to_one
   #    sql_on: ${workflow_activity_referral.event_id} = ${derived_workflow_state_duration.from_event_id}
   #    fields: [from_workstate, next_workstate, state_duration_in_seconds, state_duration_in_minutes, state_duration_in_hours]  
- 
+
+#- explore: patient_journey
+#  from: event
+#  label: 'Patient Journey'
+#  joins:
+#    - join: patient
+#      from: individual
+#      view_label: 'Patient'
+#      type: inner
+#      relationship: many_to_one
+#      sql_on: ${workflow_activity.patient_id} = ${patient.individual_id} 
+#      fields: [full_name]
+
 - explore: workflow_activity
   from: event
   label: 'Workflow Tracking'
@@ -1584,3 +1596,15 @@
       required_joins: [treatment_cycle]
       fields: [diagnosis_type_name, diagnosis_type_short_name]
       
+
+#- explore: patient_journey
+#  extends: radiology_referrals
+#  joins:
+#    - join: individual
+#      view_label: 'Patient'
+#      type: inner
+#      relationship: one_to_one
+#      sql_on: ${radiology_referrals.patient_id} = ${location.location_id}
+#      fields: [location_name]
+
+
