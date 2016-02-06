@@ -12,12 +12,12 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.end
 
-  - dimension: img_avail
-    type: int
+  - measure: img_avail
+    type: sum
     sql: ${TABLE}.img_avail
 
-  - dimension: img_sent
-    type: int
+  - measure: img_sent
+    type: sum
     sql: ${TABLE}.img_sent
 
   - dimension: router_job_id

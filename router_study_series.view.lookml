@@ -7,8 +7,8 @@
     hidden: true
     sql: ${TABLE}.id
 
-  - dimension: img_count
-    type: int
+  - measure: img_count
+    type: sum
     sql: ${TABLE}.img_count
 
   - dimension: modality

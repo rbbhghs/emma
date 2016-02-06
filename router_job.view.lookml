@@ -23,12 +23,12 @@
   - dimension: destination_mrn
     sql: ${TABLE}.destination_mrn
 
-  - dimension: img_count
-    type: number
+  - measure: img_count
+    type: sum
     sql: ${TABLE}.img_count
 
-  - dimension: img_in_count
-    type: number
+  - measure: img_in_count
+    type: sum
     sql: ${TABLE}.img_in_count
 
   - dimension_group: img_in_end
@@ -41,8 +41,8 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.img_in_start
 
-  - dimension: img_out_count
-    type: number
+  - measure: img_out_count
+    type: sum
     sql: ${TABLE}.img_out_count
 
   - dimension_group: img_out_end
@@ -71,6 +71,10 @@
 
   - dimension: study_instance_uid
     sql: ${TABLE}.study_instance_uid
+    
+  - measure: time_in_transit
+    type: sum
+    sql: TIMESTAMPDIFF(SECOND,${TABLE}.img_out_start,${TABLE}.img_out_end)
 
   - measure: count
     type: count
