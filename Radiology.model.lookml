@@ -73,6 +73,14 @@
       sql_on: ${workflow_work_stage_from.workflow_work_stage_id} = ${workflow_state_from.workflow_work_stage_id}
       fields: [stage_name, stage_short_name, stage_order]
 
+    - join: workflow_from
+      from: workflow
+      view_label: 'Workflow State From'
+      type: inner #left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_from.workflow_id} = ${workflow_from.workflow_id}
+      fields: [workflow_name, workflow_status, start_state_id]
+
     - join: workflow_state_to
       from: workflow_state
       view_label: 'Workflow State To'
@@ -89,6 +97,13 @@
       sql_on: ${workflow_work_stage_to.workflow_work_stage_id} = ${workflow_state_to.workflow_work_stage_id}
       fields: [stage_name, stage_short_name, stage_order]
 
+    - join: workflow_to
+      from: workflow
+      view_label: 'Workflow State To'
+      type: inner #left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_to.workflow_id} = ${workflow_to.workflow_id}
+      fields: [workflow_name, workflow_status, start_state_id]
 
       #added by savanp to optimise query performance
    # - join: derived_workflow_state_duration 
