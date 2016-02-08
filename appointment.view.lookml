@@ -342,8 +342,8 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
-#  - dimension: appt_last_day
-#    sql: ${TABLE}.status
+  - dimension: appt_last_day
+    sql: case when DATE(${TABLE}.start) >= DATE(DATE_ADD(now(), INTERVAL -1 DAY)) and DATE(${TABLE}.start) < DATE(now()) then 1 else 0 End 
 
   - dimension: status
     sql: ${TABLE}.status
