@@ -392,7 +392,19 @@
     sql: ${appointment_id}
 #    drill_fields: detail*
     drill_fields: [appointment_id, individual.forename, start_time, end_time]
-    
+
+
+  - measure: number_of_appts_formatted
+    type: count_distinct
+    sql: ${appointment_id}
+    html: |
+      {% if value < 0 %}
+        <font color="darkgreen">{{ test }}</font>
+      {% else %}
+        <font color="darkred">{{ test }}</font>
+      {% endif %}
+    drill_fields: [appointment_id, individual.forename, start_time, end_time]
+
   - measure: number_of_locations
     label: '# of Locations'
     type: count_distinct
