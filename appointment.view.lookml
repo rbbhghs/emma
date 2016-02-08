@@ -399,9 +399,9 @@
     sql: ${appointment_id}
     html: |
       {% if value < 0 %}
-        <font color="darkgreen">{{ test }}</font>
+        <font color="darkgreen">{{ number_of_appts }}</font>
       {% else %}
-        <font color="darkred">{{ test }}</font>
+        <font color="darkred">{{ number_of_appts }}</font>
       {% endif %}
     drill_fields: [appointment_id, individual.forename, start_time, end_time]
 
