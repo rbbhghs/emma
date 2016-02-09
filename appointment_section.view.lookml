@@ -128,10 +128,6 @@
   - dimension: ubrn
     sql: ${TABLE}.ubrn
 
-  - measure: appt_section_count
-    type: count_distinct
-    sql: ${appointment_section_id}
-
   - measure: busy_hours
     label: 'Busy Hours'
     type: sum
@@ -147,8 +143,7 @@
     type: sum
     sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) else 0 End 
 
-
-  - measure: count
+  - measure: appt_section_count
     type: count
     drill_fields: detail*
 
