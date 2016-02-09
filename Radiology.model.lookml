@@ -748,6 +748,13 @@
       relationship: many_to_one
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name]   
+
+    - join: appointment_section
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
+      fields: [appt_section_start_date, appt_section_end_date, appt_section_start_time, appt_section_end_time, appt_section_status]   
       
     - join: charge
       view_label: 'Charges'

@@ -108,8 +108,21 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
+  - dimension_group: appt_section_end
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.end
+
+  - dimension_group: appt_section_start
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.start
+
   - dimension: status
     alias: [app_section_status]  
+    sql: ${TABLE}.status
+
+  - dimension: appt_section_status
     sql: ${TABLE}.status
 
   - dimension: ubrn
