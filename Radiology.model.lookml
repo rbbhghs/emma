@@ -754,7 +754,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
-      fields: [appt_section_start_date, appt_section_end_date, appt_section_start_time, appt_section_end_time, appt_section_status]   
+      fields: [appt_section_start_date, appt_section_end_date, appt_section_start_time, appt_section_end_time, appt_section_status, appt_section_count]   
       
     - join: charge
       view_label: 'Charges'
