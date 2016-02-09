@@ -128,6 +128,10 @@
   - dimension: ubrn
     sql: ${TABLE}.ubrn
 
+  - measure: appt_section_count
+    type: count_distinct
+    sql: ${appointment_section_id}
+
   - measure: busy_hours
     label: 'Busy Hours'
     type: sum
