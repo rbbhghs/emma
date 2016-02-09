@@ -63,7 +63,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${from_event.from_id} = ${workflow_state_from.workflow_state_id}
-      fields: [workflow_state_name, workflow_state_short_name, workflow_state_order, workflow_state_status]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_from
       from: workflow_work_stage
@@ -87,7 +87,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${to_event.to_id} = ${workflow_state_to.workflow_state_id}  
-      fields: [workflow_state_name, workflow_state_short_name, workflow_state_order, workflow_state_status]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_to
       from: workflow_work_stage
@@ -173,7 +173,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.from_id} = ${workflow_state_from.workflow_state_id}
-      fields: [workflow_state_name, workflow_state_short_name, workflow_state_order, workflow_state_status]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_from
       from: workflow_work_stage
@@ -197,7 +197,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
-      fields: [workflow_state_name, workflow_state_short_name, workflow_state_order, workflow_state_status]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_to
       from: workflow_work_stage
