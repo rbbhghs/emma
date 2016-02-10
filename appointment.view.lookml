@@ -398,7 +398,7 @@
     type: count_distinct
     sql: ${appointment_id}
     html: |
-      {% if number_of_appts < 20 %}
+      {% if value < 20 %}
         <font color="darkgreen">{{ rendered_value }}</font>
       {% elsif value > 100 %}
         <font color="goldenrod">{{ rendered_value }}</font>
