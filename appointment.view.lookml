@@ -434,6 +434,11 @@
     type: count_distinct
     sql: ${patient_id}  
     sql_distinct_key: ${patient_id}    
+  
+  - measure: culmative_number_of_appts
+    type: running_total
+    sql: ${appointment_id}
+    value_format: '#,###'
     
   - measure: count
     type: count
