@@ -398,10 +398,12 @@
     type: count_distinct
     sql: ${appointment_id}
     html: |
-      {% if value < 0 %}
-        <font color="darkgreen">{{ number_of_appts_formatted }}</font>
+      {% if number_of_appts < 10 %}
+        <font color="darkgreen">{{ rendered_value }}</font>
+      {% elsif value > 100 %}
+        <font color="goldenrod">{{ rendered_value }}</font>
       {% else %}
-        <font color="darkred">{{ number_of_appts_formatted }}</font>
+        <font color="darkred">{{ rendered_value }}</font>
       {% endif %}
 #    drill_fields: [appointment_id, individual.forename, start_time, end_time]
 
