@@ -439,6 +439,10 @@
     type: running_total
     sql: ${number_of_appts}
     value_format: '#,###'
+
+  - measure: appt_growth_pct
+    type: percent_of_previous
+    sql: ${number_of_appts}
     
   - measure: count
     type: count
