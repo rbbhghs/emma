@@ -399,7 +399,7 @@
     sql: ${appointment_id}
     html: |
       {% if value < 20 %}
-        <font color="darkgreen">{{ rendered_value }}</font>
+        <font color="red">{{ rendered_value }}</font>
       {% elsif value > 100 %}
         <font color="goldenrod">{{ rendered_value }}</font>
       {% else %}
