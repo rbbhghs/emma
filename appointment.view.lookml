@@ -437,7 +437,7 @@
   
   - measure: culmative_number_of_appts
     type: running_total
-    sql: ${appointment_id}
+    sql: ${number_of_appts}
     value_format: '#,###'
     
   - measure: count
