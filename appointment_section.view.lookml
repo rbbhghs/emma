@@ -108,8 +108,21 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
+  - dimension_group: appt_section_end
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.end
+
+  - dimension_group: appt_section_start
+    type: time
+    timeframes: [time, date, week, month]
+    sql: ${TABLE}.start
+
   - dimension: status
     alias: [app_section_status]  
+    sql: ${TABLE}.status
+
+  - dimension: appt_section_status
     sql: ${TABLE}.status
 
   - dimension: ubrn
@@ -130,8 +143,7 @@
     type: sum
     sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) else 0 End 
 
-
-  - measure: count
+  - measure: appt_section_count
     type: count
     drill_fields: detail*
 

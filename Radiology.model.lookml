@@ -63,7 +63,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${from_event.from_id} = ${workflow_state_from.workflow_state_id}
-      fields: [name, short_name, order]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_from
       from: workflow_work_stage
@@ -73,13 +73,21 @@
       sql_on: ${workflow_work_stage_from.workflow_work_stage_id} = ${workflow_state_from.workflow_work_stage_id}
       fields: [stage_name, stage_short_name, stage_order]
 
+    - join: workflow_from
+      from: workflow
+      view_label: 'Workflow State From'
+      type: inner #left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_from.workflow_id} = ${workflow_from.workflow_id}
+      fields: [workflow_name, workflow_status, start_state_id]
+
     - join: workflow_state_to
       from: workflow_state
       view_label: 'Workflow State To'
       type: left_outer
       relationship: many_to_one
       sql_on: ${to_event.to_id} = ${workflow_state_to.workflow_state_id}  
-      fields: [name, short_name, order]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_to
       from: workflow_work_stage
@@ -89,6 +97,13 @@
       sql_on: ${workflow_work_stage_to.workflow_work_stage_id} = ${workflow_state_to.workflow_work_stage_id}
       fields: [stage_name, stage_short_name, stage_order]
 
+    - join: workflow_to
+      from: workflow
+      view_label: 'Workflow State To'
+      type: inner #left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_to.workflow_id} = ${workflow_to.workflow_id}
+      fields: [workflow_name, workflow_status, start_state_id]
 
       #added by savanp to optimise query performance
    # - join: derived_workflow_state_duration 
@@ -158,7 +173,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.from_id} = ${workflow_state_from.workflow_state_id}
-      fields: [workflow_name, workflow_short_name, workflow_order, workflow_status]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_from
       from: workflow_work_stage
@@ -167,6 +182,14 @@
       relationship: many_to_one
       sql_on: ${workflow_work_stage_from.workflow_work_stage_id} = ${workflow_state_from.workflow_work_stage_id}
       fields: [stage_name, stage_short_name, stage_order]
+
+    - join: workflow_from
+      from: workflow
+      view_label: 'Workflow State From'
+      type: inner #left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_from.workflow_id} = ${workflow_from.workflow_id}
+      fields: [workflow_name, workflow_status, start_state_id]
       
     - join: workflow_state_to
       from: workflow_state
@@ -174,7 +197,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${workflow_activity.to_id} = ${workflow_state_to.workflow_state_id}  
-      fields: [workflow_name, workflow_short_name, workflow_order, workflow_status]
+      fields: [state_name, state_short_name, state_order, state_status]
 
     - join: workflow_work_stage_to
       from: workflow_work_stage
@@ -183,6 +206,14 @@
       relationship: many_to_one
       sql_on: ${workflow_work_stage_to.workflow_work_stage_id} = ${workflow_state_to.workflow_work_stage_id}
       fields: [stage_name, stage_short_name, stage_order]
+
+    - join: workflow_to
+      from: workflow
+      view_label: 'Workflow State To'
+      type: inner #left_outer
+      relationship: many_to_one
+      sql_on: ${workflow_work_stage_to.workflow_id} = ${workflow_to.workflow_id}
+      fields: [workflow_name, workflow_status, start_state_id]
 
       #added by savanp to optimise query performance
     - join: derived_workflow_state_duration 
@@ -702,7 +733,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_id} = ${derived_first_appointment.first_appointment_id}
-      fields: [new_appointments, new_patient_appt, first_appointment_id]  
+      fields: [new_appointments, new_patient_appt, first_appointment_id, culmative_number_of_new_patient_appts]  
       
     - join: individual
       view_label: 'Patient'
@@ -717,6 +748,13 @@
       relationship: many_to_one
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name]   
+
+    - join: appointment_section
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment.appointment_id} = ${appointment_section.appointment_id}
+      fields: [appt_section_start_date, appt_section_end_date, appt_section_start_time, appt_section_end_time, appt_section_status, appt_section_count]   
       
     - join: charge
       view_label: 'Charges'

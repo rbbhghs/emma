@@ -342,6 +342,9 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
+  - dimension: appt_last_day
+    sql: case when DATE(${TABLE}.start) >= DATE(DATE_ADD(now(), INTERVAL -1 DAY)) and DATE(${TABLE}.start) < DATE(now()) then 1 else 0 End 
+
   - dimension: status
     sql: ${TABLE}.status
 
@@ -389,7 +392,21 @@
     sql: ${appointment_id}
 #    drill_fields: detail*
     drill_fields: [appointment_id, individual.forename, start_time, end_time]
-    
+
+
+  - measure: number_of_appts_formatted
+    type: count_distinct
+    sql: ${appointment_id}
+    html: |
+      {% if value < 20 %}
+        <font color="red">{{ rendered_value }}</font>
+      {% elsif value > 100 %}
+        <font color="goldenrod">{{ rendered_value }}</font>
+      {% else %}
+        <font color="green">{{ rendered_value }}</font>
+      {% endif %}
+#    drill_fields: [appointment_id, individual.forename, start_time, end_time]
+
   - measure: number_of_locations
     label: '# of Locations'
     type: count_distinct
@@ -419,6 +436,15 @@
     type: count_distinct
     sql: ${patient_id}  
     sql_distinct_key: ${patient_id}    
+  
+  - measure: culmative_number_of_appts
+    type: running_total
+    sql: ${number_of_appts}
+    value_format: '#,###'
+
+  - measure: appt_growth_pct
+    type: percent_of_previous
+    sql: ${number_of_appts}
     
   - measure: count
     type: count

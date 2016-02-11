@@ -13,6 +13,11 @@
     type: count
     drill_fields: detail*
 
+  - measure: culmative_number_of_new_patient_appts
+    type: running_total
+    sql: ${new_appointments}
+    value_format: '#,###'
+
   - dimension: first_appointment_id
     type: int
     primary_key: true
@@ -30,10 +35,6 @@
   - dimension: treatment_cycle_referral_id
     type: int
     sql: ${TABLE}.treatment_cycle_referral_id
-
-#  - dimension: new_appointments
-#    type: int
-#    sql: ${TABLE}.new_appointments
 
   sets:
     detail:

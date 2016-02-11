@@ -23,27 +23,27 @@
   - dimension: name
     sql: ${TABLE}.name
 
-  - dimension: workflow_name
+  - dimension: state_name
     sql: ${TABLE}.name
 
   - dimension: order
     type: int
     sql: ${TABLE}.`order`
 
-  - dimension: workflow_order
+  - dimension: state_order
     type: int
     sql: ${TABLE}.`order`
 
   - dimension: short_name
     sql: ${TABLE}.short_name
 
-  - dimension: workflow_short_name
+  - dimension: state_short_name
     sql: ${TABLE}.short_name
 
   - dimension: status
     sql: ${TABLE}.status
 
-  - dimension: workflow_status
+  - dimension: state_status
     sql: ${TABLE}.status
 
   - dimension: uuid
