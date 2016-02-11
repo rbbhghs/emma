@@ -87,8 +87,8 @@
     # hidden: true
     sql: ${TABLE}.`Patient ID`
 
-  - dimension: patient_name
-    sql: ${TABLE}.`Patient name`
+  #- dimension: patient_name
+  #  sql: ${TABLE}.`Patient name`
 
   - dimension: relative_effect_
     type: number
@@ -117,7 +117,7 @@
     sql: ${TABLE}.`Treatment cycle ID`
 
   - dimension: treatment_owner
-    sql: ${TABLE}.`Treatment owner`
+    sql: concat('Mr ', LEFT(${TABLE}.`Treatment owner`))
 
   - dimension: treatment_point
     sql: ${TABLE}.`Treatment point`

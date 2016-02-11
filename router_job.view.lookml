@@ -75,6 +75,10 @@
   - measure: time_in_transit
     type: sum
     sql: TIMESTAMPDIFF(SECOND,${TABLE}.img_out_start,${TABLE}.img_out_end)
+    
+  - measure: avg_time_in_transit
+    type: avg
+    sql: TIMESTAMPDIFF(SECOND,${TABLE}.img_out_start,${TABLE}.img_out_end)  
 
   - measure: count
     type: count
