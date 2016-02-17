@@ -117,7 +117,7 @@
     sql: ${TABLE}.`Treatment cycle ID`
 
   - dimension: treatment_owner
-    sql: concat('Mr ', LEFT(${TABLE}.`Treatment owner`))
+    sql: concat('Mr ', LEFT(${TABLE}.`Treatment owner`,2))
 
   - dimension: treatment_point
     sql: ${TABLE}.`Treatment point`

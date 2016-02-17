@@ -19,6 +19,10 @@
   - measure: img_sent
     type: sum
     sql: ${TABLE}.img_sent
+    
+  - measure: img_in_flight
+    type: sum
+    sql: ${TABLE}.img_avail-${TABLE}.img_sent 
 
   - dimension: router_job_id
     type: int
@@ -44,4 +48,6 @@
   - measure: count
     type: count
     drill_fields: [id, router_job.id, study_series.id]
+    
+    
 
