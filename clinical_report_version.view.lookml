@@ -64,7 +64,7 @@
     sql: ${TABLE}.report_xml
 
   - dimension: result_status
-    sql: ${TABLE}.result_status
+    sql: case when ${TABLE}.result_status = 'F' then '?' when ${TABLE}.result_status = 'A' then 'Active' when ${TABLE}.result_status = 'C' = 'Cancelled' when ${TABLE}.result_status = 'P' then 'Pending' else 'Not Sure' End
 
   - dimension: shared_by
     type: int
