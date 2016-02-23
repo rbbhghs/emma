@@ -78,6 +78,10 @@
     type: int
     sql: ${TABLE}.version_number
 
+  - dimension: version_number_2
+    type: int
+    sql: max(${TABLE}.version_number)-1
+
   - measure: count
     type: count
     drill_fields: [report.report_name, report.report_id, fax_message.count]
