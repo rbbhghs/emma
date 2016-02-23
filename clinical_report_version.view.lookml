@@ -81,4 +81,8 @@
   - measure: count
     type: count
     drill_fields: [report.report_name, report.report_id, fax_message.count]
+    
+  - measure: addendum_count
+    type: max
+    sql: (${TABLE}.version_number)-1 #to obtain number of addendums for a clinical report once it has been published
 
