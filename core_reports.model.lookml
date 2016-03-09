@@ -468,6 +468,13 @@
       relationship: many_to_one
       sql_on: ${appointment.patient_id} = ${individual.individual_id}
       
+    - join: nationality
+      view_label: 'Patient'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${nationality.nationality_id} = ${individual.nationality_id} 
+      fields: [nationality]
+
     - join: appointment_type
       view_label: 'Appointment'
       type: left_outer
@@ -480,6 +487,13 @@
       type: left_outer
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
+
+    - join: contract
+      view_label: 'Charges'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${contract.contract_id} = ${charge.contract_id}  
+      fields: [contract_name]
 
     - join: charge_last_modified_user
       from: individual
@@ -514,6 +528,13 @@
       required_joins: [individual]
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${individual.individual_id} 
+
+    - join: nhs_ethnicity
+      view_label: 'Patient'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${nhs_ethnicity.ethnicity_id} = ${patient.ethnicity_id} 
+      fields: [ethnicity_name]
       
     - join: insurance_company  
       view_label: 'Patient'
@@ -537,7 +558,15 @@
       type: inner
       relationship: one_to_one
       sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
-      fields: [full_name, dob_date]
+      fields: [full_name]
+      
+    - join: individual_practitioner
+      from: practitioner
+      view_label: 'Practitioner'
+      type: inner
+      relationship: one_to_one
+      sql_on: ${practitioner.individual_id} = ${individual_practitioner.individual_id}
+      fields: [gmc_no]      
       
     - join: location
       view_label: 'Location'

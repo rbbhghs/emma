@@ -8,6 +8,7 @@
 
   - dimension: access_key
     sql: ${TABLE}.access_key
+    hidden: true    
 
   - dimension: address_id
     type: int
