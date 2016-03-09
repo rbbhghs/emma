@@ -39,7 +39,7 @@
 
   - dimension_group: dob
     type: time
-    timeframes: [date, week, month]
+    timeframes: [date, week, month, year]
     convert_tz: false
     sql: if(${TABLE}.dob,'0000-00-00','1900-00-00')
 

@@ -543,7 +543,8 @@
       view_label: 'Location'
       type: left_outer
       relationship: many_to_one
-      sql_on: ${appointment.location_id} = ${location.location_id}
+      sql_on: ${appointment.location_id} = ${location.location_id} 
+      fields: [location_name,location_name_short,telephone,fax_no]
       
     - join: location_address
       from: address
@@ -552,7 +553,7 @@
       relationship: one_to_one
       sql_on: ${location.address_id} = ${location_address.address_id}
       required_joins: [location]
-      fields: [address_1, address_2, address_3, address_4, address_5, town, country] 
+      fields: [address_1, address_2, address_3, town, country, full_address_line] 
       
     - join: location_coords  
       from: postcodelatlng
@@ -570,7 +571,7 @@
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${patient_address.individual_id}
       required_joins: [patient]
-      fields: [address_1, address_2, address_3, address_4, address_5, town, country]  
+      fields: [address_1, address_2, address_3, town, country, full_address_line]  
       
     - join: patient_coords  
       from: postcodelatlng

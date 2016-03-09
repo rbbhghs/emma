@@ -21,6 +21,9 @@
   - dimension: address_5
     sql: ${TABLE}.address_5
 
+  - dimension: full_address_line
+    sql: REPLACE(REPLACE(REPLACE(CONCAT(ifnull(${TABLE}.address_1,'N/A'),',',ifnull(${TABLE}.address_2,'N/A'),',',ifnull(${TABLE}.address_3,'N/A'),',',ifnull(${TABLE}.town,'N/A'),',',ifnull(${TABLE}.county,'N/A'),',',ifnull(${TABLE}.postcode,'N/A')),',,',','),',,',','),',,',',')
+
   - dimension: address_type_id
     type: int
     hidden: true
