@@ -480,6 +480,21 @@
       type: left_outer
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
+
+    - join: charge_last_modified_user
+      from: individual
+      view_label: 'Charges'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${charge_last_modified_user.individual_id} = ${charge.last_modified_by} 
+      fields: [user_name_last_modified]
+
+    - join: product
+      view_label: 'Charges'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${product.product_id} = ${charge.product_id} 
+      fields: [product_name,short_code,sage_reference]
       
    # - join: goal
     #  view_label: 'Goals'
@@ -525,14 +540,14 @@
       fields: [full_name, dob_date]
       
     - join: location
-      view_label: 'Appointment Location'
+      view_label: 'Location'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.location_id} = ${location.location_id}
       
     - join: location_address
       from: address
-      view_label: 'Appointment Location'
+      view_label: 'Location'
       type: left_outer
       relationship: one_to_one
       sql_on: ${location.address_id} = ${location_address.address_id}
@@ -541,7 +556,7 @@
       
     - join: location_coords  
       from: postcodelatlng
-      view_label: 'Appointment Location'
+      view_label: 'Location'
       type: left_outer
       relationship: one_to_one
       sql_on: ${location_address.postcode} = ${location_coords.postcode}

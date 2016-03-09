@@ -87,6 +87,10 @@
     type: string
     sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})
     
+  - dimension: user_name_last_modified
+    type: string
+    sql: CONCAT(${title},' ', ${forename}, ' ', ${surname})    
+    
   - dimension: forename
     sql: ${TABLE}.forename
 
