@@ -117,6 +117,7 @@
     type: count_distinct
     sql: ${charge_id}
     sql_distinct_key: ${charge_id} 
+    value_format: '#,##0'    
     
   - measure: number_of_appts
     label: '# of Appts'
