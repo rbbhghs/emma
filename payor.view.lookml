@@ -1,4 +1,4 @@
-- view: payor
+- view: derived_payor
   derived_table:
     sql: 
         select 

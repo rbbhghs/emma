@@ -45,10 +45,10 @@
 - explore: treatment_cycle_referral
   label: Referrals
   joins:
-    - join: payor
+    - join: derived_payor
       type: inner
       relationship: many_to_one
-      sql_on: ${treatment_cycle_referral.charge_to_id} = ${payor.individual_id}
+      sql_on: ${treatment_cycle_referral.charge_to_id} = ${derived_payor.individual_id}
       
     - join: individual
       view_label: 'Patient'
@@ -139,10 +139,10 @@
   from: treatment_cycle_referral
   label: 'Radiology referrals'
   joins:
-    - join: payor
+    - join: derived_payor
       type: inner
       relationship: many_to_one
-      sql_on: ${radiology_referrals.charge_to_id} = ${payor.individual_id}
+      sql_on: ${radiology_referrals.charge_to_id} = ${derived_payor.individual_id}
       
     - join: patient
       type: inner
@@ -254,10 +254,10 @@
   label: Charge
   #fields: [charge.amount, charge.quantity, charge.effective_time, charge.effective_date, charge.effective_week, charge.price, charge.status]  
   joins:
-    - join: payor
+    - join: derived_payor
       type: inner
       relationship: many_to_one
-      sql_on: ${charge.charge_to_id} = ${payor.individual_id}
+      sql_on: ${charge.charge_to_id} = ${derived_payor.individual_id}
       
     - join: patients
       view_label: 'Patient'
@@ -367,10 +367,10 @@
       required_joins: [location]
       fields: [address_1, address_2, address_3, address_4, address_5, town, postcode, country]  
     
-    - join: payor
+    - join: derived_payor
       type: inner
       relationship: many_to_one
-      sql_on: ${charge_to_id} = ${payor.individual_id}  
+      sql_on: ${charge_to_id} = ${derived_payor.individual_id}  
       
     - join: referrer
       type: left_outer
@@ -789,12 +789,12 @@
   label: 'Invoices'
   #fields: [charge.amount, charge.quantity, charge.effective_time, charge.effective_date, charge.effective_week, charge.price, charge.status]  
   joins:
-    - join: payor
+    - join: derived_payor
       view_label: 'Invoices'
       type: inner
       relationship: one_to_many
-      sql_on: ${invoices.invoicee_id} = ${payor.individual_id}
-      fields: [payor]
+      sql_on: ${invoices.invoicee_id} = ${derived_payor.individual_id}
+      fields: [payor,payor_type]
       
     - join: issuing_company
       view_label: 'Invoices'
@@ -943,11 +943,11 @@
   from: payment
   label: 'Payments'
   joins:
-    - join: payor
+    - join: derived_payor
       view_label: 'Payments'
       type: inner
       relationship: one_to_many
-      sql_on: ${payments.payer_id} = ${payor.individual_id}
+      sql_on: ${payments.payer_id} = ${derived_payor.individual_id}
       fields: [payor,payor_type]
       
     - join: issuing_company
