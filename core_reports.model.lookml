@@ -488,6 +488,12 @@
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
 
+    - join: derived_payor 
+      view_label: 'Charges'    
+      type: inner
+      relationship: many_to_one
+      sql_on: ${charge.charge_to_id} = ${derived_payor.individual_id}
+
     - join: contract
       view_label: 'Charges'
       type: left_outer
