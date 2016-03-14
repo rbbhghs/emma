@@ -134,7 +134,6 @@
       relationship: many_to_one
       sql_on: ${treatment_cycle_referral.from_practitioner_id} = ${referrer.individual_id}  
            
-           
 - explore: radiology_referrals
   from: treatment_cycle_referral
   label: 'Radiology referrals'

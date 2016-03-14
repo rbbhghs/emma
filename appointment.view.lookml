@@ -347,6 +347,12 @@
 
   - dimension: status
     sql: ${TABLE}.status
+    
+  - dimension: appointment_status
+    sql: case when ${TABLE}.status = 'A' then 'Active' when ${TABLE}.status in ('C','N') then 'Cancelled' when 'R' then 'Rescheduled' else 'Unknown' End
+
+  - dimension: appointment_status_description
+    sql: case when ${TABLE}.status = 'A' then 'Active' when ${TABLE}.status = 'C' then 'Patient Cancelled' when ${TABLE}.status = 'N' then 'User Cancelled' when 'R' then 'Rescheduled' else 'Unknown' End
 
   - dimension: text_notes
     sql: ${TABLE}.text_notes
