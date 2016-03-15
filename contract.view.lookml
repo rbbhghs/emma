@@ -42,7 +42,7 @@
     sql: ${TABLE}.modified_by_function
 
   - dimension: status
-    sql: ${TABLE}.status
+    sql: case when ${TABLE}.status = 'A' then 'Active' when ${TABLE}.status = 'C' then 'Cancelled' when ${TABLE}.status = 'P' then 'Pending' else 'Unknown' End 
 
   - dimension: workflow_id
     type: int

@@ -65,8 +65,8 @@
     hidden: true
     sql: ${TABLE}.secondary_reviewer_id
 
-  - dimension: status
-    sql: ${TABLE}.status
+  - dimension: appointment_section_study_status
+    sql: case when ${TABLE}.status = 'A' then 'Active' when ${TABLE}.status = 'C' then 'Cancelled' when ${TABLE}.status = 'N' then 'Cancelled' else 'Unknown' End
 
   - dimension: study_uid
     sql: ${TABLE}.study_uid

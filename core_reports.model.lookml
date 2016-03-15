@@ -487,6 +487,19 @@
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
 
+    - join: treatment_cycle_referral
+      view_label: 'Referral'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
+
+    - join: treatment_cycle_referral_source
+      view_label: 'Referral'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${treatment_cycle_referral_source.treatment_cycle_referral_source_id} = ${treatment_cycle_referral.treatment_cycle_referral_source_id} 
+      fields: [treatment_cycle_referral_source_name]
+      
     - join: derived_payor 
       view_label: 'Charges'    
       type: inner
