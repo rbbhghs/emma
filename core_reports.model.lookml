@@ -491,7 +491,8 @@
       view_label: 'Referral'
       type: left_outer
       relationship: one_to_many
-      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
+      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id} 
+      fields: [created_date,received_date,referred_date]
 
     - join: treatment_cycle_referral_source
       view_label: 'Referral'
