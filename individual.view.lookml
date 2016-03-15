@@ -156,7 +156,7 @@
     sql: ${TABLE}.sex
 
   - dimension: status
-    sql: ${TABLE}.status
+    sql: case when ${TABLE}.status = 'A' then 'Active' when ${TABLE}.status = 'C' then 'Cancelled' when ${TABLE}.status = 'P' then 'Pending' 
 
   - dimension: surname
     sql: ${TABLE}.surname
