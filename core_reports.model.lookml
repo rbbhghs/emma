@@ -198,6 +198,30 @@
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
       fields: []
+
+    - join: study 
+      view_label: 'DICOM Router'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${study.study_instance_uid} = ${appointment_section_study.study_uid}  
+
+    - join: appointment_section_study_clinical_report
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${appointment_section_study_clinical_report.appointment_section_study_id} = ${appointment_section_study.appointment_section_study_id} 
+#      required_joins: [appointment_section,appointment]
+      fields: [appointment_section_study_clinical_report_id, appointment_section_study_id, clinical_report_id]
+
+      #added by savanp
+    - join: pacs_order
+      view_label: 'Procedure'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${pacs_order.id} = ${appointment_section_study.pacs_order_id} 
+      fields: [accession_number, pacs_order_status, accession_number_list, pacs_order_status_desc, pacs_order_status_list_desc]      
+
+
       
     - join: dicom_procedure
       view_label: 'Procedure'
