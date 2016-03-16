@@ -346,6 +346,10 @@
     type: int 
     sql: HOUR(${TABLE}.start)
 
+  - dimension: year_start 
+    type: int 
+    sql: YEAR(${TABLE}.start)
+
   - dimension: appt_last_day
     sql: case when DATE(${TABLE}.start) >= DATE(DATE_ADD(now(), INTERVAL -1 DAY)) and DATE(${TABLE}.start) < DATE(now()) then 1 else 0 End 
 
