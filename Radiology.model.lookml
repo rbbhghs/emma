@@ -302,7 +302,7 @@
       type: left_outer
       relationship: many_to_one
       sql_on: ${radiology_referrals.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id}
-      fields: [appointment_id, status, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
+      fields: [appointment_id, status, appointment_status, hour_start, start_date, start_time, start_week, start_month, end_date, end_time, arrive_date, arrive_time, leave_date, leave_time, view_date, view_time, dna, late_cancellation, number_of_appts]
   
     - join: appointment_type
       view_label: 'Appointment'
@@ -373,6 +373,12 @@
       sql_on: ${appointment_section.appointment_section_id} = ${appointment_section_study.appointment_section_id} 
       required_joins: [appointment_section,appointment]
       fields: [study_uid_desc]
+
+#    - join: dicom_router.router_study
+#      view_label: 'Appointment'
+#      type: left_outer
+#      relationship: many_to_one
+#      sql_on: ${dicom_router.router_study.study_instance_uid} = ${appointment_section_study.study_uid}
 
     - join: appointment_section_study_clinical_report
       view_label: 'Appointment'

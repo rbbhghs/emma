@@ -118,9 +118,9 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.start
 
-  - dimension: status
+#  - dimension: status
 #    alias: [app_section_status]  
-    sql: ${TABLE}.status
+#    sql: ${TABLE}.status
 
   - dimension: appt_section_status
     sql: case when ${TABLE}.status = 'A' then 'Active' when ${TABLE}.status = 'C' then 'Cancelled' when ${TABLE}.status = 'R' then 'Rescheduled' else 'Unknown' End
