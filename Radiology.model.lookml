@@ -1100,7 +1100,7 @@
     type: left_outer
     relationship: many_to_one
     sql_on: ${diary.diary_id} = ${derived_busy_duration.diary_id} 
-    fields: [total_busy_seconds]
+    fields: [total_busy_seconds, total_busy_minutes, total_busy_hours]
     
   - join: appointment
     view_label: 'Appointment Activity'
