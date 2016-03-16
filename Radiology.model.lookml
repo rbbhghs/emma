@@ -747,7 +747,14 @@
       relationship: many_to_one
       sql_on: ${appointment.patient_id} = ${individual.individual_id}
       fields: [full_patient_name]
-      
+
+    - join: nationality
+      view_label: 'Patient'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${nationality.nationality_id} = ${individual.nationality_id} 
+      fields: [nationality]
+
     - join: appointment_type
       view_label: 'Appointment'
       type: left_outer
@@ -767,6 +774,48 @@
       type: left_outer
       relationship: one_to_many
       sql_on: ${appointment.appointment_id} = ${charge.appointment_id}  
+
+    - join: treatment_cycle_referral
+      view_label: 'Referral'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${treatment_cycle_referral.treatment_cycle_referral_id} = ${appointment.treatment_cycle_referral_id} 
+      fields: [created_date,received_date,referred_date]
+
+    - join: treatment_cycle_referral_source
+      view_label: 'Referral'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${treatment_cycle_referral_source.treatment_cycle_referral_source_id} = ${treatment_cycle_referral.treatment_cycle_referral_source_id} 
+      fields: [treatment_cycle_referral_source_name]
+      
+    - join: derived_payor 
+      view_label: 'Charges'    
+      type: inner
+      relationship: many_to_one
+      sql_on: ${charge.charge_to_id} = ${derived_payor.individual_id}
+
+    - join: contract
+      view_label: 'Charges'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${contract.contract_id} = ${charge.contract_id}  
+      fields: [contract_name]
+
+    - join: charge_last_modified_user
+      from: individual
+      view_label: 'Charges'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${charge_last_modified_user.individual_id} = ${charge.last_modified_by} 
+      fields: [user_name_last_modified]
+
+    - join: product
+      view_label: 'Charges'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${product.product_id} = ${charge.product_id} 
+      fields: [product_name,short_code,sage_reference]
       
    # - join: goal
     #  view_label: 'Goals'
@@ -786,6 +835,13 @@
       required_joins: [individual]
       relationship: one_to_one
       sql_on: ${patient.individual_id} = ${individual.individual_id} 
+
+    - join: nhs_ethnicity
+      view_label: 'Patient'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${nhs_ethnicity.ethnicity_id} = ${patient.ethnicity_id} 
+      fields: [ethnicity_name]
       
     - join: insurance_company  
       view_label: 'Patient'
@@ -810,6 +866,14 @@
       relationship: one_to_one
       sql_on: ${appointment.primary_doctor_id} = ${practitioner.individual_id}
       fields: [full_practitioner_name, dob_date]
+
+    - join: individual_practitioner
+      from: practitioner
+      view_label: 'Practitioner'
+      type: inner
+      relationship: one_to_one
+      sql_on: ${practitioner.individual_id} = ${individual_practitioner.individual_id}
+      fields: [gmc_no] 
       
     - join: location
       view_label: 'Appointment Location'
