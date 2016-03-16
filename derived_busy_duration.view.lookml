@@ -11,6 +11,19 @@
     value_format: '#,##0'    
     drill_fields: detail*
 
+  - measure: total_busy_minutes
+    type: sum 
+    sql: round(total_busy_seconds/60.00,2)
+    value_format: '#,##0.00'    
+    drill_fields: detail*
+
+  - measure: total_busy_hours
+    type: sum 
+    sql: round(total_busy_seconds/3600.00,2)
+    value_format: '#,##0.00'    
+    drill_fields: detail*
+
+
   - dimension: diary_id
     type: int
     primary_key: true
