@@ -427,6 +427,12 @@
     type: sum
     sql: TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.end)
     value_format: '#,##0'        
+
+  - measure: appt_duration_mins
+    label: 'Appointment Duration in Minutes'
+    type: sum
+    sql: TIMESTAMPDIFF(MINUTE,${TABLE}.start,${TABLE}.end)
+    value_format: '#,##0'     
     
   - measure: actual_appt_duration
     label: 'Actual Appointment Duration in Seconds'
@@ -434,11 +440,24 @@
     #sql: TIMESTAMPDIFF(SECOND,ifnull((${TABLE}.view),(${TABLE}.start)),ifnull((${TABLE}.leave),(${TABLE}.end)))/60.00
     sql: TIMESTAMPDIFF(SECOND,${TABLE}.view,${TABLE}.leave)    
     value_format: '#,##0'    
+
+  - measure: actual_appt_duration_mins
+    label: 'Actual Appointment Duration in Minutes'
+    type: sum
+    #sql: TIMESTAMPDIFF(SECOND,ifnull((${TABLE}.view),(${TABLE}.start)),ifnull((${TABLE}.leave),(${TABLE}.end)))/60.00
+    sql: TIMESTAMPDIFF(MINUTE,${TABLE}.view,${TABLE}.leave)    
+    value_format: '#,##0'   
     
   - measure: time_to_view
     label: 'Time to be Seen in Seconds'
     type: sum
     sql: TIMESTAMPDIFF(SECOND,${TABLE}.start,${TABLE}.view)    
+    value_format: '#,##0'
+
+  - measure: time_to_view_mins
+    label: 'Time to be Seen in Minutes'
+    type: sum
+    sql: TIMESTAMPDIFF(MINUTE,${TABLE}.start,${TABLE}.view)    
     value_format: '#,##0'
     
   - measure: number_of_patients
