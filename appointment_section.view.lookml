@@ -143,6 +143,11 @@
     type: sum
     sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) else 0 End 
 
+  - measure: appointment_section_duration_in_mins
+    label: 'App Section Duration in Minutes'
+    type: sum
+    sql: CASE WHEN ifnull(${TABLE}.busy_type_id,0) = 0 then round(time_to_sec(timediff(${TABLE}.end,${TABLE}.start)) else 0 End)/3600.00,2) 
+
   - measure: appt_section_count
     type: count
     drill_fields: detail*
