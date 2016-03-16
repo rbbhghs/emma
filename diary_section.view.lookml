@@ -51,6 +51,16 @@
     type: sum
     sql: (${TABLE}.end_time-${TABLE}.start_time) 
 
+  - measure: diary_duration_mins
+    label: 'Diary Open Duration in Minutes'
+    type: sum
+    sql: round(((${TABLE}.end_time-${TABLE}.start_time))/60.00,2) 
+
+  - measure: diary_duration_hours
+    label: 'Diary Open Duration in Hours'
+    type: sum
+    sql: round(((${TABLE}.end_time-${TABLE}.start_time))/3600.00,2) 
+
   - measure: count
     type: count
     drill_fields: [diary_section_id, diary.diary_id, diary_template_entry.diary_template_entry_id, diary_section_cab_service.count, diary_slot.count]
