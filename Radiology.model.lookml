@@ -374,6 +374,14 @@
       required_joins: [appointment_section,appointment]
       fields: [study_uid_desc]
 
+    - join: reviewer
+      from: individual
+      view_label: 'Reviewer'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${reviewer.individual_id} = ${appointment_section_study.reviewer_id}
+      fields: [individual_id, full_name]
+
 #    - join: dicom_router.router_study
 #      view_label: 'Appointment'
 #      type: left_outer
