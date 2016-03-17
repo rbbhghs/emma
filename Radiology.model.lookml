@@ -297,6 +297,13 @@
       sql_on: ${speciality.speciality_id} = ${radiology_referrals.to_speciality_id} 
       fields: [speciality_name]      
 
+    - join: treatment_cycle_referral_source
+      view_label: 'Referral'
+      type: left_outer
+      relationship: one_to_many
+      sql_on: ${treatment_cycle_referral_source.treatment_cycle_referral_source_id} = ${radiology_referrals.treatment_cycle_referral_source_id} 
+      fields: [treatment_cycle_referral_source_name]
+
     - join: appointment
       view_label: 'Appointment'
       type: left_outer
