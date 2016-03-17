@@ -778,12 +778,26 @@
       sql_on: ${nationality.nationality_id} = ${individual.nationality_id} 
       fields: [nationality]
 
+    - join: cab_cancellation_reason
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${cab_cancellation_reason.cab_cancellation_reason_code} = ${appointment.cab_cancellation_reason_code} 
+      fields: [cancellation_reason]
+
+    - join: cab_dna_reason
+      view_label: 'Appointment'
+      type: left_outer
+      relationship: many_to_one
+      sql_on: ${cab_dna_reason.cab_dna_reason_code} = ${appointment.cab_dna_reason_code} 
+      fields: [dna_reason]
+
     - join: appointment_type
       view_label: 'Appointment'
       type: left_outer
       relationship: many_to_one
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
-      fields: [appointment_type_name]   
+      fields: [appointment_type_name, appointment_type_name_short]   
 
 #aml_test failed to connect to get view data
 #    - join: cab_cancellation_reason
