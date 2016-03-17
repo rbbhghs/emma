@@ -23,15 +23,15 @@
     primary_key: true
     sql: ${TABLE}.form_response_id
 
-  - dimension: question_name
+  - dimension: survey_question_name
     type: int
     sql: ${TABLE}.question_name
     
-  - dimension: question_text
+  - dimension: survey_question_text
     type: int
     sql: ${TABLE}.question_text    
 
-  - dimension: response_answer
+  - dimension: survey_response
     type: int
 #    primary_key: true
     sql: ${TABLE}.response_answer
