@@ -699,7 +699,14 @@
       relationship: many_to_one
       sql_on: ${form_data.form_question_instance_id} = ${form_question_instance.form_question_instance_id}
       fields: []
-      
+
+    - join: derived_pss
+      type: left_outer
+      view_label: 'Form Data'
+      relationship: many_to_one
+      sql_on: ${form_data.form_response_id} = ${derived_pss.form_response_id}
+#      fields: []
+
     - join: form
       view_label: 'Form Data'
       type: left_outer
