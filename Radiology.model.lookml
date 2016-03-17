@@ -968,7 +968,14 @@
       relationship: one_to_one
       sql_on: ${appointment.appointment_id} = ${event.entity_id} and ${event.event_type_id}='7' #savanp, appointment created date
       fields: [user_id, created_date]  
-      
+
+    - join: derived_appt_metrics 
+      view_label: 'Appointment' 
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${derived_appt_metrics.location_id} = ${location.location_id} 
+      fields: [dna_2014, dna_2015, dna_2016]  
+
 #    - join: event 
 #      view_label: 'Appointment' 
 #      type: left_outer
