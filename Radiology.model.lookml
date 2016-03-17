@@ -981,7 +981,7 @@
       type: left_outer
       relationship: one_to_one
       sql_on: ${derived_appt_metrics.location_id} = ${location.location_id} 
-      fields: [dna_2014, dna_2015, dna_2016]  
+      fields: [dna_2014, dna_2015, dna_2016, appts_2014, appts_2015, appts_2016]  
 
 #    - join: event 
 #      view_label: 'Appointment' 
