@@ -298,7 +298,7 @@
       fields: [speciality_name]      
 
     - join: treatment_cycle_referral_source
-      view_label: 'Referral'
+      view_label: 'Radiology Referrals'
       type: left_outer
       relationship: one_to_many
       sql_on: ${treatment_cycle_referral_source.treatment_cycle_referral_source_id} = ${radiology_referrals.treatment_cycle_referral_source_id} 
