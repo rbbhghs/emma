@@ -32,6 +32,20 @@
     value_format: '#,##0'    
     drill_fields: detail*
 
+  - measure: appts_2014
+    type: number 
+    value_format: '#,##0'    
+    drill_fields: detail*
+
+  - measure: appts_2015
+    type: number 
+    value_format: '#,##0'    
+    drill_fields: detail*
+
+  - measure: appts_2016
+    type: number 
+    value_format: '#,##0'    
+    drill_fields: detail*    
 
   - dimension: location_id
     type: int
