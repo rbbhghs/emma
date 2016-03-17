@@ -393,6 +393,42 @@
     timeframes: [time, date, week, month]
     sql: ${TABLE}.view
 
+  - dimension: is_before_mtd
+    type: yesno
+    sql: |
+      (EXTRACT(DAY FROM ${TABLE}.start) < EXTRACT(DAY FROM CURRENT_TIMESTAMP)
+        OR
+        (
+          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
+          EXTRACT(HOUR FROM ${TABLE}.start) < EXTRACT(HOUR FROM CURRENT_TIMESTAMP)
+        )
+        OR
+        (
+          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
+          EXTRACT(HOUR FROM ${TABLE}.start) <= EXTRACT(HOUR FROM CURRENT_TIMESTAMP) AND
+          EXTRACT(MINUTE FROM ${TABLE}.start) < EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)
+        )
+      )
+
+
+  - dimension: is_before_ytd
+    type: yesno
+    sql: |
+      DAYOFYEAR(${TABLE}.start) < EXTRACT(DAY FROM CURRENT_TIMESTAMP)
+        OR
+        (
+          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
+          EXTRACT(HOUR FROM ${TABLE}.start) < EXTRACT(HOUR FROM CURRENT_TIMESTAMP)
+        )
+        OR
+        (
+          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
+          EXTRACT(HOUR FROM ${TABLE}.start) <= EXTRACT(HOUR FROM CURRENT_TIMESTAMP) AND
+          EXTRACT(MINUTE FROM ${TABLE}.start) < EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)
+        )
+      )
+
+
   - measure: status_a
     label: 'a status count'
     type: count_distinct
@@ -469,6 +505,12 @@
     type: count_distinct
     sql: ${patient_id}  
     sql_distinct_key: ${patient_id}    
+
+#count(distinct DATE_FORMAT(start,'%M-%Y'))
+  - measure: month_count 
+    type: count_distinct
+    sql: MONTH(${TABLE}.start)
+    sql_distinct_key: MONTH(${TABLE}.start)
   
   - measure: culmative_number_of_appts
     type: running_total
