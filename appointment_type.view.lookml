@@ -13,7 +13,12 @@
     sql: ${TABLE}.appointment_type_category_id
 
   - dimension: appointment_type_name
-    sql: ${TABLE}.appointment_type_name
+    sql_case: 
+      "PET": ${TABLE}.appointment_type_name like '%PET-CT%'
+      "CT": ${TABLE}.appointment_type_name like '%CT%' 
+      "MR": ${TABLE}.appointment_type_name like '%MRI%'
+      "X-RAY": ${TABLE}.appointment_type_name like '%XR%' 
+      else: "Other"
 
   - dimension: appointment_type_name_short
     sql: ${TABLE}.appointment_type_name_short
