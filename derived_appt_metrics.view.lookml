@@ -10,7 +10,7 @@
       sum(case when year(start) = 2014 and dna = 0 and status = 'A' then 1 else 0 End)/count(distinct DATE_FORMAT(case when year(start) = 2014 and start < now() then start else null End,'%M-%Y')) appts_2014,
       sum(case when year(start) = 2015 and dna = 0 and status = 'A' then 1 else 0 End)/count(distinct DATE_FORMAT(case when year(start) = 2015 and start < now() then start else null End,'%M-%Y')) appts_2015,
       sum(case when year(start) = 2016 and dna = 0 and status = 'A' then 1 else 0 End)/count(distinct DATE_FORMAT(case when year(start) = 2016 and start < now() then start else null End,'%M-%Y')) appts_2016    
-      from aml_live.appointment 
+      from appointment 
       group by location_id 
       ;
     sql_trigger_value: SELECT CURDATE()
@@ -41,4 +41,4 @@
     
   sets:
     detail:
-      - diary_id
+      - location_id
