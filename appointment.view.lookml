@@ -428,6 +428,13 @@
         )
       )
 
+  - measure: dna_previous_year
+    label: 'DNA 2015'
+    type: count_distinct
+    sql: ${appointment_id}
+    filters:
+      status: 'A'
+      dna:    1
 
   - measure: status_a
     label: 'a status count'
