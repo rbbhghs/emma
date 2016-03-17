@@ -11,6 +11,7 @@
       where e.from_id > 0 and e.to_id > 0 
       and e1.from_id > 0 and e1.to_id > 0 
       and e1.event_type_id = 223 
+      and e.event_id = 1 and e1.event_id = 1 
       group by e.event_type_id,e.event_id,e.created,e.entity_id;
     sql_trigger_value: SELECT 1 #update never
  #   sql_trigger_value: SELECT HOUR(CURTIME()) #update every hour

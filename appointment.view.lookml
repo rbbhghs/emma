@@ -411,37 +411,29 @@
       )
 
 
-  - dimension: is_before_ytd
-    type: yesno
-    sql: |
-      DAYOFYEAR(${TABLE}.start) < EXTRACT(DAY FROM CURRENT_TIMESTAMP)
-        OR
-        (
-          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
-          EXTRACT(HOUR FROM ${TABLE}.start) < EXTRACT(HOUR FROM CURRENT_TIMESTAMP)
-        )
-        OR
-        (
-          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
-          EXTRACT(HOUR FROM ${TABLE}.start) <= EXTRACT(HOUR FROM CURRENT_TIMESTAMP) AND
-          EXTRACT(MINUTE FROM ${TABLE}.start) < EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)
-        )
-      )
+#  - dimension: is_before_ytd
+#    type: yesno
+#    sql: |
+#      DAYOFYEAR(${TABLE}.start) < EXTRACT(DAY FROM CURRENT_TIMESTAMP)
+#        OR
+#        (
+#          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
+#          EXTRACT(HOUR FROM ${TABLE}.start) < EXTRACT(HOUR FROM CURRENT_TIMESTAMP)
+#        )
+#        OR
+#        (
+#          EXTRACT(DAY FROM ${TABLE}.start) = EXTRACT(DAY FROM CURRENT_TIMESTAMP) AND
+#          EXTRACT(HOUR FROM ${TABLE}.start) <= EXTRACT(HOUR FROM CURRENT_TIMESTAMP) AND
+#          EXTRACT(MINUTE FROM ${TABLE}.start) < EXTRACT(MINUTE FROM CURRENT_TIMESTAMP)
+#        )
+#      )
 
-  - measure: dna_previous_year
-    label: 'DNA 2015'
-    type: count_distinct
-    sql: ${appointment_id}
-    filters:
-      status: 'A'
-      dna:    1
-
-  - measure: status_a
-    label: 'a status count'
-    type: count_distinct
-    sql: ${appointment_id}
-    filters:
-      status: 'A'
+#  - measure: status_a
+#    label: 'a status count'
+#    type: count_distinct
+#    sql: ${appointment_id}
+#    filters:
+#      status: 'A'
 
   - measure: number_of_appts
     label: '# of Appts'
@@ -449,7 +441,6 @@
     sql: ${appointment_id}
 #    drill_fields: detail*
     drill_fields: [appointment_id, individual.forename, start_time, end_time]
-
 
   - measure: number_of_appts_formatted
     type: count_distinct
