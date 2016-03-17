@@ -785,6 +785,14 @@
       sql_on: ${appointment.appointment_type_id} = ${appointment_type.appointment_type_id}
       fields: [appointment_type_name]   
 
+#aml_test failed to connect to get view data
+#    - join: cab_cancellation_reason
+#      view_label: 'Appointment'
+#      type: left_outer
+#      relationship: many_to_one
+#      sql_on: ${cab_cancellation_reason.cab_cancellation_reason_code} = ${appointment.cab_cancellation_reason_code}
+#      fields: [description]   
+
     - join: appointment_section
       view_label: 'Appointment'
       type: left_outer
