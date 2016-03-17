@@ -320,6 +320,14 @@
       sql_on: ${appointment.appointment_id} = ${derived_treatment_cycle_referral_first_appt.first_referral_appointment_id}
       fields: [first_referral_appointment_id, new_appointments_by_referral, new_referral_appt, first_referral_appt_date, first_referral_appt_time, referral_to_treat_duration_days, referral_to_treat_duration_days_dim]  
 
+    - join: referral_location
+      from: location
+      view_label: 'Radiology Referrals'
+      type: left_outer
+      relationship: one_to_one
+      sql_on: ${referral_location.location_id} = ${radiology_referrals.to_location_id}
+      fields: [location_name]
+
     - join: location
       view_label: 'Appointment Location'
       type: left_outer
